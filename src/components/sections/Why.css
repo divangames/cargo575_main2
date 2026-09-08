@@ -1,0 +1,106 @@
+/* Цифры компании: текст и карта целиком */
+
+.why {
+  background: #ffffff;
+}
+
+.why-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.why-copy .section-head {
+  margin-bottom: 0;
+}
+
+.why-map-wrap {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  aspect-ratio: 1000 / 810;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: #ffffff;
+}
+
+.why-map {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.why-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.why-stats li {
+  padding: 1.1rem;
+  background: var(--blue-500);
+  color: var(--white);
+  border-radius: var(--radius);
+}
+
+.why-stats strong {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  font-size: clamp(2.6rem, 7vw, 5.2rem);
+  letter-spacing: -0.06em;
+  line-height: 0.85;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
+.why-stats strong > span {
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+}
+
+.why-stats small {
+  font-size: 1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.why-stats-label {
+  display: block;
+  margin-top: 0.4rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+}
+
+@media (min-width: 960px) {
+  .why-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+    grid-template-areas:
+      "copy map"
+      "stats stats";
+    align-items: center;
+    column-gap: clamp(1.5rem, 4vw, 3.25rem);
+    row-gap: clamp(1.35rem, 3vw, 2.25rem);
+  }
+
+  .why-copy {
+    grid-area: copy;
+    min-width: 0;
+  }
+
+  .why-map-wrap {
+    grid-area: map;
+  }
+
+  .why-stats {
+    grid-area: stats;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,23 @@
+/* Нижняя плашка: белая с красной кнопкой */
+
+.sticky-cta {
+  position: fixed;
+  left: 0.7rem;
+  right: 0.7rem;
+  bottom: calc(0.55rem + env(safe-area-inset-bottom));
+  z-index: 30;
+  padding: 0.55rem;
+  background: var(--white);
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+}
+
+.sticky-cta .btn {
+  width: 100%;
+}
+
+@media (min-width: 1080px) {
+  .sticky-cta {
+    display: none;
+  }
+}

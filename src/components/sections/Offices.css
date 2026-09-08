@@ -1,0 +1,129 @@
+/* Инфраструктура: теги городов и два вертикальных ролика */
+
+.offices {
+  background: var(--paper);
+}
+
+.off-layout {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.off-copy .section-head {
+  margin-bottom: 1.15rem;
+}
+
+.offices .section-title {
+  max-width: min(12ch, 100%);
+}
+
+.off-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.off-tags span {
+  background: var(--mist);
+  border-radius: 999px;
+  padding: 0.32rem 0.72rem;
+  font-size: clamp(0.72rem, 1.2vw, 0.8rem);
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.off-ru-title {
+  margin: 1.35rem 0 0.55rem;
+  font-weight: 900;
+  font-size: clamp(0.78rem, 1.3vw, 0.9rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.off-videos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(0.55rem, 1.6vw, 1.1rem);
+  min-width: 0;
+}
+
+.off-card {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  border-radius: clamp(18px, 2.8vw, 28px);
+  overflow: hidden;
+  background: #1b2430;
+  container-type: inline-size;
+}
+
+.off-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.off-play {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  min-height: 44px;
+}
+
+.off-play span {
+  display: grid;
+  place-items: center;
+  width: clamp(3rem, 6vw, 4rem);
+  height: clamp(3rem, 6vw, 4rem);
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--ink);
+  box-shadow: 0 10px 28px rgba(10, 61, 99, 0.22);
+  transition: transform 0.25s var(--ease);
+}
+
+.off-play svg {
+  width: 1.75rem;
+  height: 1.75rem;
+  max-width: none;
+  max-height: none;
+}
+
+.off-play:hover span {
+  transform: scale(1.06);
+}
+
+.off-play:focus-visible {
+  outline: none;
+}
+
+.off-play:focus-visible span {
+  outline: 3px solid var(--blue-300);
+  outline-offset: 3px;
+}
+
+@media (min-width: 960px) {
+  .off-layout {
+    grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.9fr);
+    align-items: center;
+  }
+}
+
+@media (max-width: 479px) {
+  .off-videos {
+    max-width: 22rem;
+    margin-inline: auto;
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .off-play span {
+    transition: none;
+  }
+}

@@ -1,0 +1,87 @@
+/* Подвал: синяя плоскость, не чёрная */
+
+.footer {
+  background: var(--blue-700);
+  color: var(--white);
+  padding-block: 3.5rem 2rem;
+  border-radius: 40px 40px 0 0;
+}
+
+.footer-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.footer img {
+  width: 140px;
+  height: auto;
+  background: var(--white);
+  padding: 0.55rem 0.7rem;
+  border-radius: var(--radius-sm);
+}
+
+.footer-grid p,
+.footer-grid a,
+.footer-grid span {
+  display: block;
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: none;
+  margin-top: 0.35rem;
+}
+
+.footer-grid h2 {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.footer-messengers a {
+  color: var(--white);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.footer-cities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.8rem;
+}
+
+.footer-cities span {
+  margin: 0;
+}
+
+.footer-bottom {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.8rem;
+}
+
+.footer-bottom button {
+  width: fit-content;
+  background: none;
+  border: 0;
+  color: var(--white);
+  padding: 0;
+  min-height: 44px;
+  text-align: left;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.privacy {
+  display: grid;
+  gap: 0.75rem;
+  color: var(--ink-soft);
+}
+
+@media (min-width: 900px) {
+  .footer-grid {
+    grid-template-columns: 1.2fr 0.8fr 0.8fr 1fr;
+  }
+}

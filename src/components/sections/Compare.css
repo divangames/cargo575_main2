@@ -1,0 +1,42 @@
+/* Карго и белая схема */
+
+.cmp-grid {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.cmp-grid article {
+  padding: 1.25rem;
+  display: grid;
+  gap: 0.8rem;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.cmp-grid article.is-alt {
+  background: var(--blue-700);
+  color: var(--white);
+}
+
+.cmp-grid h3 {
+  text-transform: uppercase;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+}
+
+.cmp-grid small {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 800;
+  font-size: 0.68rem;
+  opacity: 0.55;
+  margin-bottom: 0.2rem;
+}
+
+@media (min-width: 800px) {
+  .cmp-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

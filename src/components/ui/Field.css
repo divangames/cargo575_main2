@@ -1,0 +1,58 @@
+/* Поля с мягким радиусом */
+
+.field {
+  display: grid;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.field-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.field-label em {
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink-soft);
+}
+
+.field input,
+.field select {
+  width: 100%;
+  min-height: 50px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 0 0.95rem;
+  background: var(--white);
+  color: var(--ink);
+}
+
+.field input:focus,
+.field select:focus {
+  outline: 2px solid var(--blue-300);
+  border-color: var(--blue-500);
+}
+
+.field.is-invalid input,
+.field.is-invalid select {
+  border-color: var(--red);
+}
+
+.field-error {
+  color: var(--red);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.field-hint {
+  color: var(--ink-soft);
+  font-size: 0.75rem;
+}

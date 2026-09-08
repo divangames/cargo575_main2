@@ -1,0 +1,128 @@
+/* База: плакатная типографика, без мягких теней */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font);
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.45;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+video,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--ink);
+  color: var(--white);
+  padding: 0.75rem 1rem;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+}
+
+.wrap,
+.wrap-wide {
+  width: min(100% - var(--page-gutter) * 2, var(--max));
+  margin-inline: auto;
+}
+
+.eyebrow {
+  font-size: clamp(0.7rem, 1.1vw, 0.78rem);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 5.2vw, 4.4rem);
+  line-height: 0.92;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  max-width: min(16ch, 100%);
+}
+
+.section-lead {
+  font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+  color: var(--ink-soft);
+  max-width: 46ch;
+}
+
+.section-head {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: clamp(1.75rem, 4vw, 3rem);
+}
+
+.block {
+  padding-block: clamp(3.25rem, 8vw, 7rem);
+}
+
+@media (max-width: 1079px) {
+  body {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

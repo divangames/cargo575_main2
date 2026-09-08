@@ -1,0 +1,82 @@
+/* Форма расчёта */
+
+.lead-form {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.lead-row {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.lead-prio {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.lead-prio legend {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.45rem;
+}
+
+.lead-prio-grid {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.lead-prio-grid label {
+  display: grid;
+  gap: 0.15rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem;
+  min-height: 64px;
+  cursor: pointer;
+}
+
+.lead-prio-grid label.is-on {
+  background: var(--blue-700);
+  color: var(--white);
+  border-color: var(--blue-700);
+}
+
+.lead-prio-grid input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.lead-prio-grid span {
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+
+.lead-note {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+.lead-ok {
+  display: grid;
+  gap: 0.4rem;
+  padding: 1.2rem;
+  border-radius: var(--radius);
+  background: var(--mist);
+  color: var(--blue-700);
+}
+
+@media (min-width: 640px) {
+  .lead-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .lead-prio-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}

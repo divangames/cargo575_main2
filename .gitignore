@@ -1,0 +1,10 @@
+node_modules
+dist
+.DS_Store
+*.local
+.vite
+.env
+.env.*
+*.log
+# Исходники видео дублируют public/video и близки к лимиту GitHub 100 МБ
+assets/video

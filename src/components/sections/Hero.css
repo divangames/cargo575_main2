@@ -1,0 +1,251 @@
+.hero-dock {
+  display: grid;
+  gap: 1.25rem;
+  align-items: stretch;
+  padding: clamp(2rem, 4.5vw, 3.5rem) 0 3.5rem;
+}
+
+.hero-trap {
+  position: relative;
+  min-height: clamp(200px, 38vw, 320px);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.hero-trap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+}
+
+.hero-stamp {
+  position: absolute;
+  left: 1.15rem;
+  bottom: 1.15rem;
+  width: clamp(108px, 16vw, 148px);
+  height: clamp(108px, 16vw, 148px);
+  border-radius: 50%;
+  border: 0;
+  background: var(--red);
+  color: var(--white);
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  display: grid;
+  place-content: center;
+  box-shadow: 0 12px 28px rgba(255, 48, 1, 0.35);
+  transform-origin: center;
+  transition:
+    transform 0.38s cubic-bezier(0.34, 1.62, 0.46, 1),
+    box-shadow 0.3s var(--ease);
+}
+
+.hero-stamp:hover {
+  transform: scale(1.14);
+  box-shadow: 0 18px 40px rgba(255, 48, 1, 0.42);
+  animation: stamp-bloop 0.5s cubic-bezier(0.34, 1.62, 0.46, 1);
+}
+
+.hero-stamp:active {
+  animation: none;
+  transform: scale(0.88);
+  transition: transform 0.12s ease-out;
+  box-shadow: 0 6px 16px rgba(255, 48, 1, 0.28);
+}
+
+.hero-stamp:focus-visible {
+  outline: 3px solid var(--white);
+  outline-offset: 4px;
+}
+
+@keyframes stamp-bloop {
+  0% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1.14);
+  }
+}
+
+.hero-stamp b {
+  font-size: 1.05rem;
+  letter-spacing: 0.12em;
+}
+
+.hero-form {
+  background: var(--white);
+  color: var(--ink);
+  padding: 1.4rem 1.1rem 1.6rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.hero-form .lead-form {
+  flex: 1;
+}
+
+.hero-form h2 {
+  margin: 0.4rem 0 0.45rem;
+  text-transform: uppercase;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+}
+
+.hero-form > p:not(.eyebrow) {
+  color: var(--ink-soft);
+  margin-bottom: 1rem;
+}
+
+.hero-form .eyebrow {
+  color: var(--blue-600);
+}
+
+
+/* Main hero: editorial type and a unified vector road scene. */
+.hero { background: var(--paper); color: var(--ink); }
+.hero-poster { position: relative; isolation: isolate; overflow: hidden; color: var(--white); background: var(--blue-500); padding: calc(var(--header-offset) + 2.2rem) 0 1.5rem; }
+.hero-poster::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse at 78% 35%, #6db7ff99, transparent 49%), linear-gradient(125deg, transparent 45%, #0066a24d 100%); }
+.hero-poster::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: -1; opacity: .16; background-image: linear-gradient(#ffffff22 1px, transparent 1px), linear-gradient(90deg, #ffffff22 1px, transparent 1px); background-size: 90px 90px; mask-image: linear-gradient(90deg, transparent 35%, #000); }
+.hero-main { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 1rem; align-items: center; }
+.hero-copy { position: relative; z-index: 2; padding-bottom: .5rem; }
+.hero-copy .eyebrow { font-size: .65rem; color: #e8f4fb; letter-spacing: .2em; display: flex; align-items: center; gap: .75rem; }
+.hero-copy .eyebrow::before { content: ""; width: 22px; height: 2px; background: var(--red); }
+.hero-copy h1 { margin: 1.6rem 0 1.4rem; font-size: clamp(3.4rem, 6.05vw, 6.1rem); line-height: .98; letter-spacing: -.065em; text-transform: uppercase; font-weight: 900; }
+.hero-copy h1 span { display: block; }
+.hero-copy h1 span:first-child { font-size: .43em; letter-spacing: .035em; margin-bottom: .45em; }
+.hero-copy h1 span:last-child { color: #d8ecff; }
+.hero-sub { max-width: 34ch; font-size: clamp(.9rem, 1.35vw, 1.1rem); line-height: 1.75; color: #e8f4fb; }
+.hero-cta { display: flex; flex-direction: column; align-items: flex-start; gap: .65rem; margin: 1.7rem 0 1.5rem; }
+.hero-cta .btn { min-height: 60px; padding-inline: 1.6rem; font-size: .73rem; box-shadow: 0 10px 24px #0066a245; }
+.hero-ghost { border: 0; border-bottom: 1px solid #ffffff55; padding: .35rem 0; min-height: 36px; background: transparent; font-size: .78rem; font-weight: 600; color: white; }
+.hero-ghost:hover { border-color: white; }
+.hero-ghost:focus-visible { outline: 2px solid white; outline-offset: 5px; }
+.hero-facts { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: .8rem 1rem; max-width: 440px; font-size: .7rem; line-height: 1.5; color: #e8f4fb; }
+.hero-facts li { display: flex; align-items: baseline; gap: .5rem; }
+.hero-facts li::before { content: "✓"; font-weight: 700; color: white; }
+.hero-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid #ffffff40; margin-top: 2.25rem; padding-top: 1.5rem; }
+.hero-metrics div { display: flex; justify-content: center; align-items: center; gap: 1rem; }
+.hero-metrics div + div { border-left: 1px solid #ffffff30; }
+.hero-metrics strong { font-size: clamp(2rem, 3.3vw, 3.4rem); font-weight: 800; line-height: 1; letter-spacing: -.06em; }
+.hero-metrics span { max-width: 14ch; font-size: .6rem; text-transform: uppercase; letter-spacing: .1em; line-height: 1.75; color: #e8f4fb; font-weight: 600; }
+
+.freight-scene { min-width: 0; position: relative; --motion-state: paused; }
+.freight-scene.is-playing { --motion-state: running; }
+.freight-topline { display: flex; justify-content: space-between; gap: 1rem; align-items: center; font-size: .52rem; font-weight: 600; letter-spacing: .14em; color: #e8f4fb; }
+.freight-topline span:first-child { display: flex; align-items: center; gap: .6rem; }
+.freight-topline i { width: 5px; height: 5px; border-radius: 50%; background: white; box-shadow: 0 0 0 4px #ffffff15; }
+.freight-visual { position: relative; height: auto; aspect-ratio: 800 / 540; isolation: isolate; }
+.freight-console { position: relative; margin-top: 1.1rem; padding: 1rem 1.3rem .25rem; border: 1px solid #ffffff40; border-radius: 12px; background: linear-gradient(110deg, #0066a2b3, #0066a280); backdrop-filter: blur(16px); box-shadow: 0 16px 45px #0066a21a; z-index: 4; }
+.freight-console-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 26px; font-size: .53rem; letter-spacing: .14em; font-weight: 600; color: #d8ecff; }
+.freight-play { display: grid; place-items: center; border: 1px solid #ffffff40; border-radius: 50%; background: transparent; width: 32px; height: 32px; min-width: 32px; color: white; font-size: .85rem; margin: -.25rem -.25rem -.25rem 0; }
+.freight-play:hover { background: #ffffff20; }
+.freight-caption { display: flex; align-items: center; justify-content: space-between; gap: .8rem; min-height: 92px; padding-block: .7rem; }
+.freight-caption-text { animation: freight-caption-in .5s var(--ease) both; }
+.freight-caption-text > span { display: block; font-size: .48rem; letter-spacing: .15em; color: #d8ecff; margin-bottom: .25rem; }
+.freight-caption h2 { font-size: clamp(.95rem, 1.4vw, 1.3rem); font-weight: 700; line-height: 1.3; letter-spacing: -.035em; }
+.freight-caption p { font-size: .62rem; line-height: 1.6; color: #e8f4fb; margin-top: .35rem; }
+.freight-step-number { font-size: 2.5rem; line-height: 1; letter-spacing: -.055em; font-weight: 500; white-space: nowrap; }
+.freight-step-number small { font-size: .65rem; color: #d8ecff; letter-spacing: 0; margin-left: .3rem; }
+.freight-stages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem; }
+.freight-stages button { padding: 0; background: none; border: 0; color: #d8ecff; min-height: 50px; font-size: .61rem; font-weight: 500; text-align: left; }
+.freight-stage-line { display: block; position: relative; height: 2px; background: #ffffff35; overflow: hidden; }
+.freight-stage-line i { position: absolute; inset: 0; background: white; transform: scaleX(0); transform-origin: left; }
+.freight-stages button.is-active .freight-stage-line { background: var(--red); }
+.is-playing .freight-stages button.is-active .freight-stage-line i { animation: freight-stage-progress 9s linear both; }
+.freight-stages button > span:last-child { display: flex; align-items: center; gap: .5rem; padding-block: .85rem; }
+.freight-stages small { opacity: .6; font-size: .5rem; }
+.freight-stages b { margin-left: auto; opacity: 0; font-size: .9rem; }
+.freight-stages button.is-active, .freight-stages button:hover { color: white; }
+.freight-stages button.is-active b { opacity: 1; }
+.freight-stages button:focus-visible, .freight-play:focus-visible { outline: 2px solid white; outline-offset: 4px; }
+
+@keyframes freight-caption-in { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes freight-stage-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes freight-copy-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@media (min-width: 900px) {
+  .hero-copy > * { animation: freight-copy-in .9s var(--ease) both; }
+  .hero-copy h1 { animation-delay: .08s; }
+  .hero-sub { animation-delay: .16s; }
+  .hero-cta { animation-delay: .24s; }
+  .hero-facts { animation-delay: .32s; }
+  .hero-dock {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1.5rem;
+    padding-top: clamp(2.5rem, 4vw, 3.75rem);
+    align-items: stretch;
+  }
+  .hero-trap {
+    min-height: 100%;
+    height: auto;
+    aspect-ratio: unset;
+  }
+  .hero-form {
+    padding: 1.5rem 1.5rem 1.35rem;
+    height: 100%;
+  }
+}
+@media (min-width: 1500px) { .hero-poster { padding-top: calc(var(--header-offset) + 3rem); padding-bottom: 2rem; } }
+@media (max-width: 1100px) and (min-width: 900px) {
+  .hero-copy h1 { font-size: 5.9vw; }
+  .hero-cta .btn { font-size: .63rem; padding-inline: 1.1rem; }
+  .freight-topline span:last-child { display: none; }
+  .freight-caption p { max-width: 31ch; }
+}
+@media (max-width: 899px) {
+  .hero-poster { padding-top: calc(var(--header-offset) + 1rem); }
+  .hero-main { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-copy h1 { font-size: clamp(3.2rem, 10vw, 5.5rem); margin: 1.2rem 0; }
+  .hero-copy h1 span:first-child { font-size: .45em; }
+  .hero-sub { font-size: .9rem; max-width: 42ch; }
+  .hero-cta { margin: 1.3rem 0; }
+  .hero-facts { max-width: 480px; }
+  .freight-scene { width: min(100%, 580px); margin-inline: auto; }
+  .freight-topline { font-size: .48rem; }
+  .freight-topline span:last-child { display: none; }
+  .freight-visual { height: auto; aspect-ratio: 800 / 540; }
+  .freight-console { margin-top: 1rem; padding: .9rem 1rem .1rem; }
+  .freight-caption { min-height: 104px; }
+  .freight-caption h2 { font-size: 1rem; }
+  .freight-caption p { font-size: .65rem; max-width: 31ch; }
+  .freight-step-number { font-size: 2rem; }
+  .freight-stages { gap: .6rem; }
+  .freight-stages button { font-size: .6rem; }
+  .hero-metrics { margin-top: 1.6rem; padding-top: 1.2rem; }
+  .hero-metrics div { flex-direction: column; gap: .5rem; }
+  .hero-metrics span { font-size: .52rem; text-align: center; }
+}
+@media (max-width: 390px) {
+  .hero-cta .btn { width: 100%; font-size: .65rem; padding-inline: .9rem; min-height: 56px; }
+  .hero-facts { font-size: .66rem; gap: .65rem; }
+  .freight-caption h2 { font-size: .92rem; }
+  .freight-step-number { font-size: 1.65rem; }
+  .freight-stages b { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero *, .hero *::before, .hero *::after { animation: none !important; transition: none !important; }
+  .freight-play, .freight-light { display: none; }
+}
+
+
+
+/* All objects share one SVG coordinate system and the same axonometric projection. */
+.vector-journey { display: block; width: 100%; height: 100%; overflow: hidden; }
+.vector-biome { opacity: 0; transition: opacity .9s ease; }
+.vector-biome.is-current { opacity: 1; }
+.vector-wheel { animation: vector-wheel-turn 1s linear infinite; animation-play-state: var(--motion-state); }
+@keyframes vector-wheel-turn { to { transform: rotate(360deg); } }
+.freight-visual { margin-top: .5rem; }
+.freight-console { margin-top: -.3rem; background: #0066a259; box-shadow: none; backdrop-filter: none; }
+@media (max-width: 899px) { .vector-wheel { animation: none; } }
+
+@media (max-width: 899px) { .freight-play { display: none; } }

@@ -1,0 +1,122 @@
+/* Тарифы мягкими карточками */
+
+.tariff-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.tariff {
+  position: relative;
+  padding: 1.4rem 1.25rem 1.5rem;
+  display: grid;
+  gap: 0.5rem;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.tariff.is-feat {
+  background: var(--blue-700);
+  color: var(--white);
+}
+
+.tariff.is-feat .btn-primary {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.tariff.is-feat .btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: -20% -40%;
+  background: linear-gradient(
+    105deg,
+    transparent 36%,
+    rgba(255, 255, 255, 0.55) 48%,
+    rgba(255, 255, 255, 0.12) 54%,
+    transparent 68%
+  );
+  transform: translateX(-80%) skewX(-18deg);
+  animation: tariff-btn-shine 2.6s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tariff.is-feat .btn-primary::after {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes tariff-btn-shine {
+  0%,
+  40% {
+    transform: translateX(-80%) skewX(-18deg);
+  }
+
+  70%,
+  100% {
+    transform: translateX(80%) skewX(-18deg);
+  }
+}
+
+.tariff-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ffc4b6;
+}
+
+.tariff h3 {
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
+  text-transform: uppercase;
+  line-height: 0.95;
+}
+
+.tariff-days,
+.tariff-price {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+}
+
+.tariff-price {
+  color: var(--red);
+}
+
+.tariff.is-feat .tariff-price {
+  color: #ffb4a4;
+}
+
+.tariff details {
+  font-size: 0.9rem;
+}
+
+.tariff summary {
+  cursor: pointer;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.tariff-foot {
+  margin-top: 1.25rem;
+  color: var(--ink-soft);
+  max-width: 70ch;
+}
+
+@media (min-width: 900px) {
+  .tariff-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .tariff.is-feat {
+    transform: translateY(-8px);
+  }
+}

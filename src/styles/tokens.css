@@ -1,0 +1,75 @@
+/* Сине-белая система с красным акцентом и мягкими радиусами */
+
+:root {
+  --blue-500: #0088d8;
+  --blue-600: #0c6eb1;
+  --blue-700: #0066a2;
+  --blue-300: #6db7ff;
+  --red: #ff3001;
+  --red-soft: #ff6643;
+  --white: #ffffff;
+  --mist: #e8f4fb;
+  --paper: #f5faff;
+  --ink: #0a3d63;
+  --ink-soft: rgba(10, 61, 99, 0.68);
+  --line: rgba(12, 110, 177, 0.18);
+  --shadow: 0 16px 40px rgba(0, 102, 162, 0.12);
+  --radius: 24px;
+  --radius-sm: 16px;
+  --header: 76px;
+  --header-offset: 5.6rem;
+  --pad: clamp(1rem, 3.5vw, 2.75rem);
+  --page-gutter: max(var(--pad), env(safe-area-inset-left), env(safe-area-inset-right));
+  --max: 1280px;
+  --wide: 1280px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --font: "Montserrat", system-ui, sans-serif;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../../public/fonts/Montserrat-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../../public/fonts/Montserrat-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../../public/fonts/Montserrat-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../../public/fonts/Montserrat-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../../public/fonts/Montserrat-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../../public/fonts/Montserrat-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}

@@ -1,0 +1,14 @@
+---
+description: Пуш — коммит, GitHub и Pages для CARGO 575
+alwaysApply: true
+---
+
+Когда пользователь пишет «Пуш» или «Push», сразу без дополнительного вопроса:
+
+1. `git add` нужных файлов (не коммитить `.env` и секреты).
+2. `git commit` с сообщением на русском по стилю CHANGELOG.
+3. `git push origin main` в https://github.com/divangames/cargo575_main2
+4. Дождаться workflow «GitHub Pages»; при необходимости `workflow_dispatch`.
+5. В ответе отдать URL: https://divangames.github.io/cargo575_main2/
+
+Не менять `git config --global`. При dubious ownership — `git -c safe.directory`. Не force-push в `main`.

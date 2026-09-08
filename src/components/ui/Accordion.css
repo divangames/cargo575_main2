@@ -1,0 +1,42 @@
+/* FAQ карточками */
+
+.acc {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.acc-item {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.acc-btn {
+  width: 100%;
+  min-height: 72px;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  padding: 1.1rem 1.15rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.acc-btn b {
+  color: var(--red);
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.acc-body {
+  padding: 0 1.15rem 1.2rem;
+  color: var(--ink-soft);
+  max-width: 70ch;
+  text-transform: none;
+  font-weight: 500;
+}
