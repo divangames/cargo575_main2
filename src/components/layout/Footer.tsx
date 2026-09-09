@@ -1,64 +1,183 @@
 ////////////////////////////////////////////////////////
 //
-// Подвал: услуги, офисы, реквизиты, политика
+// Подвал: контакты, мессенджеры, офисы, реквизиты
 //
 ////////////////////////////////////////////////////////
 
 import { useState } from "react";
+import {
+  ClockIcon,
+  EnvelopeSimpleIcon,
+  MapPinIcon,
+  PhoneIcon,
+} from "@phosphor-icons/react";
 import { chinaOffices, russiaOffices } from "../../config/content";
-import { site } from "../../config/site";
+import { legalLine, site } from "../../config/site";
 import { assetUrl } from "../../helpers/assetUrl";
+import {
+  FooterCircleIcon,
+  FooterPillIcon,
+  type FooterCircleSocial,
+  type FooterPillSocial,
+} from "../../helpers/footerSocialIcon";
 import { Modal } from "../ui/Modal";
 import "./Footer.css";
 
-/** Подвал лендинга */
+/** Якорные ссылки блока услуг */
+const serviceLinks = [
+  { href: "#calc", label: "Расчёт карго" },
+  { href: "#tariffs", label: "Авто и авиа" },
+  { href: "#vykup", label: "Выкуп и оплата в юанях" },
+  { href: "#included", label: "Что входит в стоимость" },
+] as const;
+
+/** Круглые кнопки мессенджеров */
+const circleSocials: { id: FooterCircleSocial; href: string; label: string }[] = [
+  { id: "telegram", href: site.telegramHref, label: "Telegram" },
+  { id: "max", href: site.maxHref, label: "MAX" },
+  { id: "whatsapp", href: site.whatsappHref, label: "WhatsApp" },
+];
+
+/** Широкие кнопки WeChat и группы */
+const pillSocials: { id: FooterPillSocial; href: string; label: string }[] = [
+  { id: "wechat", href: site.wechatHref, label: "WeChat" },
+  { id: "telegram-group", href: site.telegramGroupHref, label: "Группа" },
+];
+
+/** Подвал лендинга: маршрут Китай — Россия, мессенджеры и реквизиты */
 export function Footer() {
   const [privacy, setPrivacy] = useState(false);
 
   return (
-    <footer className="footer" id="contacts">
-      <div className="wrap-wide footer-grid">
-        <div>
-          <img src={assetUrl("/logo.svg")} alt="CARGO 575" width={150} height={74} />
-          <p>Карго доставка коммерческих грузов из Китая в любой город России.</p>
-          <a href={site.phoneHref}>{site.phoneDisplay}</a>
-          <a href={`mailto:${site.email}`}>{site.email}</a>
-          <p>{site.address}</p>
-          <p>{site.hours}</p>
-          <div className="footer-messengers">
-            <a href={site.whatsappHref} target="_blank" rel="noreferrer">
-              WhatsApp
-            </a>
+    <div className="footer-shell">
+      <footer className="footer" id="contacts">
+      <div className="footer-stripe" aria-hidden />
+      <div className="wrap-wide footer-inner">
+        <div className="footer-board">
+          <div className="footer-brand">
+            <img
+              className="footer-logo"
+              src={assetUrl("/logo.svg")}
+              alt="CARGO 575"
+              width={150}
+              height={74}
+            />
+            <p className="footer-lead">
+              Карго доставка коммерческих грузов из Китая в любой город России.
+            </p>
+            <p className="footer-route" aria-hidden>
+              <span>Китай</span>
+              <span className="footer-route-line" />
+              <span>Россия</span>
+            </p>
+            <ul className="footer-meta">
+              <li>
+                <span className="footer-icon" aria-hidden>
+                  <PhoneIcon weight="bold" size={18} />
+                </span>
+                <a href={site.phoneHref}>{site.phoneDisplay}</a>
+              </li>
+              <li>
+                <span className="footer-icon" aria-hidden>
+                  <EnvelopeSimpleIcon weight="bold" size={18} />
+                </span>
+                <a href={`mailto:${site.email}`}>{site.email}</a>
+              </li>
+              <li>
+                <span className="footer-icon" aria-hidden>
+                  <MapPinIcon weight="bold" size={18} />
+                </span>
+                <span>{site.address}</span>
+              </li>
+              <li>
+                <span className="footer-icon" aria-hidden>
+                  <ClockIcon weight="bold" size={18} />
+                </span>
+                <span>{site.hours}</span>
+              </li>
+            </ul>
+            <img
+              className="footer-mascot"
+              src={assetUrl("/mascote/cat_footer.webp")}
+              alt=""
+              width={320}
+              height={320}
+              decoding="async"
+            />
+            <div className="footer-socials">
+              <div className="footer-social-row">
+                {circleSocials.map((item) => (
+                  <a
+                    key={item.id}
+                    className="footer-social-circle"
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={item.label}
+                  >
+                    <FooterCircleIcon id={item.id} />
+                  </a>
+                ))}
+              </div>
+              {pillSocials.map((item) => (
+                <a
+                  key={item.id}
+                  className="footer-social-pill"
+                  href={item.href}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span>{item.label}</span>
+                  <FooterPillIcon id={item.id} />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div className="footer-aside">
+            <nav className="footer-col" aria-label="Услуги">
+              <h2>Услуги</h2>
+              <div className="footer-chips">
+                {serviceLinks.map((item) => (
+                  <a key={item.href} className="footer-chip" href={item.href}>
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+            </nav>
+            <div className="footer-col">
+              <h2>Офисы в Китае</h2>
+              <div className="footer-chips">
+                {chinaOffices.map((item) => (
+                  <a key={item.city} className="footer-chip" href="#offices">
+                    {item.city}
+                  </a>
+                ))}
+              </div>
+            </div>
+            <div className="footer-col">
+              <h2>Офисы в России</h2>
+              <div className="footer-chips is-dense">
+                {russiaOffices.map((city) => (
+                  <span key={city} className="footer-chip">
+                    {city}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-        <div>
-          <h2>Услуги</h2>
-          <a href="#calc">Расчёт карго</a>
-          <a href="#tariffs">Авто и авиа</a>
-          <a href="#vykup">Выкуп и оплата в юанях</a>
-          <a href="#included">Что входит в стоимость</a>
+
+        <div className="footer-bottom">
+          <small>
+            © {new Date().getFullYear()} {site.legalName}. Все права защищены.
+          </small>
+          <p className="footer-legal">{legalLine}</p>
+          <button type="button" onClick={() => setPrivacy(true)}>
+            Политика конфиденциальности
+          </button>
+          <small>Отправляя заявку, вы соглашаетесь на обработку персональных данных.</small>
         </div>
-        <div>
-          <h2>Офисы в Китае</h2>
-          {chinaOffices.map((item) => (
-            <span key={item.city}>{item.city}</span>
-          ))}
-        </div>
-        <div>
-          <h2>Офисы в России</h2>
-          <div className="footer-cities">
-            {russiaOffices.map((city) => (
-              <span key={city}>{city}</span>
-            ))}
-          </div>
-        </div>
-      </div>
-      <div className="wrap-wide footer-bottom">
-        <small>© {new Date().getFullYear()} {site.legalName}. Все права защищены.</small>
-        <button type="button" onClick={() => setPrivacy(true)}>
-          Политика конфиденциальности
-        </button>
-        <small>Отправляя заявку, вы соглашаетесь на обработку персональных данных.</small>
       </div>
       <Modal open={privacy} title="Политика конфиденциальности" onClose={() => setPrivacy(false)}>
         <div className="privacy">
@@ -73,5 +192,6 @@ export function Footer() {
         </div>
       </Modal>
     </footer>
+    </div>
   );
 }

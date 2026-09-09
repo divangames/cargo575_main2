@@ -1,17 +1,27 @@
 ////////////////////////////////////////////////////////
 //
-// Отправка заявки: локальное сохранение до подключения CRM
+// Отправка заявки в Telegram через PHP-прокси /api
 //
 ////////////////////////////////////////////////////////
 
+import { site } from "../config/site";
+import { formatLeadTelegram } from "../helpers/formatLeadTelegram";
 import type { LeadPayload } from "../types/lead";
 
-const STORAGE_KEY = "cargo575-leads";
-
-/** Сохраняет заявку и имитирует ответ логиста */
+/** Отправляет заявку на stanki-lead.php, бот дублирует её в Telegram */
 export async function submitLead(payload: LeadPayload): Promise<void> {
-  await new Promise((resolve) => window.setTimeout(resolve, 700));
-  const prev = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "[]") as LeadPayload[];
-  prev.push(payload);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(prev));
+  const response = await fetch(site.leadApiUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text: formatLeadTelegram(payload) }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Lead API error");
+  }
+
+  const data = (await response.json()) as { ok?: boolean };
+  if (!data.ok) {
+    throw new Error("Lead rejected");
+  }
 }

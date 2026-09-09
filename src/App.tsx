@@ -5,6 +5,7 @@
 ////////////////////////////////////////////////////////
 
 import { useCallback, useMemo, useState } from "react";
+import { BackToTop } from "./components/layout/BackToTop";
 import { Footer } from "./components/layout/Footer";
 import { Header } from "./components/layout/Header";
 import { StickyCta } from "./components/layout/StickyCta";
@@ -66,6 +67,7 @@ export function App() {
       </main>
       <Footer />
       <StickyCta />
+      <BackToTop />
       <LeadModal open={open} source={source} preset={preset} onClose={() => setOpen(false)} />
     </LeadModalContext.Provider>
   );

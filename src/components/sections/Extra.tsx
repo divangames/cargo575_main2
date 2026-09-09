@@ -4,12 +4,29 @@
 //
 ////////////////////////////////////////////////////////
 
-import { extraServices } from "../../config/content";
+import { extraScenes, extraServices } from "../../config/content";
 import { assetUrl } from "../../helpers/assetUrl";
+import { extraServiceIcon } from "../../helpers/extraServiceIcon";
 import { useLeadModal } from "../../hooks/useLeadModal";
 import { Button } from "../ui/Button";
 import { Reveal } from "../ui/Reveal";
 import "./Extra.css";
+
+type ExtraSceneId = (typeof extraScenes)[number]["id"];
+
+/** Класс акцента карточки по сценарию */
+function extraSceneTone(id: ExtraSceneId): string {
+  switch (id) {
+    case "logistics":
+      return "is-logistics";
+    case "turnkey":
+      return "is-turnkey";
+    default: {
+      const exhaustive: never = id;
+      throw new Error(`Неизвестный сценарий: ${exhaustive}`);
+    }
+  }
+}
 
 /** Развилка: уже купили / нужна закупка */
 export function Extra() {
@@ -27,33 +44,54 @@ export function Extra() {
             </p>
           </div>
         </Reveal>
-        <div className="extra-scenes">
-          <article>
-            <img src={assetUrl("/images/uslugi/04.jpg")} alt="" />
-            <div>
-              <h3>Уже купили товар? Просто доставим.</h3>
-              <p>Поставщик отправляет партию на наш склад — дальше логистика и контроль.</p>
-              <Button type="button" onClick={() => openLead("extra")}>
-                Рассчитать доставку
-              </Button>
-            </div>
-          </article>
-          <article>
-            <img src={assetUrl("/images/uslugi/05.png")} alt="" />
-            <div>
-              <h3>Нужно организовать закупку с нуля? Возьмём весь процесс.</h3>
-              <p>Поиск, проверка фабрики, выкуп, оплата в юанях, контроль отгрузки.</p>
-              <Button type="button" variant="secondary" onClick={() => openLead("extra")}>
-                Обсудить закупку и доставку
-              </Button>
-            </div>
-          </article>
-        </div>
-        <ul className="extra-list">
-          {extraServices.map((item) => (
-            <li key={item}>{item}</li>
+
+        <div className="extra-fork">
+          {extraScenes.map((scene) => (
+            <article key={scene.id} className={`extra-scene ${extraSceneTone(scene.id)}`}>
+              <div className="extra-media">
+                <img
+                  src={assetUrl(scene.image)}
+                  alt={scene.alt}
+                  width={960}
+                  height={600}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span className="extra-badge">{scene.badge}</span>
+              </div>
+              <div className="extra-body">
+                <p className="extra-kicker">{scene.kicker}</p>
+                <h3>{scene.title}</h3>
+                <p>{scene.text}</p>
+                <Button
+                  type="button"
+                  variant={scene.variant}
+                  onClick={() => openLead("extra")}
+                >
+                  {scene.cta}
+                </Button>
+              </div>
+            </article>
           ))}
-        </ul>
+        </div>
+
+        <div className="extra-chain">
+          <p className="extra-chain-label">Что можем взять на себя</p>
+          <ul className="extra-list">
+            {extraServices.map((item) => {
+              const Icon = extraServiceIcon(item);
+
+              return (
+                <li key={item}>
+                  <span className="extra-chip-icon" aria-hidden>
+                    <Icon weight="bold" size={16} />
+                  </span>
+                  {item}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
     </section>
   );

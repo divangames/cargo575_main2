@@ -11,12 +11,14 @@
 - фирменные цвета из `assets/colors.txt`
 - шрифт Montserrat из `assets/fonts`
 - фото, маскот, видео складов и иконки категорий из `assets`
+- иконки MAX и WeChat: `assets/social` → `public/social`
+- маскот: `assets/mascote` → `public/mascote`
 - кадры проверок груза для кейсов: `assets/check` → `public/images/check`
 
 ## Структура
 
-- `src/components/layout` — шапка, подвал, sticky CTA
-- `src/components/sections` — блоки лендинга по ТЗ
+- `src/components/layout` — шапка (капсула / бургер), подвал, sticky CTA, кнопка «наверх»
+- `src/components/sections` — блоки лендинга по ТЗ; сравнение карго и белой схемы — таблица-развилка в `Compare.tsx`
 - `src/components/lead` — формы расчёта
 - `src/config` — контент и контакты
 - `src/hooks` / `helpers` / `services` — логика заявки, скролл-анимации процесса и автопроигрывание видео складов
@@ -43,7 +45,7 @@
 Репозиторий: https://github.com/divangames/cargo575_main2  
 Сборка для Pages идёт workflow «GitHub Pages» при push в `main`.
 
-Заявки пока пишутся в `localStorage` (`cargo575-leads`). Подключите CRM / почту в `src/services/leadService.ts`.
+Заявки с форм уходят в Telegram через PHP-прокси `https://chinatoway.ru/api/stanki-lead.php` (скрипты в папке `api/`). На GitHub Pages PHP не выполняется, поэтому используется уже работающий хост. Токен бота хранится только в `api/config.php` на сервере (в репозиторий не коммитится; образец — `api/config.example.php`).
 
 ## Коммерческие ориентиры
 

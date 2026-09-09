@@ -20,6 +20,7 @@ export function Hero() {
   return (
     <section className="hero" id="top">
       <div className="hero-poster">
+        <div className="hero-poster-fx" aria-hidden="true" />
         <div className="hero-main wrap-wide">
           <div className="hero-copy">
             <p className="eyebrow">CARGO 575 · Китай → Россия</p>
@@ -59,8 +60,8 @@ export function Hero() {
             <span>от кг минимум</span>
           </div>
         </div>
+        <Wave from="#0088d8" to="#f5faff" />
       </div>
-      <Wave from="#0088d8" to="#f5faff" />
       <div className="hero-dock wrap-wide" id="hero-calc">
         <div className="hero-trap">
           <img src={assetUrl("/images/uslugi/04.jpg")} alt="Склад CARGO 575: консолидация партий" />

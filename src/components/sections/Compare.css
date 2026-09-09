@@ -1,42 +1,182 @@
-/* Карго и белая схема */
+/* Развилка схем: общая ось критериев и две колеи */
 
-.cmp-grid {
-  display: grid;
-  gap: 1rem;
-  margin-bottom: 1.25rem;
+.compare {
+  background:
+    radial-gradient(120% 80% at 100% 0%, rgba(0, 136, 216, 0.1), transparent 55%),
+    var(--paper);
 }
 
-.cmp-grid article {
-  padding: 1.25rem;
-  display: grid;
-  gap: 0.8rem;
-  background: var(--white);
+.cmp-board {
+  container-type: inline-size;
+  overflow: clip;
+  border: 1px solid var(--line);
   border-radius: var(--radius);
+  background: var(--white);
   box-shadow: var(--shadow);
 }
 
-.cmp-grid article.is-alt {
-  background: var(--blue-700);
-  color: var(--white);
+.cmp-caption {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-.cmp-grid h3 {
-  text-transform: uppercase;
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
-}
-
-.cmp-grid small {
+.cmp-table {
   display: block;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-weight: 800;
-  font-size: 0.68rem;
-  opacity: 0.55;
-  margin-bottom: 0.2rem;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
-@media (min-width: 800px) {
-  .cmp-grid {
-    grid-template-columns: 1fr 1fr;
+.cmp-table thead,
+.cmp-table tbody {
+  display: block;
+  width: 100%;
+}
+
+.cmp-table tr {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+}
+
+.cmp-table th,
+.cmp-table td {
+  min-width: 0;
+  margin: 0;
+  font-weight: 700;
+  text-align: left;
+  vertical-align: top;
+}
+
+.cmp-axis {
+  display: none;
+}
+
+.cmp-lane {
+  display: grid;
+  gap: 0.35rem;
+  padding: clamp(1rem, 3vw, 1.55rem) clamp(0.9rem, 2.4vw, 1.5rem);
+}
+
+.cmp-kicker {
+  font-size: clamp(0.62rem, 1.2vw, 0.72rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 800;
+  opacity: 0.62;
+}
+
+.cmp-name {
+  font-size: clamp(1.05rem, 3.4vw, 1.85rem);
+  line-height: 0.95;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.cmp-lane.is-cargo {
+  color: var(--ink);
+  background: linear-gradient(180deg, rgba(232, 244, 251, 0.95), var(--white) 72%);
+  border-bottom: 3px solid var(--red);
+}
+
+.cmp-lane.is-white {
+  color: var(--white);
+  background: linear-gradient(165deg, var(--blue-500), var(--blue-700) 58%);
+  border-bottom: 3px solid var(--blue-300);
+}
+
+.cmp-table tbody th {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  grid-column: 1 / -1;
+  padding: 0.9rem 1rem 0.35rem;
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.cmp-table tbody th svg {
+  flex-shrink: 0;
+  color: var(--blue-600);
+}
+
+.cmp-table tbody td {
+  padding: 0.25rem 1rem 1.05rem;
+  color: var(--ink);
+  font-size: clamp(0.86rem, 1.6vw, 1.05rem);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.cmp-table tbody td:last-child {
+  color: var(--blue-700);
+}
+
+.cmp-table tbody tr {
+  border-top: 1px solid var(--line);
+  background: var(--white);
+  transition: background 0.28s var(--ease);
+}
+
+.cmp-table tbody tr:nth-child(even) {
+  background: rgba(232, 244, 251, 0.45);
+}
+
+.cmp-foot {
+  margin-top: clamp(1.2rem, 3vw, 1.75rem);
+}
+
+@container (min-width: 760px) {
+  .cmp-table tr {
+    grid-template-columns: minmax(10rem, 14rem) 1fr 1fr;
+  }
+
+  .cmp-axis {
+    display: grid;
+    align-content: end;
+    padding: 1.35rem 1.25rem;
+    color: var(--ink-soft);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 800;
+    background: var(--mist);
+    border-bottom: 3px solid transparent;
+  }
+
+  .cmp-table tbody th {
+    grid-column: auto;
+    align-items: flex-start;
+    padding: 1.25rem 1.25rem;
+    background: var(--mist);
+  }
+
+  .cmp-table tbody td {
+    padding: 1.25rem 1.4rem;
+  }
+
+  .cmp-table tbody tr:hover {
+    background: rgba(0, 136, 216, 0.06);
+  }
+
+  .cmp-table tbody tr:hover th {
+    background: #d9eef8;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cmp-table tbody tr {
+    transition: none;
   }
 }

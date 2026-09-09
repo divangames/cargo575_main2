@@ -5,6 +5,7 @@ dist
 .vite
 .env
 .env.*
+api/config.php
 *.log
 # Исходники видео дублируют public/video и близки к лимиту GitHub 100 МБ
 assets/video

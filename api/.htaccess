@@ -1,0 +1,4 @@
+# Закрываем секреты Telegram от прямого открытия в браузере
+<Files "config.php">
+  Require all denied
+</Files>

@@ -14,5 +14,12 @@ export default defineConfig({
   server: {
     port: 5175,
     host: true,
+    proxy: {
+      "/api": {
+        target: "https://chinatoway.ru",
+        changeOrigin: true,
+        secure: true,
+      },
+    },
   },
 });
