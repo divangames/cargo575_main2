@@ -14,13 +14,8 @@ import {
 import { chinaOffices, russiaOffices } from "../../config/content";
 import { legalLine, site } from "../../config/site";
 import { assetUrl } from "../../helpers/assetUrl";
-import {
-  FooterCircleIcon,
-  FooterPillIcon,
-  type FooterCircleSocial,
-  type FooterPillSocial,
-} from "../../helpers/footerSocialIcon";
 import { Modal } from "../ui/Modal";
+import { SocialLinks } from "./SocialLinks";
 import "./Footer.css";
 
 /** Якорные ссылки блока услуг */
@@ -30,19 +25,6 @@ const serviceLinks = [
   { href: "#vykup", label: "Выкуп и оплата в юанях" },
   { href: "#included", label: "Что входит в стоимость" },
 ] as const;
-
-/** Круглые кнопки мессенджеров */
-const circleSocials: { id: FooterCircleSocial; href: string; label: string }[] = [
-  { id: "telegram", href: site.telegramHref, label: "Telegram" },
-  { id: "max", href: site.maxHref, label: "MAX" },
-  { id: "whatsapp", href: site.whatsappHref, label: "WhatsApp" },
-];
-
-/** Широкие кнопки WeChat и группы */
-const pillSocials: { id: FooterPillSocial; href: string; label: string }[] = [
-  { id: "wechat", href: site.wechatHref, label: "WeChat" },
-  { id: "telegram-group", href: site.telegramGroupHref, label: "Группа" },
-];
 
 /** Подвал лендинга: маршрут Китай — Россия, мессенджеры и реквизиты */
 export function Footer() {
@@ -97,40 +79,15 @@ export function Footer() {
               </li>
             </ul>
             <img
-              className="footer-avatar"
-              src={assetUrl("/images/ava.jpg")}
-              alt="Специалист по доставке из Китая"
-              width={160}
-              height={160}
+              className="footer-mascot"
+              src={assetUrl("/mascote/cat_footer.webp")}
+              alt=""
+              width={320}
+              height={320}
               decoding="async"
             />
             <div className="footer-socials">
-              <div className="footer-social-row">
-                {circleSocials.map((item) => (
-                  <a
-                    key={item.id}
-                    className="footer-social-circle"
-                    href={item.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={item.label}
-                  >
-                    <FooterCircleIcon id={item.id} />
-                  </a>
-                ))}
-              </div>
-              {pillSocials.map((item) => (
-                <a
-                  key={item.id}
-                  className="footer-social-pill"
-                  href={item.href}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span>{item.label}</span>
-                  <FooterPillIcon id={item.id} />
-                </a>
-              ))}
+              <SocialLinks />
             </div>
           </div>
 
@@ -167,6 +124,16 @@ export function Footer() {
             </div>
           </div>
         </div>
+
+        <img
+          className="footer-office"
+          src={assetUrl("/images/office.jpg")}
+          alt="Офис CARGO 575"
+          width={960}
+          height={540}
+          loading="lazy"
+          decoding="async"
+        />
 
         <div className="footer-bottom">
           <small>

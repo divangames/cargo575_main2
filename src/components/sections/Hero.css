@@ -100,7 +100,7 @@
     line-height: .86;
     gap: 0.4rem;
   }
-  .hero-title-route { font-size: clamp(1rem, 1.55vw, 1.35rem); letter-spacing: .04em; }
+  .hero-title-route { font-size: clamp(0.92rem, 1.45vw, 1.22rem); letter-spacing: .04em; }
   .hero-sub { animation-delay: .16s; }
   .hero-cta { animation-delay: .24s; }
   .hero-facts { animation-delay: .32s; }
@@ -125,11 +125,12 @@
     gap: 0.22rem;
   }
   .hero-title-route {
-    font-size: clamp(0.92rem, 5.15vw, 1.22rem);
+    font-size: clamp(0.68rem, 3.85vw, 1.05rem);
     font-weight: 800;
-    letter-spacing: 0.045em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     color: #eef6ff;
+    white-space: nowrap;
   }
   .hero-shot {
     display: block;

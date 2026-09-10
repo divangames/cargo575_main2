@@ -100,8 +100,17 @@ p {
 
 .section-head {
   display: grid;
-  gap: 1rem;
+  align-content: start;
+  gap: 0.42rem;
   margin-bottom: clamp(1.75rem, 4vw, 3rem);
+}
+
+.section-head .eyebrow {
+  margin-bottom: 0.28rem;
+}
+
+.section-head .section-title + .section-lead {
+  margin-top: 0.08rem;
 }
 
 .block {

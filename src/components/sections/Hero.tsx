@@ -25,7 +25,7 @@ export function Hero() {
             <p className="eyebrow">CARGO 575 · Китай → Россия</p>
             <h1>
               <span className="hero-title-brand">КАРГО</span>
-              <span className="hero-title-route">из Китая в Россию</span>
+              <span className="hero-title-route">доставка из Китая в Россию</span>
             </h1>
             <figure className="hero-shot">
               <img

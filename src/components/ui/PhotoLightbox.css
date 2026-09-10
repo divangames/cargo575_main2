@@ -40,12 +40,19 @@
   top: 0.35rem;
   right: 0.35rem;
   z-index: 2;
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
   width: 44px;
   height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  aspect-ratio: 1;
   border: 1px solid var(--line);
   border-radius: 50%;
   background: var(--mist);
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   line-height: 1;
   color: var(--ink);
 }

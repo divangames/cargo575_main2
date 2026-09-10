@@ -46,12 +46,21 @@
 }
 
 .modal-x {
+  box-sizing: border-box;
+  flex: 0 0 44px;
+  display: grid;
+  place-items: center;
   width: 44px;
   height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  aspect-ratio: 1;
   border: 1px solid var(--line);
   border-radius: 50%;
   background: var(--mist);
-  font-size: 1.5rem;
+  font-size: 1.35rem;
+  line-height: 1;
 }
 
 @media (min-width: 720px) {

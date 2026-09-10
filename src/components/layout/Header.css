@@ -206,6 +206,10 @@
   padding-inline: 1.4rem;
 }
 
+.header-sheet-socials {
+  margin-top: 1.5rem;
+}
+
 @media (min-width: 1080px) {
   .header {
     padding-top: 0.85rem;

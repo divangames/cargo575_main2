@@ -12,6 +12,7 @@ import { assetUrl } from "../../helpers/assetUrl";
 import { scrollToId } from "../../helpers/scrollToId";
 import { useActiveSection } from "../../hooks/useActiveSection";
 import { useLeadModal } from "../../hooks/useLeadModal";
+import { SocialLinks } from "./SocialLinks";
 import "./Header.css";
 
 const NAV_HREFS = navItems.map((item) => item.href);
@@ -134,6 +135,7 @@ export function Header() {
             Рассчитать
           </button>
         </div>
+        <SocialLinks className="header-sheet-socials" />
       </nav>
     </header>
   );

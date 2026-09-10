@@ -53,6 +53,34 @@
   box-shadow: none;
 }
 
+.rev-market-chips {
+  display: none;
+}
+
+@media (max-width: 899px) {
+  .rev-markets-block {
+    margin-top: clamp(2rem, 6vw, 2.75rem);
+  }
+
+  .rev-market-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin: 0.9rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .rev-market-chips li {
+    background: var(--mist);
+    border-radius: 999px;
+    padding: 0.32rem 0.72rem;
+    font-size: clamp(0.72rem, 3.2vw, 0.8rem);
+    font-weight: 700;
+    color: var(--ink);
+  }
+}
+
 @keyframes rev-marquee-ltr {
   from {
     transform: translate3d(-50%, 0, 0);

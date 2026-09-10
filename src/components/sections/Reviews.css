@@ -4,6 +4,12 @@
   padding-bottom: 0;
 }
 
+@media (max-width: 1079px) {
+  .reviews.block {
+    padding-bottom: clamp(2rem, 6vw, 2.75rem);
+  }
+}
+
 .reviews .wrap {
   min-width: 0;
 }

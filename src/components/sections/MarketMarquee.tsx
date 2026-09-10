@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////
 
-import { markets } from "../../config/content";
+import { marketChips, markets } from "../../config/content";
 import "./MarketMarquee.css";
 
 const repeats = 4;
@@ -51,6 +51,13 @@ export function MarketMarquee() {
             <MarqueeSet items={bottomSet} clone />
           </div>
         </div>
+      </div>
+      <div className="wrap">
+        <ul className="rev-market-chips" aria-label="Площадки Китая">
+          {marketChips.map((name) => (
+            <li key={name}>{name}</li>
+          ))}
+        </ul>
       </div>
     </div>
   );
