@@ -4,6 +4,7 @@
 //
 ////////////////////////////////////////////////////////
 
+import { useEffect } from "react";
 import { cargoCategories, priorities } from "../../config/content";
 import { getContactChannel } from "../../config/contactChannels";
 import { useLeadForm } from "../../hooks/useLeadForm";
@@ -11,6 +12,7 @@ import type { LeadFormMode, LeadPayload, LeadSource } from "../../types/lead";
 import { Button } from "../ui/Button";
 import { Field, SelectField } from "../ui/Field";
 import { ContactChannelPicker } from "./ContactChannelPicker";
+import { LeadSuccessOverlay } from "./LeadSuccessOverlay";
 import "./LeadForm.css";
 
 interface Props {
@@ -19,6 +21,8 @@ interface Props {
   cta: string;
   preset?: Partial<LeadPayload>;
   note?: string;
+  onSuccessChange?: (success: boolean) => void;
+  onDismiss?: () => void;
 }
 
 /** Текст после успешной отправки */
@@ -52,17 +56,28 @@ function loadingCopy(mode: LeadFormMode): string {
 }
 
 /** Короткая форма; вопрос — имя и связь, с тарифов ещё приоритет пакета */
-export function LeadForm({ source, mode, cta, preset, note }: Props) {
-  const { values, errors, status, setField, submit } = useLeadForm({ source, mode, preset });
+export function LeadForm({ source, mode, cta, preset, note, onSuccessChange, onDismiss }: Props) {
+  const { values, errors, status, setField, submit, reset } = useLeadForm({ source, mode, preset });
   const phoneMeta = getContactChannel(values.contactChannel);
   const showCargoFields = mode === "simple" || mode === "tariff";
 
+  /** Сообщает модалке, что форму нужно спрятать под оверлеем */
+  useEffect(() => {
+    onSuccessChange?.(status === "success");
+  }, [onSuccessChange, status]);
+
+  /** Закрывает оверлей и возвращает форму к полям */
+  function closeSuccess() {
+    reset();
+    onDismiss?.();
+  }
+
   if (status === "success") {
     return (
-      <div className="lead-ok" role="status">
-        <b>Заявка отправлена.</b>
-        <p>{successCopy(mode)}</p>
-      </div>
+      <>
+        <div className="lead-ok-hold" aria-hidden="true" />
+        <LeadSuccessOverlay title="Заявка отправлена" text={successCopy(mode)} onClose={closeSuccess} />
+      </>
     );
   }
 

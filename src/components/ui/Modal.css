@@ -8,6 +8,12 @@
   place-items: end center;
 }
 
+.modal-root.is-quiet .modal-backdrop,
+.modal-root.is-quiet .modal-panel {
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .modal-backdrop {
   position: absolute;
   inset: 0;

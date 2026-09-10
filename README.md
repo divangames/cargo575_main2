@@ -15,13 +15,14 @@
 - маскот: `assets/mascote` → `public/mascote`
 - кадры проверок груза для кейсов: `assets/check` → `public/images/check`
 - фото мобильного hero: `assets/images/HERO.webp` → `public/images/hero/HERO.webp`
-- фото офисов в Китае: `assets/images/china` → `public/images/china`
+- фото офисов в Китае: `assets/images/china` → `public/images/china` (карусель в блоке «Компания»)
+- аватар специалиста: `assets/images/ava.jpg` → `public/images/ava.jpg` (финальный блок и подвал)
 
 ## Структура
 
 - `src/components/layout` — шапка (капсула; на мобильном — телефон и бургер), подвал, sticky CTA, кнопка «наверх»
 - `src/components/sections` — блоки лендинга по ТЗ; сравнение карго и белой схемы — таблица-развилка в `Compare.tsx`
-- `src/components/lead` — формы расчёта; нижний блок — имя и способ связи; с тарифов ещё приоритет пакета
+- `src/components/lead` — формы расчёта; успех — оверлей с галочкой по центру экрана; нижний блок — имя и способ связи; с тарифов ещё приоритет пакета
 - `src/config` — контент и контакты
 - `src/hooks` / `helpers` / `services` — логика заявки, скролл-анимации маршрута и автопроигрывание видео складов
 - `src/components/ui/RoutePinScene.tsx` — пин-сцена с грузовиком в блоке «что входит в стоимость»

@@ -97,11 +97,11 @@ export function Footer() {
               </li>
             </ul>
             <img
-              className="footer-mascot"
-              src={assetUrl("/mascote/cat_footer.webp")}
-              alt=""
-              width={320}
-              height={320}
+              className="footer-avatar"
+              src={assetUrl("/images/ava.jpg")}
+              alt="Специалист по доставке из Китая"
+              width={160}
+              height={160}
               decoding="async"
             />
             <div className="footer-socials">

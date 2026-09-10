@@ -61,13 +61,18 @@
   backdrop-filter: blur(10px);
 }
 
-.footer-mascot {
+.footer-avatar {
   position: absolute;
-  right: -0.35rem;
-  bottom: -0.55rem;
+  right: 0.7rem;
+  bottom: 0.7rem;
   z-index: 0;
-  width: clamp(6.8rem, 34vw, 11.2rem);
-  height: auto;
+  width: clamp(4.6rem, 22vw, 6.4rem);
+  height: clamp(4.6rem, 22vw, 6.4rem);
+  object-fit: cover;
+  object-position: center 18%;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.88);
+  box-shadow: 0 10px 24px rgba(0, 20, 40, 0.28);
   pointer-events: none;
   user-select: none;
 }
@@ -163,7 +168,7 @@
   display: grid;
   gap: 0.55rem;
   margin-top: 0.25rem;
-  padding-right: clamp(4.5rem, 22vw, 7.5rem);
+  padding-right: clamp(5.2rem, 24vw, 7.2rem);
 }
 
 .footer-social-row {

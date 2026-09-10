@@ -62,13 +62,8 @@
   color: var(--ink-soft);
 }
 
-.lead-ok {
-  display: grid;
-  gap: 0.4rem;
-  padding: 1.2rem;
-  border-radius: var(--radius);
-  background: var(--mist);
-  color: var(--blue-700);
+.lead-ok-hold {
+  min-height: 8rem;
 }
 
 @media (min-width: 640px) {

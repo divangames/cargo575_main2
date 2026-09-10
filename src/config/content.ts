@@ -226,15 +226,21 @@ export const stats = [
   { value: "120+", suffix: "", label: "сотрудников" },
 ] as const;
 
-/** Временные фото офисов и складов в Китае: assets/images/china → public/images/china */
-export const chinaPhotos = Array.from({ length: 21 }, (_, index) => {
-  const n = index + 1;
-  return {
-    id: String(n),
-    src: assetUrl(`/images/china/${n}.jpg`),
-    alt: `CARGO 575 в Китае, фото ${n}`,
-  };
-});
+/** Фото офиса в Китае: assets/images/china → public/images/china */
+const CHINA_PHOTO_CACHE = "3";
+
+export const chinaPhotos = [
+  { id: "1", file: "1.jpg", alt: "Офис CARGO 575 Синь Да в Китае" },
+  { id: "2", file: "2.jpg", alt: "Ресепшен офиса CARGO 575 в Китае" },
+  { id: "3", file: "3.jpg", alt: "Команда офиса CARGO 575 в Китае" },
+  { id: "4", file: "4.jpg", alt: "Сотрудники офиса CARGO 575 за работой" },
+  { id: "5", file: "5.jpg", alt: "Рабочее место в офисе CARGO 575" },
+  { id: "6", file: "6.jpg", alt: "Переговорная в офисе CARGO 575" },
+].map((item) => ({
+  id: item.id,
+  src: `${assetUrl(`/images/china/${item.file}`)}?v=${CHINA_PHOTO_CACHE}`,
+  alt: item.alt,
+}));
 
 export const chinaOffices: ChinaOffice[] = [
   {

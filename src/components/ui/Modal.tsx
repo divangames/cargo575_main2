@@ -12,10 +12,12 @@ interface Props {
   title: string;
   onClose: () => void;
   children: ReactNode;
+  /** Прячет панель, когда поверх уже другой экран */
+  quiet?: boolean;
 }
 
 /** Диалог поверх страницы */
-export function Modal({ open, title, onClose, children }: Props) {
+export function Modal({ open, title, onClose, children, quiet = false }: Props) {
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
@@ -33,7 +35,11 @@ export function Modal({ open, title, onClose, children }: Props) {
   if (!open) return null;
 
   return (
-    <div className="modal-root" role="presentation">
+    <div
+      className={`modal-root${quiet ? " is-quiet" : ""}`}
+      role="presentation"
+      aria-hidden={quiet || undefined}
+    >
       <button className="modal-backdrop" type="button" aria-label="Закрыть" onClick={onClose} />
       <div className="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div className="modal-bar">
