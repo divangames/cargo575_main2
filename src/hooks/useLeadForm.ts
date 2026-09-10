@@ -7,7 +7,7 @@
 import { useCallback, useState } from "react";
 import { validateLead } from "../helpers/validateLead";
 import { submitLead } from "../services/leadService";
-import type { FieldErrors, FormStatus, LeadPayload, LeadSource } from "../types/lead";
+import type { FieldErrors, FormStatus, LeadFormMode, LeadPayload, LeadSource } from "../types/lead";
 
 const empty: Omit<LeadPayload, "source"> = {
   cargo: "",
@@ -17,12 +17,13 @@ const empty: Omit<LeadPayload, "source"> = {
   toCity: "",
   name: "",
   contact: "",
+  contactChannel: "call",
   priority: "optimal",
 };
 
 interface Options {
   source: LeadSource;
-  mode: "hero" | "full";
+  mode: LeadFormMode;
   preset?: Partial<LeadPayload>;
 }
 

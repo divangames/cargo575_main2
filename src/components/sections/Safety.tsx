@@ -22,12 +22,9 @@ export function Safety() {
         <div className="safety-copy">
           <Reveal>
             <div className="section-head">
-              <p className="eyebrow">Контроль</p>
-              <h2 className="section-title">
-                Ваш груз не исчезает
-                <br /> после отправки из Китая
-              </h2>
-              <p className="section-lead">Контролируем партию на каждом этапе: склад, проверка, маршрут, выдача.</p>
+              <p className="eyebrow">Безопасность</p>
+              <h2 className="section-title">Контроль груза на каждом этапе</h2>
+              <p className="section-lead">Склад, проверка, отчёт, маршрут, выдача</p>
             </div>
           </Reveal>
         </div>

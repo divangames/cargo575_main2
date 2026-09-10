@@ -1,13 +1,18 @@
-/* Пин-сцена процесса: экран стоит, грузовик едет, карточки открываются */
+/* Пин-сцена: экран стоит, грузовик едет, карточки открываются */
 
 .process {
   --truck-w: clamp(4.2rem, 9.5vw, 7.2rem);
   padding: 0;
 }
 
+.process.is-white,
+.process.is-white .process-scene {
+  background: var(--white);
+}
+
 .process-pin {
   position: relative;
-  height: calc(100svh + 7 * 34svh);
+  height: calc(100svh + var(--pin-steps, 7) * 34svh);
 }
 
 .process-scene {
@@ -148,10 +153,24 @@
 }
 
 @media (max-width: 1079px) {
+  .process-pin {
+    height: calc(72svh + var(--pin-steps, 7) * 18svh);
+  }
+
   .process-scene {
     justify-content: flex-start;
-    padding-top: calc(var(--header) + 0.45rem);
-    padding-bottom: calc(5.6rem + env(safe-area-inset-bottom));
+    min-height: 0;
+    height: auto;
+    padding-top: calc(var(--header) + 0.35rem);
+    padding-bottom: calc(4.85rem + env(safe-area-inset-bottom));
+  }
+
+  .process-scene.is-active {
+    inset: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
   }
 
   .process-scene .section-head {
@@ -217,5 +236,11 @@
   position: relative;
   inset: auto;
   min-height: 0;
-  padding-block: clamp(3.25rem, 8vw, 7rem);
+  padding-block: clamp(2rem, 6vw, 3.5rem);
+}
+
+@media (min-width: 1080px) {
+  .process.is-static .process-scene {
+    padding-block: clamp(3.25rem, 8vw, 7rem);
+  }
 }

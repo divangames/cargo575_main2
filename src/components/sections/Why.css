@@ -79,12 +79,25 @@
   letter-spacing: 0.06em;
 }
 
+.why-carousel,
+.why-places,
+.why-videos {
+  min-width: 0;
+}
+
+.why-places .off-ru-title:first-child {
+  margin-top: 0;
+}
+
 @media (min-width: 960px) {
   .why-grid {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
     grid-template-areas:
       "copy map"
-      "stats stats";
+      "stats stats"
+      "carousel carousel"
+      "places places"
+      "videos videos";
     align-items: center;
     column-gap: clamp(1.5rem, 4vw, 3.25rem);
     row-gap: clamp(1.35rem, 3vw, 2.25rem);
@@ -101,6 +114,19 @@
 
   .why-stats {
     grid-area: stats;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 36rem;
+  }
+
+  .why-carousel {
+    grid-area: carousel;
+  }
+
+  .why-places {
+    grid-area: places;
+  }
+
+  .why-videos {
+    grid-area: videos;
   }
 }

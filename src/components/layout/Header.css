@@ -1,4 +1,4 @@
-/* Плавающая капсула: десктоп — пилюли, мобильный — логотип и бургер */
+/* Плавающая капсула: десктоп — пилюли, мобильный — логотип, телефон и бургер */
 
 .header {
   position: fixed;
@@ -40,11 +40,35 @@
 .logo img {
   width: auto;
   height: 30px;
+  max-width: min(28vw, 7.4rem);
+  object-fit: contain;
+  object-position: left center;
 }
 
 .header-nav,
 .header-actions {
   display: none;
+}
+
+/* Мобильная зона: номер в одной линии с бургером */
+.header-mobile-tools {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.15rem;
+  margin-left: auto;
+}
+
+.header-mobile-tools .header-phone {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.35rem 0.4rem;
+  font-size: clamp(0.68rem, 3.15vw, 0.84rem);
+  letter-spacing: -0.02em;
 }
 
 .header-nav a,
@@ -189,6 +213,7 @@
 
   .logo img {
     height: 34px;
+    max-width: none;
   }
 
   .header-bar {
@@ -254,7 +279,7 @@
     padding: 0 1.2rem;
   }
 
-  .header-burger,
+  .header-mobile-tools,
   .header-sheet {
     display: none;
   }

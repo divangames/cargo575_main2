@@ -1,0 +1,104 @@
+/* Выбор канала связи крупными иконками */
+
+.lead-contact {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.lead-contact legend {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.45rem;
+}
+
+.lead-contact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+.lead-contact-option {
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+  min-height: 76px;
+  padding: 0.55rem 0.2rem 0.5rem;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--white);
+  cursor: pointer;
+  transition:
+    border-color 0.2s var(--ease),
+    background 0.2s var(--ease),
+    box-shadow 0.2s var(--ease),
+    transform 0.2s var(--ease);
+}
+
+.lead-contact-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.lead-contact-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: var(--white);
+}
+
+.lead-contact-call .lead-contact-icon {
+  background: var(--blue-600);
+}
+
+.lead-contact-telegram .lead-contact-icon {
+  background: #2aabee;
+}
+
+.lead-contact-whatsapp .lead-contact-icon {
+  background: #25d366;
+}
+
+.lead-contact-max .lead-contact-icon {
+  background: #3d3d4a;
+}
+
+.lead-contact-name {
+  font-size: clamp(0.58rem, 2.6vw, 0.68rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-align: center;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.lead-contact-option.is-on {
+  border-color: var(--blue-600);
+  background: #f3f8fd;
+  box-shadow: 0 8px 18px rgba(0, 102, 162, 0.12);
+}
+
+.lead-contact-option:hover {
+  transform: translateY(-1px);
+}
+
+.lead-contact-option:focus-within {
+  outline: 2px solid var(--blue-300);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lead-contact-option {
+    transition: none;
+  }
+
+  .lead-contact-option:hover {
+    transform: none;
+  }
+}

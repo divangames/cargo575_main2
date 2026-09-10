@@ -23,7 +23,7 @@ export function QuickCalc() {
           </div>
         </Reveal>
         <div className="quick-card">
-          <LeadForm source="quick" mode="full" cta="Получить расчет" />
+          <LeadForm source="quick" mode="simple" cta="Получить расчет" />
         </div>
       </div>
     </section>

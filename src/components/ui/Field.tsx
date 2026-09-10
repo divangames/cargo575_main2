@@ -33,16 +33,20 @@ interface SelectProps {
   label: string;
   value: string;
   error?: string;
+  optional?: boolean;
   children: ReactNode;
   onChange: (value: string) => void;
   id?: string;
 }
 
 /** Выпадающий список категории */
-export function SelectField({ label, value, error, children, onChange, id }: SelectProps) {
+export function SelectField({ label, value, error, optional, children, onChange, id }: SelectProps) {
   return (
     <label className={`field ${error ? "is-invalid" : ""}`} htmlFor={id}>
-      <span className="field-label">{label}</span>
+      <span className="field-label">
+        {label}
+        {optional ? <em>необязательно</em> : null}
+      </span>
       <select id={id} value={value} onChange={(e) => onChange(e.target.value)} aria-invalid={Boolean(error)}>
         {children}
       </select>

@@ -6,6 +6,12 @@
 
 export type LeadPriority = "cheaper" | "optimal" | "faster";
 
+/** Как клиент просит связаться */
+export type LeadContactChannel = "call" | "telegram" | "whatsapp" | "max";
+
+/** Короткая заявка, тариф с приоритетом или вопрос без параметров груза */
+export type LeadFormMode = "simple" | "tariff" | "question";
+
 export type LeadSource =
   | "hero"
   | "quick"
@@ -26,6 +32,7 @@ export interface LeadPayload {
   toCity: string;
   name: string;
   contact: string;
+  contactChannel: LeadContactChannel;
   priority: LeadPriority;
   source: LeadSource;
 }

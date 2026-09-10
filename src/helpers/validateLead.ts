@@ -4,21 +4,37 @@
 //
 ////////////////////////////////////////////////////////
 
-import type { FieldErrors, LeadPayload } from "../types/lead";
+import { getContactChannel } from "../config/contactChannels";
+import type { FieldErrors, LeadFormMode, LeadPayload } from "../types/lead";
 
 /** Проверяет обязательные поля заявки */
-export function validateLead(payload: LeadPayload, mode: "hero" | "full"): FieldErrors {
+export function validateLead(payload: LeadPayload, mode: LeadFormMode): FieldErrors {
   const errors: FieldErrors = {};
-  if (!payload.cargo.trim()) errors.cargo = "Укажите, что везём";
-  if (!payload.weight.trim()) errors.weight = "Укажите вес";
-  else if (!/^\d+([.,]\d+)?$/.test(payload.weight.trim())) errors.weight = "Только число";
-  if (!payload.toCity.trim()) errors.toCity = "Укажите город доставки";
-  if (!payload.contact.trim()) errors.contact = "Укажите телефон или Telegram";
-  if (mode === "full") {
-    if (!payload.name.trim()) errors.name = "Укажите имя";
+
+  switch (mode) {
+    case "question":
+      if (!payload.name.trim()) {
+        errors.name = "Укажите имя";
+      }
+      break;
+    case "simple":
+    case "tariff":
+      if (payload.weight && !/^\d+([.,]\d+)?$/.test(payload.weight.trim())) {
+        errors.weight = "Только число";
+      }
+      if (payload.volume && !/^\d+([.,]\d+)?$/.test(payload.volume.trim())) {
+        errors.volume = "Только число";
+      }
+      break;
+    default: {
+      const exhaustive: never = mode;
+      throw new Error(`Неизвестный режим формы: ${exhaustive}`);
+    }
   }
-  if (payload.volume && !/^\d+([.,]\d+)?$/.test(payload.volume.trim())) {
-    errors.volume = "Только число";
+
+  if (!payload.contact.trim()) {
+    errors.contact = `Укажите ${getContactChannel(payload.contactChannel).phoneLabel.toLowerCase()}`;
   }
+
   return errors;
 }

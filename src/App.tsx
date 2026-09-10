@@ -18,8 +18,6 @@ import { Faq } from "./components/sections/Faq";
 import { FinalCalc } from "./components/sections/FinalCalc";
 import { Hero } from "./components/sections/Hero";
 import { Included } from "./components/sections/Included";
-import { Offices } from "./components/sections/Offices";
-import { Process } from "./components/sections/Process";
 import { QuickCalc } from "./components/sections/QuickCalc";
 import { Reviews } from "./components/sections/Reviews";
 import { Safety } from "./components/sections/Safety";
@@ -55,10 +53,8 @@ export function App() {
         <Included />
         <Categories />
         <Cases />
-        <Process />
         <Safety />
         <Why />
-        <Offices />
         <Reviews />
         <Compare />
         <Extra />

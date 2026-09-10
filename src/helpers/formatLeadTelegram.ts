@@ -4,6 +4,7 @@
 //
 ////////////////////////////////////////////////////////
 
+import { getContactChannel } from "../config/contactChannels";
 import { priorities } from "../config/content";
 import type { LeadPayload, LeadPriority, LeadSource } from "../types/lead";
 
@@ -32,7 +33,7 @@ function sourceLabel(source: LeadSource): string {
     case "extra":
       return "Доп. услуги";
     case "final":
-      return "Нижний расчёт";
+      return "Остались вопросы";
     case "header":
       return "Шапка";
     default: {
@@ -58,17 +59,17 @@ function line(label: string, value: string): string {
 
 /** Собирает HTML-сообщение для api/stanki-lead.php */
 export function formatLeadTelegram(payload: LeadPayload): string {
+  const channel = getContactChannel(payload.contactChannel);
   return [
     "<b>Новая заявка — CARGO 575</b>",
     line("Источник", sourceLabel(payload.source)),
+    line("Имя", payload.name),
     line("Груз", payload.cargo),
     line("Вес, кг", payload.weight),
-    line("Объём, м³", payload.volume),
-    line("Откуда", payload.fromCity),
-    line("Куда", payload.toCity),
-    line("Приоритет", priorityLabel(payload.priority)),
-    line("Имя", payload.name),
-    line("Контакт", payload.contact),
+    line("Город доставки", payload.toCity),
+    payload.source === "tariff" ? line("Приоритет", priorityLabel(payload.priority)) : "",
+    line("Способ связи", channel.notifyChannel),
+    line(channel.notifyPhone, payload.contact),
   ]
     .filter(Boolean)
     .join("\n");

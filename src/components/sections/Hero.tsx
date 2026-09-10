@@ -5,15 +5,14 @@
 ////////////////////////////////////////////////////////
 
 import { HeroRoute } from "./HeroRoute";
-import { heroFacts } from "../../config/content";
+import { heroChips, heroFacts } from "../../config/content";
 import { assetUrl } from "../../helpers/assetUrl";
 import { useLeadModal } from "../../hooks/useLeadModal";
-import { LeadForm } from "../lead/LeadForm";
 import { Button } from "../ui/Button";
 import { Wave } from "../ui/Wave";
 import "./Hero.css";
 
-/** Главный оффер с фирменной грузовой машиной */
+/** Главный оффер: на мобильном — фото, плашки и маршрут, на десктопе — сцена с фурой */
 export function Hero() {
   const { openLead } = useLeadModal();
 
@@ -25,10 +24,27 @@ export function Hero() {
           <div className="hero-copy">
             <p className="eyebrow">CARGO 575 · Китай → Россия</p>
             <h1>
-              <span>Карго</span>
-              <span>из Китая</span>
-              <span>в Россию</span>
+              <span className="hero-title-brand">КАРГО</span>
+              <span className="hero-title-route">из Китая в Россию</span>
             </h1>
+            <figure className="hero-shot">
+              <img
+                src={assetUrl("/images/hero/HERO.webp?v=2")}
+                alt="Встреча клиента и представителя CARGO 575 у офиса 575 Карго Синь Да"
+                width={1080}
+                height={1080}
+                decoding="async"
+                fetchPriority="high"
+              />
+            </figure>
+            <ul className="hero-chips" aria-label="Ориентиры по доставке">
+              {heroChips.map((item) => (
+                <li key={item.label}>
+                  <strong>{item.value}</strong>
+                  <span>{item.label}</span>
+                </li>
+              ))}
+            </ul>
             <p className="hero-sub">Доставляем коммерческие грузы из Китая в любой город РФ от 20 кг</p>
             <div className="hero-cta">
               <Button type="button" onClick={() => openLead("hero")}>
@@ -61,21 +77,6 @@ export function Hero() {
           </div>
         </div>
         <Wave from="#0088d8" to="#f5faff" />
-      </div>
-      <div className="hero-dock wrap-wide" id="hero-calc">
-        <div className="hero-trap">
-          <img src={assetUrl("/images/uslugi/04.jpg")} alt="Склад CARGO 575: консолидация партий" />
-          <button type="button" className="hero-stamp" onClick={() => openLead("hero")}>
-            Расчёт
-            <b>цены</b>
-          </button>
-        </div>
-        <aside className="hero-form">
-          <p className="eyebrow">Мини-расчёт</p>
-          <h2>Параметры груза</h2>
-          <p>Логист подберёт несколько вариантов по цене и сроку.</p>
-          <LeadForm source="hero" mode="hero" cta="Рассчитать доставку" />
-        </aside>
       </div>
     </section>
   );

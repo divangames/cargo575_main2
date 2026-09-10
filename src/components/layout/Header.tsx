@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////
 //
-// Шапка: стеклянная капсула, десктоп-навигация, бургер на мобильном
+// Шапка: стеклянная капсула, десктоп-навигация, телефон и бургер на мобильном
 //
 ////////////////////////////////////////////////////////
 
@@ -16,7 +16,7 @@ import "./Header.css";
 
 const NAV_HREFS = navItems.map((item) => item.href);
 
-/** Фиксированная навигация: на десктопе капсула, на телефоне логотип и бургер */
+/** Фиксированная навигация: на десктопе капсула, на телефоне логотип, номер и бургер */
 export function Header() {
   const { openLead } = useLeadModal();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -83,16 +83,21 @@ export function Header() {
             Рассчитать
           </button>
         </div>
-        <button
-          type="button"
-          className="header-burger"
-          aria-expanded={menuOpen}
-          aria-controls={menuId}
-          aria-label={menuOpen ? "Закрыть меню" : "Открыть меню"}
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          {menuOpen ? <X weight="bold" size={22} /> : <List weight="bold" size={22} />}
-        </button>
+        <div className="header-mobile-tools">
+          <a className="header-phone" href={site.phoneHref}>
+            {site.phoneDisplay}
+          </a>
+          <button
+            type="button"
+            className="header-burger"
+            aria-expanded={menuOpen}
+            aria-controls={menuId}
+            aria-label={menuOpen ? "Закрыть меню" : "Открыть меню"}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            {menuOpen ? <X weight="bold" size={22} /> : <List weight="bold" size={22} />}
+          </button>
+        </div>
       </div>
       <nav
         className="header-sheet"

@@ -1,0 +1,56 @@
+/* Просмотр фото: стиль крестика как у модалки заявки */
+
+.photo-lb {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.photo-lb-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(10, 61, 99, 0.55);
+}
+
+.photo-lb-panel {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 920px);
+  max-height: 92dvh;
+  display: grid;
+  place-items: center;
+}
+
+.photo-lb-panel img {
+  width: 100%;
+  height: auto;
+  max-height: 92dvh;
+  object-fit: contain;
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: 0 24px 60px rgba(0, 36, 62, 0.35);
+}
+
+.photo-lb-x {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.35rem;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--mist);
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.photo-lb-x:focus-visible {
+  outline: 3px solid var(--blue-300);
+  outline-offset: 2px;
+}

@@ -117,7 +117,7 @@
 }
 
 .extra-body h3 {
-  max-width: 22ch;
+  max-width: 20ch;
   font-size: clamp(1.12rem, 2.6vw, 1.48rem);
   font-weight: 900;
   letter-spacing: -0.03em;

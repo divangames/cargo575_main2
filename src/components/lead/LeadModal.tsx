@@ -20,9 +20,9 @@ export function LeadModal({ open, source, preset, onClose }: Props) {
   return (
     <Modal open={open} title="Рассчитать стоимость доставки" onClose={onClose}>
       <LeadForm
-        key={`${source}-${preset?.cargo ?? ""}-${open ? "1" : "0"}`}
+        key={`${source}-${preset?.cargo ?? ""}-${preset?.priority ?? ""}-${open ? "1" : "0"}`}
         source={source}
-        mode="full"
+        mode={source === "tariff" ? "tariff" : "simple"}
         cta="Получить расчет доставки"
         preset={preset}
         note="Логист подберёт несколько вариантов по цене и сроку."

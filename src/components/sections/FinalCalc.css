@@ -1,4 +1,4 @@
-/* Финальный расчёт на синем */
+/* Финальный блок связи на синем */
 
 .final {
   background: var(--blue-500);
@@ -13,6 +13,7 @@
 
 .final .section-title {
   color: var(--white);
+  max-width: 11ch;
 }
 
 .final-grid {
@@ -32,6 +33,7 @@
   width: 72px;
   height: 72px;
   object-fit: cover;
+  object-position: center 20%;
   border-radius: 50%;
 }
 

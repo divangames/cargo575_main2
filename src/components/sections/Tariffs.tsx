@@ -6,9 +6,26 @@
 
 import { tariffs } from "../../config/content";
 import { useLeadModal } from "../../hooks/useLeadModal";
+import type { LeadPriority } from "../../types/lead";
 import { Button } from "../ui/Button";
 import { Reveal } from "../ui/Reveal";
 import "./Tariffs.css";
+
+/** Приоритет заявки совпадает с выбранной карточкой тарифа */
+function priorityFromTariff(id: (typeof tariffs)[number]["id"]): LeadPriority {
+  switch (id) {
+    case "auto-eco":
+      return "cheaper";
+    case "auto-opt":
+      return "optimal";
+    case "avia":
+      return "faster";
+    default: {
+      const neverId: never = id;
+      return neverId;
+    }
+  }
+}
 
 /** Три маршрута: эконом, оптимальный, экспресс */
 export function Tariffs() {
@@ -42,7 +59,11 @@ export function Tariffs() {
                   оформления. Фото / доп. упаковка / страхование — по условиям расчёта.
                 </p>
               </details>
-              <Button type="button" variant={item.featured ? "primary" : "secondary"} onClick={() => openLead("tariff")}>
+              <Button
+                type="button"
+                variant={item.featured ? "primary" : "secondary"}
+                onClick={() => openLead("tariff", { priority: priorityFromTariff(item.id) })}
+              >
                 Рассчитать мой груз
               </Button>
             </article>
@@ -50,7 +71,7 @@ export function Tariffs() {
         </div>
         <p className="tariff-foot">
           Точная стоимость зависит от категории товара, веса, объёма, города отправления и маршрута.
-          Рассчитаем ваш груз индивидуально. Ориентиры ставок — с 575cargo.ru.
+          Рассчитаем ваш груз индивидуально.
         </p>
       </div>
     </section>

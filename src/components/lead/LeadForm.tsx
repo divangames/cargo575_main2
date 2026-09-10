@@ -5,29 +5,63 @@
 ////////////////////////////////////////////////////////
 
 import { cargoCategories, priorities } from "../../config/content";
+import { getContactChannel } from "../../config/contactChannels";
 import { useLeadForm } from "../../hooks/useLeadForm";
-import type { LeadPayload, LeadSource } from "../../types/lead";
+import type { LeadFormMode, LeadPayload, LeadSource } from "../../types/lead";
 import { Button } from "../ui/Button";
 import { Field, SelectField } from "../ui/Field";
+import { ContactChannelPicker } from "./ContactChannelPicker";
 import "./LeadForm.css";
 
 interface Props {
   source: LeadSource;
-  mode: "hero" | "full";
+  mode: LeadFormMode;
   cta: string;
   preset?: Partial<LeadPayload>;
   note?: string;
 }
 
-/** Конверсионная форма с состояниями idle / error / loading / success */
+/** Текст после успешной отправки */
+function successCopy(mode: LeadFormMode): string {
+  switch (mode) {
+    case "question":
+      return "Специалист ответит удобным способом связи.";
+    case "simple":
+    case "tariff":
+      return "Логист рассчитает варианты доставки и свяжется с вами.";
+    default: {
+      const exhaustive: never = mode;
+      return exhaustive;
+    }
+  }
+}
+
+/** Подпись кнопки во время отправки */
+function loadingCopy(mode: LeadFormMode): string {
+  switch (mode) {
+    case "question":
+      return "Отправляем…";
+    case "simple":
+    case "tariff":
+      return "Считаем…";
+    default: {
+      const exhaustive: never = mode;
+      return exhaustive;
+    }
+  }
+}
+
+/** Короткая форма; вопрос — имя и связь, с тарифов ещё приоритет пакета */
 export function LeadForm({ source, mode, cta, preset, note }: Props) {
   const { values, errors, status, setField, submit } = useLeadForm({ source, mode, preset });
+  const phoneMeta = getContactChannel(values.contactChannel);
+  const showCargoFields = mode === "simple" || mode === "tariff";
 
   if (status === "success") {
     return (
       <div className="lead-ok" role="status">
         <b>Заявка отправлена.</b>
-        <p>Логист рассчитает варианты доставки и свяжется с вами.</p>
+        <p>{successCopy(mode)}</p>
       </div>
     );
   }
@@ -41,93 +75,91 @@ export function LeadForm({ source, mode, cta, preset, note }: Props) {
       }}
       noValidate
     >
-      <SelectField
-        id={`${source}-cargo`}
-        label="Что везём?"
-        value={values.cargo}
-        error={errors.cargo}
-        onChange={(value) => setField("cargo", value)}
-      >
-        <option value="">Категория товара</option>
-        {cargoCategories.map((item) => (
-          <option key={item} value={item}>
-            {item}
-          </option>
-        ))}
-      </SelectField>
-      <div className="lead-row">
+      {mode === "question" ? (
         <Field
-          id={`${source}-weight`}
-          label="Вес, кг"
-          inputMode="decimal"
-          value={values.weight}
-          error={errors.weight}
-          onChange={(e) => setField("weight", e.target.value)}
-        />
-        <Field
-          id={`${source}-volume`}
-          label="Объём, м³"
-          optional
-          inputMode="decimal"
-          value={values.volume}
-          error={errors.volume}
-          onChange={(e) => setField("volume", e.target.value)}
-        />
-      </div>
-      {mode === "full" ? (
-        <Field
-          id={`${source}-from`}
-          label="Город отправления в Китае"
-          optional
-          value={values.fromCity}
-          onChange={(e) => setField("fromCity", e.target.value)}
+          id={`${source}-name`}
+          label="Имя"
+          value={values.name}
+          error={errors.name}
+          autoComplete="name"
+          required
+          aria-required="true"
+          onChange={(e) => setField("name", e.target.value)}
         />
       ) : null}
-      <Field
-        id={`${source}-to`}
-        label="Город доставки"
-        value={values.toCity}
-        error={errors.toCity}
-        onChange={(e) => setField("toCity", e.target.value)}
-      />
-      {mode === "full" ? (
+      {showCargoFields ? (
         <>
-          <fieldset className="lead-prio">
-            <legend>Приоритет</legend>
-            <div className="lead-prio-grid">
-              {priorities.map((item) => (
-                <label key={item.id} className={values.priority === item.id ? "is-on" : ""}>
-                  <input
-                    type="radio"
-                    name={`${source}-prio`}
-                    checked={values.priority === item.id}
-                    onChange={() => setField("priority", item.id)}
-                  />
-                  <b>{item.label}</b>
-                  <span>{item.hint}</span>
-                </label>
-              ))}
-            </div>
-          </fieldset>
+          <SelectField
+            id={`${source}-cargo`}
+            label="Что везём?"
+            optional
+            value={values.cargo}
+            error={errors.cargo}
+            onChange={(value) => setField("cargo", value)}
+          >
+            <option value="">Категория товара</option>
+            {cargoCategories.map((item) => (
+              <option key={item} value={item}>
+                {item}
+              </option>
+            ))}
+          </SelectField>
           <Field
-            id={`${source}-name`}
-            label="Имя"
-            value={values.name}
-            error={errors.name}
-            onChange={(e) => setField("name", e.target.value)}
+            id={`${source}-weight`}
+            label="Вес, кг"
+            optional
+            inputMode="decimal"
+            value={values.weight}
+            error={errors.weight}
+            onChange={(e) => setField("weight", e.target.value)}
+          />
+          <Field
+            id={`${source}-to`}
+            label="Город доставки"
+            optional
+            value={values.toCity}
+            error={errors.toCity}
+            onChange={(e) => setField("toCity", e.target.value)}
           />
         </>
       ) : null}
+      {mode === "tariff" ? (
+        <fieldset className="lead-prio">
+          <legend>Приоритет</legend>
+          <div className="lead-prio-grid">
+            {priorities.map((item) => (
+              <label key={item.id} className={values.priority === item.id ? "is-on" : ""}>
+                <input
+                  type="radio"
+                  name={`${source}-prio`}
+                  checked={values.priority === item.id}
+                  onChange={() => setField("priority", item.id)}
+                />
+                <b>{item.label}</b>
+                <span>{item.hint}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      ) : null}
+      <ContactChannelPicker
+        name={`${source}-channel`}
+        value={values.contactChannel}
+        onChange={(channel) => setField("contactChannel", channel)}
+      />
       <Field
         id={`${source}-contact`}
-        label="Телефон / Telegram"
+        label={phoneMeta.phoneLabel}
         value={values.contact}
         error={errors.contact}
         autoComplete="tel"
+        inputMode="tel"
+        required
+        aria-required="true"
         onChange={(e) => setField("contact", e.target.value)}
       />
       <Button type="submit" disabled={status === "loading"}>
-        {status === "loading" ? "Считаем…" : cta}
+        {status === "loading" ? loadingCopy(mode) : cta}
       </Button>
       {note ? <p className="lead-note">{note}</p> : null}
     </form>

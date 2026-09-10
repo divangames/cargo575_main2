@@ -36,7 +36,7 @@ export function MarketMarquee() {
   return (
     <div className="rev-markets-block">
       <div className="wrap">
-        <p className="rev-markets-title">Работаем с площадками Китая</p>
+        <p className="rev-markets-title">Работаем с популярными площадками Китая</p>
       </div>
       <div className="rev-marquee" role="region" aria-label={`Площадки Китая: ${names}`}>
         <div className="rev-marquee-row is-slow">

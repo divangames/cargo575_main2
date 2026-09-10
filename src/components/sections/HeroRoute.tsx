@@ -7,7 +7,7 @@ const stages = [
   { title: "Ближе к вашему бизнесу", text: "Доставляем в любой город России.", label: "Получение", country: "РОССИЯ" },
 ];
 
-/** Иллюстрация этапов доставки. Автовоспроизведение только на больших экранах. */
+/** Иллюстрация этапов доставки: грузовик едет, пока блок в кадре. */
 export function HeroRoute() {
   const root = useRef<HTMLDivElement>(null);
   const [stage, setStage] = useState(0);
@@ -18,7 +18,7 @@ export function HeroRoute() {
   const [pageVisible, setPageVisible] = useState(true);
 
   useEffect(() => {
-    const media = window.matchMedia("(min-width: 900px) and (prefers-reduced-motion: no-preference)");
+    const media = window.matchMedia("(prefers-reduced-motion: no-preference)");
     const update = () => setMotionAllowed(media.matches);
     update();
     media.addEventListener("change", update);

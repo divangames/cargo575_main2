@@ -82,15 +82,15 @@
 }
 
 .cmp-lane.is-cargo {
-  color: var(--ink);
-  background: linear-gradient(180deg, rgba(232, 244, 251, 0.95), var(--white) 72%);
-  border-bottom: 3px solid var(--red);
-}
-
-.cmp-lane.is-white {
   color: var(--white);
   background: linear-gradient(165deg, var(--blue-500), var(--blue-700) 58%);
   border-bottom: 3px solid var(--blue-300);
+}
+
+.cmp-lane.is-white {
+  color: var(--ink);
+  background: linear-gradient(180deg, rgba(232, 244, 251, 0.95), var(--white) 72%);
+  border-bottom: 3px solid var(--red);
 }
 
 .cmp-table tbody th {
