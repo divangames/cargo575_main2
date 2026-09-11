@@ -1,0 +1,86 @@
+/* Загрузка фото товара */
+
+.product-upload {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.product-upload-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.product-upload-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.product-upload-btn {
+  width: 100%;
+}
+
+.product-upload-hint {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.product-upload-list {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.product-upload-list li {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--mist);
+  min-width: 0;
+}
+
+.product-upload-list span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.product-upload-list small {
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.product-upload-list button {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--white);
+  font-size: 1.2rem;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.product-upload-error {
+  font-size: 0.78rem;
+  color: #c62828;
+}
+
+.product-upload.is-invalid .product-upload-btn {
+  border-color: #c62828;
+}

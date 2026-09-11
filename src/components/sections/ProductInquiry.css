@@ -1,0 +1,54 @@
+/* Блок «Ссылка или фото товара» */
+
+.product-inquiry {
+  background: var(--paper);
+}
+
+.product-inquiry-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.product-inquiry-title {
+  max-width: none;
+}
+
+.product-inquiry-calc {
+  margin-top: 0.35rem;
+  padding: 1rem 1.05rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--line);
+}
+
+.product-inquiry-calc-label {
+  margin: 0 0 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue-700);
+}
+
+.product-inquiry-calc ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--ink-soft);
+  font-size: clamp(0.92rem, 1.4vw, 1.02rem);
+  line-height: 1.55;
+}
+
+.product-inquiry-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: clamp(1.1rem, 3vw, 2rem);
+  box-shadow: var(--shadow);
+}
+
+@media (min-width: 960px) {
+  .product-inquiry-grid {
+    grid-template-columns: 0.9fr 1.1fr;
+    align-items: start;
+    gap: clamp(1.5rem, 4vw, 3rem);
+  }
+}

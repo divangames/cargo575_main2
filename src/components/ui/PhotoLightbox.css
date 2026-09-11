@@ -23,6 +23,7 @@
   max-height: 92dvh;
   display: grid;
   place-items: center;
+  touch-action: pan-y;
 }
 
 .photo-lb-panel img {
@@ -33,6 +34,8 @@
   border-radius: var(--radius);
   background: var(--white);
   box-shadow: 0 24px 60px rgba(0, 36, 62, 0.35);
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .photo-lb-x {
@@ -60,4 +63,76 @@
 .photo-lb-x:focus-visible {
   outline: 3px solid var(--blue-300);
   outline-offset: 2px;
+}
+
+.photo-lb-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--ink);
+  transform: translateY(-50%);
+  box-shadow: 0 8px 24px rgba(0, 36, 62, 0.18);
+}
+
+.photo-lb-nav.is-prev {
+  left: 0.35rem;
+}
+
+.photo-lb-nav.is-next {
+  right: 0.35rem;
+}
+
+.photo-lb-nav:focus-visible {
+  outline: 3px solid var(--blue-300);
+  outline-offset: 2px;
+}
+
+.photo-lb-counter {
+  position: absolute;
+  left: 50%;
+  bottom: 0.5rem;
+  z-index: 2;
+  margin: 0;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  transform: translateX(-50%);
+}
+
+@media (min-width: 720px) {
+  .photo-lb-nav {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    min-height: 52px;
+  }
+
+  .photo-lb-nav.is-prev {
+    left: -0.35rem;
+  }
+
+  .photo-lb-nav.is-next {
+    right: -0.35rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-lb-panel img {
+    transition: none;
+  }
 }

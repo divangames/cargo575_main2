@@ -30,6 +30,9 @@ export const site = {
   leadApiUrl: import.meta.env.DEV
     ? "/api/stanki-lead.php"
     : "https://chinatoway.ru/api/stanki-lead.php",
+  productLeadApiUrl: import.meta.env.DEV
+    ? "/api/product-lead.php"
+    : "https://chinatoway.ru/api/product-lead.php",
 } as const;
 
 /** Реквизиты одной строкой для мелкого текста в подвале */

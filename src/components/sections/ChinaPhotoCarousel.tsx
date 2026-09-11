@@ -214,7 +214,7 @@ export function ChinaPhotoCarousel() {
     };
   }, [count, hovering, openId, paint]);
 
-  const opened = chinaPhotos.find((item) => item.id === openId) ?? null;
+  const openedIndex = chinaPhotos.findIndex((item) => item.id === openId);
 
   return (
     <div className="china-carousel">
@@ -248,7 +248,14 @@ export function ChinaPhotoCarousel() {
           ))}
         </div>
       </div>
-      {opened ? <PhotoLightbox src={opened.src} alt={opened.alt} onClose={() => setOpenId(null)} /> : null}
+      {openId && openedIndex >= 0 ? (
+        <PhotoLightbox
+          items={chinaPhotos.map((photo) => ({ src: photo.src, alt: photo.alt }))}
+          index={openedIndex}
+          onIndexChange={(next) => setOpenId(chinaPhotos[next]?.id ?? null)}
+          onClose={() => setOpenId(null)}
+        />
+      ) : null}
     </div>
   );
 }

@@ -12,6 +12,7 @@ import { StickyCta } from "./components/layout/StickyCta";
 import { LeadModal } from "./components/lead/LeadModal";
 import { Categories } from "./components/sections/Categories";
 import { Cases } from "./components/sections/Cases";
+import { ProductInquiry } from "./components/sections/ProductInquiry";
 import { Compare } from "./components/sections/Compare";
 import { Extra } from "./components/sections/Extra";
 import { Faq } from "./components/sections/Faq";
@@ -55,6 +56,7 @@ export function App() {
         <Included />
         <Categories />
         <Cases />
+        <ProductInquiry />
         <Safety />
         <Why />
         <Reviews />
