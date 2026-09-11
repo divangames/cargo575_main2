@@ -113,7 +113,7 @@ export function Footer() {
               </div>
             </div>
             <div className="footer-col">
-              <h2>Офисы в России</h2>
+              <h2>Представители в городах</h2>
               <div className="footer-chips is-dense">
                 {russiaOffices.map((city) => (
                   <span key={city} className="footer-chip">

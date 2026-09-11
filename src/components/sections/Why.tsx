@@ -70,8 +70,8 @@ export function Why() {
               <span key={item.city}>{item.city}</span>
             ))}
           </div>
-          <p className="off-ru-title">14 офисов в России</p>
-          <div className="off-tags" aria-label="Офисы в России">
+          <p className="off-ru-title">Представители в городах</p>
+          <div className="off-tags" aria-label="Представители в городах">
             {russiaOffices.map((city) => (
               <span key={city}>{city}</span>
             ))}
