@@ -1,23 +1,33 @@
 ////////////////////////////////////////////////////////
 //
-// Сопоставление заголовка формы и цели Метрики
+// Сопоставление источника формы и цели Метрики
 //
 ////////////////////////////////////////////////////////
 
 import { metrikaGoals, type MetrikaGoalId } from "../config/metrika";
+import type { LeadFormMode, LeadSource } from "../types/lead";
 
-/** Возвращает идентификатор цели по заголовку формы или null, если цель не задана */
-export function getLeadMetrikaGoal(formTitle: string): MetrikaGoalId | null {
-  switch (formTitle) {
-    case "Рассчитать стоимость доставки":
+/** Возвращает идентификатор цели по источнику формы */
+export function getLeadMetrikaGoal(source: LeadSource, mode: LeadFormMode): MetrikaGoalId {
+  switch (source) {
+    case "quick":
+    case "hero":
+    case "tariff":
+    case "case":
+    case "category":
+    case "safety":
+    case "extra":
+    case "header":
       return metrikaGoals.leadDelivery;
-    case "Поможем выбрать способ доставки":
+    case "final":
+      return mode === "question" ? metrikaGoals.leadQuestions : metrikaGoals.leadDelivery;
+    case "compare":
       return metrikaGoals.leadHelpCargoOrWhite;
-    case "Обсудить бизнес-тур":
+    case "businessTour":
       return metrikaGoals.leadBusinessTour;
-    case "Остались вопросы?":
-      return metrikaGoals.leadQuestions;
-    default:
-      return null;
+    default: {
+      const neverSource: never = source;
+      return neverSource;
+    }
   }
 }

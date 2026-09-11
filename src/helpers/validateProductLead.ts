@@ -5,6 +5,7 @@
 ////////////////////////////////////////////////////////
 
 import { getContactChannel } from "../config/contactChannels";
+import { isRuMobileComplete } from "./ruPhoneMask";
 import {
   isAllowedProductPhoto,
   PRODUCT_PHOTO_MAX_BYTES,
@@ -53,8 +54,8 @@ export function validateProductLead(values: ProductLeadValues): ProductLeadError
     }
   }
 
-  if (!values.contact.trim()) {
-    errors.contact = `Укажите ${getContactChannel(values.contactChannel).phoneLabel.toLowerCase()}`;
+  if (!isRuMobileComplete(values.contact)) {
+    errors.contact = `Укажите ${getContactChannel(values.contactChannel).phoneLabel.toLowerCase()} полностью`;
   }
 
   return errors;

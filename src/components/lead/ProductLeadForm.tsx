@@ -7,8 +7,11 @@
 import { useCallback, useState } from "react";
 import { cargoCategories } from "../../config/content";
 import { getContactChannel } from "../../config/contactChannels";
+import { metrikaGoals } from "../../config/metrika";
+import { RU_PHONE_PREFIX } from "../../helpers/ruPhoneMask";
 import { validateProductLead } from "../../helpers/validateProductLead";
 import { submitProductLead } from "../../services/productLeadService";
+import { reachMetrikaGoal } from "../../services/metrikaService";
 import type {
   ProductInputKind,
   ProductLeadErrors,
@@ -17,6 +20,7 @@ import type {
 } from "../../types/productLead";
 import { Button } from "../ui/Button";
 import { Field, SelectField } from "../ui/Field";
+import { PhoneField } from "../ui/PhoneField";
 import { ContactChannelPicker } from "./ContactChannelPicker";
 import { LeadSuccessOverlay } from "./LeadSuccessOverlay";
 import { ProductInputPicker } from "./ProductInputPicker";
@@ -29,7 +33,7 @@ const emptyValues: ProductLeadValues = {
   photos: [],
   weight: "",
   cargo: "",
-  contact: "",
+  contact: RU_PHONE_PREFIX,
   contactChannel: "telegram",
 };
 
@@ -38,11 +42,13 @@ export function ProductLeadForm() {
   const [values, setValues] = useState<ProductLeadValues>(emptyValues);
   const [errors, setErrors] = useState<ProductLeadErrors>({});
   const [status, setStatus] = useState<ProductLeadStatus>("idle");
+  const [submitError, setSubmitError] = useState("");
   const phoneMeta = getContactChannel(values.contactChannel);
 
   const setField = useCallback(<K extends keyof ProductLeadValues>(key: K, value: ProductLeadValues[K]) => {
     setValues((prev) => ({ ...prev, [key]: value }));
     setErrors((prev) => ({ ...prev, [key]: undefined }));
+    setSubmitError("");
   }, []);
 
   /** Меняет тип ввода и сбрасывает ошибки связанных полей */
@@ -55,6 +61,7 @@ export function ProductLeadForm() {
   async function submit() {
     const nextErrors = validateProductLead(values);
     setErrors(nextErrors);
+    setSubmitError("");
     if (Object.keys(nextErrors).length > 0) {
       setStatus("error");
       return;
@@ -62,9 +69,11 @@ export function ProductLeadForm() {
     setStatus("loading");
     try {
       await submitProductLead(values);
+      reachMetrikaGoal(metrikaGoals.leadLinkOrPhoto);
       setStatus("success");
     } catch {
       setStatus("error");
+      setSubmitError("Не удалось отправить заявку. Попробуйте ещё раз или позвоните 8 (800) 300-57-58.");
     }
   }
 
@@ -72,24 +81,20 @@ export function ProductLeadForm() {
   function reset() {
     setValues(emptyValues);
     setErrors({});
+    setSubmitError("");
     setStatus("idle");
   }
 
-  if (status === "success") {
-    return (
-      <>
-        <div className="product-form-ok-hold" aria-hidden="true" />
+  return (
+    <>
+      {status === "success" ? (
         <LeadSuccessOverlay
           title="Заявка отправлена"
           text="Логист оценит товар и подберёт варианты доставки."
           onClose={reset}
         />
-      </>
-    );
-  }
-
-  return (
-    <form
+      ) : null}
+      <form
       className="product-lead-form"
       onSubmit={(event) => {
         event.preventDefault();
@@ -154,20 +159,18 @@ export function ProductLeadForm() {
         legend="Куда отправить расчет?"
         onChange={(channel) => setField("contactChannel", channel)}
       />
-      <Field
+      <PhoneField
         id="product-contact"
         label={phoneMeta.phoneLabel}
         value={values.contact}
         error={errors.contact}
-        autoComplete="tel"
-        inputMode="tel"
-        required
-        aria-required="true"
-        onChange={(event) => setField("contact", event.target.value)}
+        onChange={(contact) => setField("contact", contact)}
       />
-      <Button type="submit" disabled={status === "loading"}>
+      <Button type="submit" disabled={status === "loading" || status === "success"}>
         {status === "loading" ? "Отправляем…" : "Получить расчёт"}
       </Button>
+      {submitError ? <p className="lead-submit-error">{submitError}</p> : null}
     </form>
+    </>
   );
 }

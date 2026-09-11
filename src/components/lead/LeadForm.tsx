@@ -12,6 +12,7 @@ import { useLeadForm } from "../../hooks/useLeadForm";
 import type { LeadFormMode, LeadPayload, LeadSource } from "../../types/lead";
 import { Button } from "../ui/Button";
 import { Field, SelectField } from "../ui/Field";
+import { PhoneField } from "../ui/PhoneField";
 import { ContactChannelPicker } from "./ContactChannelPicker";
 import { LeadSuccessOverlay } from "./LeadSuccessOverlay";
 import "./LeadForm.css";
@@ -71,7 +72,7 @@ export function LeadForm({
   onDismiss,
 }: Props) {
   const formTitle = formTitleProp ?? getLeadFormTitle(source, mode);
-  const { values, errors, status, setField, submit, reset } = useLeadForm({
+  const { values, errors, status, submitError, setField, submit, reset } = useLeadForm({
     source,
     mode,
     formTitle,
@@ -91,17 +92,12 @@ export function LeadForm({
     onDismiss?.();
   }
 
-  if (status === "success") {
-    return (
-      <>
-        <div className="lead-ok-hold" aria-hidden="true" />
-        <LeadSuccessOverlay title="Заявка отправлена" text={successCopy(mode)} onClose={closeSuccess} />
-      </>
-    );
-  }
-
   return (
-    <form
+    <>
+      {status === "success" ? (
+        <LeadSuccessOverlay title="Заявка отправлена" text={successCopy(mode)} onClose={closeSuccess} />
+      ) : null}
+      <form
       className={`lead-form lead-${mode}`}
       onSubmit={(e) => {
         e.preventDefault();
@@ -182,21 +178,19 @@ export function LeadForm({
         legend={channelLegend}
         onChange={(channel) => setField("contactChannel", channel)}
       />
-      <Field
+      <PhoneField
         id={`${source}-contact`}
         label={phoneMeta.phoneLabel}
         value={values.contact}
         error={errors.contact}
-        autoComplete="tel"
-        inputMode="tel"
-        required
-        aria-required="true"
-        onChange={(e) => setField("contact", e.target.value)}
+        onChange={(value) => setField("contact", value)}
       />
-      <Button type="submit" disabled={status === "loading"}>
+      <Button type="submit" disabled={status === "loading" || status === "success"}>
         {status === "loading" ? loadingCopy(mode) : cta}
       </Button>
+      {submitError ? <p className="lead-submit-error">{submitError}</p> : null}
       {note ? <p className="lead-note">{note}</p> : null}
     </form>
+    </>
   );
 }

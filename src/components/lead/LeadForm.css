@@ -62,6 +62,13 @@
   color: var(--ink-soft);
 }
 
+.lead-submit-error {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #c2410c;
+}
+
 .lead-ok-hold {
   min-height: 8rem;
 }

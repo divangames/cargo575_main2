@@ -5,6 +5,7 @@
 ////////////////////////////////////////////////////////
 
 import { getContactChannel } from "../config/contactChannels";
+import { isRuMobileComplete } from "./ruPhoneMask";
 import type { FieldErrors, LeadFormMode, LeadPayload } from "../types/lead";
 
 /** Проверяет обязательные поля заявки */
@@ -32,8 +33,8 @@ export function validateLead(payload: LeadPayload, mode: LeadFormMode): FieldErr
     }
   }
 
-  if (!payload.contact.trim()) {
-    errors.contact = `Укажите ${getContactChannel(payload.contactChannel).phoneLabel.toLowerCase()}`;
+  if (!isRuMobileComplete(payload.contact)) {
+    errors.contact = `Укажите ${getContactChannel(payload.contactChannel).phoneLabel.toLowerCase()} полностью`;
   }
 
   return errors;

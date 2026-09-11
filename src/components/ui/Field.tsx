@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////
 
-import type { InputHTMLAttributes, ReactNode } from "react";
+import { forwardRef, type InputHTMLAttributes, type ReactNode } from "react";
 import "./Field.css";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
@@ -15,7 +15,10 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 /** Подписанное поле ввода */
-export function Field({ label, error, hint, optional, id, ...rest }: Props) {
+export const Field = forwardRef<HTMLInputElement, Props>(function Field(
+  { label, error, hint, optional, id, ...rest },
+  ref,
+) {
   const fieldId = id ?? rest.name;
   return (
     <label className={`field ${error ? "is-invalid" : ""}`} htmlFor={fieldId}>
@@ -23,11 +26,11 @@ export function Field({ label, error, hint, optional, id, ...rest }: Props) {
         {label}
         {optional ? <em>необязательно</em> : null}
       </span>
-      <input id={fieldId} aria-invalid={Boolean(error)} {...rest} />
+      <input ref={ref} id={fieldId} aria-invalid={Boolean(error)} {...rest} />
       {error ? <span className="field-error">{error}</span> : hint ? <span className="field-hint">{hint}</span> : null}
     </label>
   );
-}
+});
 
 interface SelectProps {
   label: string;

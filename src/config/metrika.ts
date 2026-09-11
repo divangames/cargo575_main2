@@ -13,6 +13,7 @@ export const metrikaGoals = {
   leadHelpCargoOrWhite: "lid-cargo-help-cargo-or-white",
   leadBusinessTour: "lid-cargo-business-tour",
   leadQuestions: "lid-cargo-questions",
+  leadLinkOrPhoto: "lid-cargo-link-or-photo",
   clickTelegram: "click-cargo-tg",
   clickTelegramGroup: "click-cargo-tg-group",
   clickMax: "click-cargo-max",
