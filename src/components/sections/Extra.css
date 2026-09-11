@@ -202,11 +202,18 @@
   }
 
   .extra-body {
+    gap: 0.72rem;
+    padding: 1.45rem 1.6rem 1.65rem;
     grid-template-rows: auto auto 1fr auto;
+  }
+
+  .extra-kicker {
+    margin-bottom: 0;
   }
 
   .extra-body .btn {
     align-self: end;
+    margin-top: 0.85rem;
   }
 }
 

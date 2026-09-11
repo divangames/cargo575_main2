@@ -55,5 +55,15 @@
 @media (min-width: 960px) {
   .final-grid {
     grid-template-columns: 0.9fr 1.1fr;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .final .section-head {
+    gap: 0.9rem;
+  }
+
+  .final-person {
+    margin-top: 1.35rem;
   }
 }

@@ -45,7 +45,7 @@ export function Hero() {
                 </li>
               ))}
             </ul>
-            <p className="hero-sub">Доставляем коммерческие грузы из Китая в любой город РФ от 20 кг</p>
+            <p className="hero-sub">Доставляем коммерческие грузы из Китая в любой город РФ от 2 кг</p>
             <div className="hero-cta">
               <Button type="button" onClick={() => openLead("hero")}>
                 Рассчитать стоимость доставки

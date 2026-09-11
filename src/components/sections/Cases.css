@@ -134,8 +134,13 @@
   font-size: 0.92rem;
 }
 
-.case-card small {
-  color: var(--ink-soft);
+.case-rate {
+  margin: 0;
+  color: var(--blue-700);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  line-height: 1.35;
 }
 
 .case-card .btn {

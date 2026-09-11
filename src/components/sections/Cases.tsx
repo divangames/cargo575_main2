@@ -50,7 +50,7 @@ export function Cases() {
                   <li>{item.mode}</li>
                 </ul>
                 <p>{item.note}</p>
-                <small>{item.rate}</small>
+                <p className="case-rate">{item.rate}</p>
                 <Button
                   type="button"
                   variant="secondary"

@@ -224,11 +224,11 @@
     width: max-content;
     max-width: 100%;
     min-height: 64px;
-    padding: 0.32rem 0.4rem 0.32rem 0.85rem;
+    padding: 0.32rem 0.4rem 0.32rem 0.95rem;
     display: grid;
     grid-template-columns: auto auto auto;
     align-items: center;
-    gap: 1rem;
+    gap: 1.15rem;
   }
 
   .header-nav {
