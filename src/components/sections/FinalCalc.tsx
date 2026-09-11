@@ -5,8 +5,10 @@
 ////////////////////////////////////////////////////////
 
 import { LeadForm } from "../lead/LeadForm";
+import { metrikaGoals } from "../../config/metrika";
 import { site } from "../../config/site";
 import { assetUrl } from "../../helpers/assetUrl";
+import { reachMetrikaGoal } from "../../services/metrikaService";
 import { Reveal } from "../ui/Reveal";
 import "./FinalCalc.css";
 
@@ -25,7 +27,12 @@ export function FinalCalc() {
               <div>
                 <b>На связи специалист по доставке из Китая</b>
                 <a href={site.phoneHref}>{site.phoneDisplay}</a>
-                <a href={site.whatsappHref} target="_blank" rel="noreferrer">
+                <a
+                  href={site.whatsappHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => reachMetrikaGoal(metrikaGoals.clickWhatsapp)}
+                >
                   WhatsApp
                 </a>
               </div>

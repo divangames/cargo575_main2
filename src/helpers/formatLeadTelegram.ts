@@ -32,6 +32,8 @@ function sourceLabel(source: LeadSource): string {
       return "Сравнение";
     case "extra":
       return "Доп. услуги";
+    case "businessTour":
+      return "Бизнес-тур";
     case "final":
       return "Остались вопросы";
     case "header":
@@ -62,6 +64,7 @@ export function formatLeadTelegram(payload: LeadPayload): string {
   const channel = getContactChannel(payload.contactChannel);
   return [
     "<b>Новая заявка — CARGO 575</b>",
+    line("Форма", payload.formTitle),
     line("Источник", sourceLabel(payload.source)),
     line("Имя", payload.name),
     line("Груз", payload.cargo),

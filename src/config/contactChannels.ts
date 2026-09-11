@@ -16,13 +16,6 @@ export interface ContactChannelOption {
 
 export const contactChannels: ContactChannelOption[] = [
   {
-    id: "call",
-    label: "Позвонить",
-    phoneLabel: "Номер телефона",
-    notifyChannel: "Звонок",
-    notifyPhone: "Номер телефона",
-  },
-  {
     id: "telegram",
     label: "Telegram",
     phoneLabel: "Номер телефона от Telegram",
@@ -43,22 +36,21 @@ export const contactChannels: ContactChannelOption[] = [
     notifyChannel: "MAX",
     notifyPhone: "Номер телефона MAX",
   },
+  {
+    id: "call",
+    label: "Позвонить",
+    phoneLabel: "Номер телефона",
+    notifyChannel: "Звонок",
+    notifyPhone: "Номер телефона",
+  },
 ];
+
+const contactChannelById = Object.fromEntries(contactChannels.map((item) => [item.id, item])) as Record<
+  LeadContactChannel,
+  ContactChannelOption
+>;
 
 /** Возвращает подписи выбранного канала */
 export function getContactChannel(id: LeadContactChannel): ContactChannelOption {
-  switch (id) {
-    case "call":
-      return contactChannels[0];
-    case "telegram":
-      return contactChannels[1];
-    case "whatsapp":
-      return contactChannels[2];
-    case "max":
-      return contactChannels[3];
-    default: {
-      const neverChannel: never = id;
-      return neverChannel;
-    }
-  }
+  return contactChannelById[id];
 }

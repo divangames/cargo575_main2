@@ -6,10 +6,12 @@
 
 import { useCallback, useState } from "react";
 import { validateLead } from "../helpers/validateLead";
+import { getLeadMetrikaGoal } from "../helpers/leadMetrikaGoal";
 import { submitLead } from "../services/leadService";
+import { reachMetrikaGoal } from "../services/metrikaService";
 import type { FieldErrors, FormStatus, LeadFormMode, LeadPayload, LeadSource } from "../types/lead";
 
-const empty: Omit<LeadPayload, "source"> = {
+const empty: Omit<LeadPayload, "source" | "formTitle"> = {
   cargo: "",
   weight: "",
   volume: "",
@@ -17,19 +19,20 @@ const empty: Omit<LeadPayload, "source"> = {
   toCity: "",
   name: "",
   contact: "",
-  contactChannel: "call",
+  contactChannel: "telegram",
   priority: "optimal",
 };
 
 interface Options {
   source: LeadSource;
   mode: LeadFormMode;
+  formTitle: string;
   preset?: Partial<LeadPayload>;
 }
 
 /** Управляет полями, ошибками и отправкой заявки */
-export function useLeadForm({ source, mode, preset }: Options) {
-  const [values, setValues] = useState<LeadPayload>({ ...empty, ...preset, source });
+export function useLeadForm({ source, mode, formTitle, preset }: Options) {
+  const [values, setValues] = useState<LeadPayload>({ ...empty, ...preset, source, formTitle });
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<FormStatus>("idle");
 
@@ -47,18 +50,22 @@ export function useLeadForm({ source, mode, preset }: Options) {
     }
     setStatus("loading");
     try {
-      await submitLead({ ...values, source });
+      await submitLead({ ...values, source, formTitle });
+      const goalId = getLeadMetrikaGoal(formTitle);
+      if (goalId) {
+        reachMetrikaGoal(goalId);
+      }
       setStatus("success");
     } catch {
       setStatus("error");
     }
-  }, [mode, source, values]);
+  }, [formTitle, mode, source, values]);
 
   const reset = useCallback(() => {
-    setValues({ ...empty, ...preset, source });
+    setValues({ ...empty, ...preset, source, formTitle });
     setErrors({});
     setStatus("idle");
-  }, [preset, source]);
+  }, [formTitle, preset, source]);
 
   return { values, errors, status, setField, submit, reset };
 }

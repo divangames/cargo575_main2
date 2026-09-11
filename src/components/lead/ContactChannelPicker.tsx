@@ -12,15 +12,16 @@ import "./ContactChannelPicker.css";
 interface Props {
   name: string;
   value: LeadContactChannel;
+  legend?: string;
   onChange: (value: LeadContactChannel) => void;
 }
 
 /** Четыре крупные иконки, как клиент хочет получить ответ */
-export function ContactChannelPicker({ name, value, onChange }: Props) {
+export function ContactChannelPicker({ name, value, legend = "Как удобнее получить расчёт?", onChange }: Props) {
   return (
     <fieldset className="lead-contact">
-      <legend>Как с Вами связаться</legend>
-      <div className="lead-contact-grid" role="radiogroup" aria-label="Как с Вами связаться">
+      <legend>{legend}</legend>
+      <div className="lead-contact-grid" role="radiogroup" aria-label={legend}>
         {contactChannels.map((item) => {
           const selected = value === item.id;
           return (

@@ -6,6 +6,7 @@
 
 import { circleSocials, pillSocials } from "../../config/socials";
 import { FooterCircleIcon, FooterPillIcon } from "../../helpers/footerSocialIcon";
+import { reachMetrikaGoal } from "../../services/metrikaService";
 import "./SocialLinks.css";
 
 interface Props {
@@ -25,6 +26,7 @@ export function SocialLinks({ className = "" }: Props) {
             target="_blank"
             rel="noreferrer"
             aria-label={item.label}
+            onClick={() => reachMetrikaGoal(item.metrikaGoal)}
           >
             <FooterCircleIcon id={item.id} />
           </a>
@@ -38,6 +40,7 @@ export function SocialLinks({ className = "" }: Props) {
             href={item.href}
             target="_blank"
             rel="noreferrer"
+            onClick={() => reachMetrikaGoal(item.metrikaGoal)}
           >
             <span>{item.label}</span>
             <FooterPillIcon id={item.id} />

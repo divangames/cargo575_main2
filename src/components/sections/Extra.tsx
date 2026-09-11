@@ -14,6 +14,20 @@ import "./Extra.css";
 
 type ExtraSceneId = (typeof extraScenes)[number]["id"];
 
+/** Источник заявки по сценарию карточки */
+function extraLeadSource(id: ExtraSceneId): "extra" | "businessTour" {
+  switch (id) {
+    case "logistics":
+      return "extra";
+    case "turnkey":
+      return "businessTour";
+    default: {
+      const exhaustive: never = id;
+      return exhaustive;
+    }
+  }
+}
+
 /** Класс акцента карточки по сценарию */
 function extraSceneTone(id: ExtraSceneId): string {
   switch (id) {
@@ -66,7 +80,7 @@ export function Extra() {
                 <Button
                   type="button"
                   variant={scene.variant}
-                  onClick={() => openLead("extra")}
+                  onClick={() => openLead(extraLeadSource(scene.id))}
                 >
                   {scene.cta}
                 </Button>

@@ -13,6 +13,25 @@
   margin-bottom: 0;
 }
 
+/* Мобильный заголовок: фиксированные переносы вместо случайных от 16ch */
+.why-title {
+  max-width: none;
+}
+
+.why-title-br {
+  display: block;
+}
+
+@media (min-width: 960px) {
+  .why-title {
+    max-width: min(16ch, 100%);
+  }
+
+  .why-title-br {
+    display: none;
+  }
+}
+
 .why-map-wrap {
   display: grid;
   place-items: center;

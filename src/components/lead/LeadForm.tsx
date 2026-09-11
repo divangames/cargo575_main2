@@ -7,6 +7,7 @@
 import { useEffect } from "react";
 import { cargoCategories, priorities } from "../../config/content";
 import { getContactChannel } from "../../config/contactChannels";
+import { getLeadFormTitle } from "../../helpers/leadFormTitle";
 import { useLeadForm } from "../../hooks/useLeadForm";
 import type { LeadFormMode, LeadPayload, LeadSource } from "../../types/lead";
 import { Button } from "../ui/Button";
@@ -19,6 +20,8 @@ interface Props {
   source: LeadSource;
   mode: LeadFormMode;
   cta: string;
+  formTitle?: string;
+  channelLegend?: string;
   preset?: Partial<LeadPayload>;
   note?: string;
   onSuccessChange?: (success: boolean) => void;
@@ -56,8 +59,24 @@ function loadingCopy(mode: LeadFormMode): string {
 }
 
 /** Короткая форма; вопрос — имя и связь, с тарифов ещё приоритет пакета */
-export function LeadForm({ source, mode, cta, preset, note, onSuccessChange, onDismiss }: Props) {
-  const { values, errors, status, setField, submit, reset } = useLeadForm({ source, mode, preset });
+export function LeadForm({
+  source,
+  mode,
+  cta,
+  formTitle: formTitleProp,
+  channelLegend,
+  preset,
+  note,
+  onSuccessChange,
+  onDismiss,
+}: Props) {
+  const formTitle = formTitleProp ?? getLeadFormTitle(source, mode);
+  const { values, errors, status, setField, submit, reset } = useLeadForm({
+    source,
+    mode,
+    formTitle,
+    preset,
+  });
   const phoneMeta = getContactChannel(values.contactChannel);
   const showCargoFields = mode === "simple" || mode === "tariff";
 
@@ -160,6 +179,7 @@ export function LeadForm({ source, mode, cta, preset, note, onSuccessChange, onD
       <ContactChannelPicker
         name={`${source}-channel`}
         value={values.contactChannel}
+        legend={channelLegend}
         onChange={(channel) => setField("contactChannel", channel)}
       />
       <Field

@@ -31,7 +31,13 @@ export function Why() {
         <Reveal className="why-copy">
           <div className="section-head">
             <p className="eyebrow">Компания</p>
-            <h2 className="section-title">Почему бизнес доверяет доставку CARGO 575</h2>
+            <h2 className="section-title why-title">
+              Почему бизнес
+              <br className="why-title-br" aria-hidden="true" />
+              доверяет доставку
+              <br className="why-title-br" aria-hidden="true" />
+              CARGO 575
+            </h2>
             <p className="section-lead">
               Большая компания с людьми и инфраструктурой по обе стороны границы. Не посредник из
               мессенджера.

@@ -21,10 +21,13 @@ export type LeadSource =
   | "safety"
   | "compare"
   | "extra"
+  | "businessTour"
   | "final"
   | "header";
 
 export interface LeadPayload {
+  /** Заголовок формы, с которой отправлена заявка */
+  formTitle: string;
   cargo: string;
   weight: string;
   volume: string;

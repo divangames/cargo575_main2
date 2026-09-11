@@ -24,10 +24,12 @@ import { Safety } from "./components/sections/Safety";
 import { Tariffs } from "./components/sections/Tariffs";
 import { Why } from "./components/sections/Why";
 import { LeadModalContext } from "./hooks/useLeadModal";
+import { useTelMetrikaTracking } from "./hooks/useTelMetrikaTracking";
 import type { LeadPayload, LeadSource } from "./types/lead";
 
 /** Собирает посадочную страницу карго-доставки */
 export function App() {
+  useTelMetrikaTracking();
   const [open, setOpen] = useState(false);
   const [source, setSource] = useState<LeadSource>("header");
   const [preset, setPreset] = useState<Partial<LeadPayload>>({});
