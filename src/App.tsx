@@ -13,6 +13,7 @@ import { LeadModal } from "./components/lead/LeadModal";
 import { Categories } from "./components/sections/Categories";
 import { Cases } from "./components/sections/Cases";
 import { ProductInquiry } from "./components/sections/ProductInquiry";
+import { Packaging } from "./components/sections/Packaging";
 import { Compare } from "./components/sections/Compare";
 import { Extra } from "./components/sections/Extra";
 import { Faq } from "./components/sections/Faq";
@@ -57,6 +58,7 @@ export function App() {
         <Categories />
         <Cases />
         <ProductInquiry />
+        <Packaging />
         <Safety />
         <Why />
         <Reviews />

@@ -296,10 +296,11 @@
   }
 
   .footer-office {
-    aspect-ratio: 21 / 7;
-    max-height: 16.5rem;
-    margin-top: 1.6rem;
+    width: min(100%, 32rem);
+    aspect-ratio: 16 / 9;
+    margin: 1.6rem 0 0 auto;
     object-position: center 42%;
+    border-radius: 20px;
   }
 }
 

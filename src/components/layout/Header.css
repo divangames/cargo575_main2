@@ -72,10 +72,10 @@
 }
 
 .header-nav a,
-.header-sheet a {
+.header-sheet-nav a {
   text-decoration: none;
   color: var(--blue-700);
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .header-phone {
@@ -143,7 +143,7 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0.25rem;
   padding: calc(6.2rem + env(safe-area-inset-top)) var(--page-gutter) 2.5rem;
   background:
@@ -159,6 +159,11 @@
     visibility 0.35s;
 }
 
+.header-sheet-nav {
+  display: grid;
+  gap: 0.25rem;
+}
+
 .header.is-open .header-sheet {
   pointer-events: auto;
   opacity: 1;
@@ -166,10 +171,10 @@
   transform: translate3d(0, 0, 0);
 }
 
-.header-sheet a {
+.header-sheet-nav a {
   color: var(--white);
   font-size: clamp(1.45rem, 6.5vw, 2.1rem);
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: -0.04em;
   text-transform: uppercase;
   line-height: 1.15;
@@ -177,13 +182,13 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.16);
 }
 
-.header-sheet a.is-active,
-.header-sheet a:hover,
-.header-sheet a:focus-visible {
+.header-sheet-nav a.is-active,
+.header-sheet-nav a:hover,
+.header-sheet-nav a:focus-visible {
   color: #d8ecff;
 }
 
-.header-sheet a:focus-visible {
+.header-sheet-nav a:focus-visible {
   outline: 2px solid var(--white);
   outline-offset: 4px;
 }
@@ -251,6 +256,7 @@
     border-radius: 999px;
     text-transform: uppercase;
     font-size: 0.68rem;
+    font-weight: 600;
     letter-spacing: 0.05em;
     white-space: nowrap;
   }

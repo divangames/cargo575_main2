@@ -169,15 +169,25 @@
     display: block;
     position: relative;
   }
+  .hero-title-mobile-word {
+    position: relative;
+    z-index: 1;
+  }
   .hero-route-mark {
     display: block;
     position: absolute;
-    top: -3.65rem;
+    z-index: 0;
+    top: 1rem;
     right: -0.35rem;
     width: min(51vw, 11.25rem);
     height: auto;
     overflow: hidden;
+    opacity: 0.82;
     pointer-events: none;
+  }
+  .hero-copy > :not(.hero-route-mark) {
+    position: relative;
+    z-index: 1;
   }
   .hero-sub-mobile {
     display: block;

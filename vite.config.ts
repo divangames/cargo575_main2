@@ -11,6 +11,14 @@ function copyCheckPhotos() {
   cpSync(from, to, { recursive: true });
 }
 
+/** Кладёт материалы проверки и упаковки в public */
+function copyPackagingMedia() {
+  const from = fileURLToPath(new URL("./assets/proverka_upakovka", import.meta.url));
+  const to = fileURLToPath(new URL("./public/proverka-upakovka", import.meta.url));
+  mkdirSync(to, { recursive: true });
+  cpSync(from, to, { recursive: true });
+}
+
 export default defineConfig({
   // На GitHub Pages сайт лежит в /cargo575_main2/
   base: process.env.GITHUB_PAGES === "true" ? "/cargo575_main2/" : "/",
@@ -19,6 +27,7 @@ export default defineConfig({
       name: "copy-check-photos",
       buildStart() {
         copyCheckPhotos();
+        copyPackagingMedia();
       },
     },
     react(),

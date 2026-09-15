@@ -15,14 +15,17 @@ export { cases } from "./cases";
 
 export const navItems = [
   { href: "#uslugi", label: "Услуги" },
+  { href: "#tariffs", label: "Тарифы" },
   { href: "#vykup", label: "Выкуп" },
+  { href: "#packaging", label: "Упаковка" },
   { href: "#about", label: "О компании" },
   { href: "#reviews", label: "Кейсы / Отзывы" },
+  { href: "#faq", label: "FAQ" },
   { href: "#contacts", label: "Контакты" },
 ] as const;
 
 export const heroFacts = [
-  { text: "Работаем по договору с юр. лицами", short: "Работаем по договору" },
+  { text: "Работаем по договору с физическими лицами", short: "Работаем по договору с физическими лицами" },
   { text: "Фиксируем стоимость доставки", short: "Фиксируем стоимость доставки" },
   { text: "Страхуем груз", short: "Страхуем груз" },
   { text: "20 лет работаем с Китаем", short: "20 лет работаем с Китаем" },

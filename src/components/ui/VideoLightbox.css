@@ -77,8 +77,11 @@
 }
 
 .vlb-frame {
+  position: relative;
   min-width: 0;
   min-height: 0;
+  overflow: hidden;
+  border-radius: 16px;
 }
 
 .vlb-video {
@@ -86,8 +89,44 @@
   max-height: calc(92dvh - 7.2rem);
   aspect-ratio: 9 / 16;
   object-fit: contain;
-  background: #000;
+  background: transparent;
   border-radius: 16px;
+  opacity: 0;
+  transition: opacity 0.2s var(--ease);
+}
+
+.vlb-video.is-ready {
+  opacity: 1;
+}
+
+.vlb-loader {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 0.85rem;
+  min-height: 100%;
+  background: linear-gradient(145deg, #058be8, #0874c4);
+  color: var(--white);
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.vlb-loader-spinner {
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 3px solid rgba(255, 255, 255, 0.35);
+  border-top-color: var(--white);
+  border-radius: 50%;
+  animation: vlb-loader-spin 0.8s linear infinite;
+}
+
+@keyframes vlb-loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .vlb-bar {
@@ -177,10 +216,22 @@
     border-radius: 0;
     object-fit: contain;
   }
+
+  .vlb-frame {
+    border-radius: 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .vlb-panel {
     transition: none;
+  }
+
+  .vlb-video {
+    transition: none;
+  }
+
+  .vlb-loader-spinner {
+    animation: none;
   }
 }

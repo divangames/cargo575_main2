@@ -28,6 +28,7 @@ export function Hero() {
         <div className="hero-poster-fx" aria-hidden="true" />
         <div className="hero-main wrap-wide">
           <div className="hero-copy">
+            <HeroRouteMark />
             <p className="eyebrow">CARGO 575 · Китай → Россия</p>
             <h1>
               <span className="hero-title-desktop">
@@ -38,8 +39,7 @@ export function Hero() {
                 <span>Карго-доставка</span>
                 <span>из Китая</span>
                 <span className="hero-title-mobile-last">
-                  в Россию
-                  <HeroRouteMark />
+                  <span className="hero-title-mobile-word">в Россию</span>
                 </span>
               </span>
             </h1>

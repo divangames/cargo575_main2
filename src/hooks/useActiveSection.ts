@@ -17,17 +17,21 @@ export function useActiveSection(hrefs: readonly string[]) {
 
     if (!nodes.length) return;
 
+    const visibleSections = new Map<HTMLElement, number>();
+
     const observer = new IntersectionObserver(
       (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        entries.forEach((entry) => {
+          visibleSections.set(entry.target as HTMLElement, entry.isIntersecting ? entry.intersectionRatio : 0);
+        });
 
-        if (visible?.target.id) {
-          setActive(`#${visible.target.id}`);
-        }
+        const visible = [...visibleSections.entries()]
+          .filter(([, ratio]) => ratio > 0)
+          .sort(([, ratioA], [, ratioB]) => ratioB - ratioA)[0]?.[0];
+
+        setActive(visible?.id ? `#${visible.id}` : "");
       },
-      { rootMargin: "-35% 0px -50% 0px", threshold: [0.1, 0.25, 0.5] },
+      { rootMargin: "-35% 0px -50% 0px", threshold: [0, 0.1, 0.25, 0.5] },
     );
 
     nodes.forEach((node) => observer.observe(node));

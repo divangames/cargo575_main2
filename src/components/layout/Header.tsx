@@ -107,19 +107,21 @@ export function Header() {
         aria-hidden={!menuOpen}
         inert={!menuOpen ? true : undefined}
       >
-        {navItems.map((item) => (
-          <a
-            key={item.href}
-            href={item.href}
-            className={active === item.href ? "is-active" : undefined}
-            onClick={(event) => {
-              event.preventDefault();
-              goTo(item.href);
-            }}
-          >
-            {item.label}
-          </a>
-        ))}
+        <div className="header-sheet-nav">
+          {navItems.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className={active === item.href ? "is-active" : undefined}
+              onClick={(event) => {
+                event.preventDefault();
+                goTo(item.href);
+              }}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
         <div className="header-sheet-actions">
           <a className="header-phone" href={site.phoneHref}>
             {site.phoneDisplay}

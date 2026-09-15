@@ -17,6 +17,7 @@ export function Cases() {
   const { openLead } = useLeadModal();
   const [open, setOpen] = useState<{ n: string; index: number } | null>(null);
   const opened = cases.find((item) => item.n === open?.n);
+  const visibleCases = cases.filter((item) => !item.hidden);
 
   return (
     <section className="block cases" id="reviews">
@@ -31,7 +32,7 @@ export function Cases() {
           </div>
         </Reveal>
         <div className="case-track">
-          {cases.map((item) => {
+          {visibleCases.map((item) => {
             const cover = item.images[0];
             const extra = item.images.length;
 

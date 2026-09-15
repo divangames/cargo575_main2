@@ -13,6 +13,7 @@ export interface CasePhoto {
 /** Кейс: маршрут, цифры и фотоотчёт */
 export interface CaseItem {
   n: string;
+  hidden?: boolean;
   category: string;
   route: string;
   weight: string;

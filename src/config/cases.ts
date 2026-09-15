@@ -232,6 +232,7 @@ export const cases: CaseItem[] = [
   },
   {
     n: "17",
+    hidden: true,
     category: "Другие категории",
     route: "Гуанчжоу → Красноярск",
     weight: "112 кг",

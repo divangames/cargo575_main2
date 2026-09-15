@@ -25,6 +25,7 @@ export function VideoLightbox({ office, onClose }: Props) {
   const [volume, setVolume] = useState(1);
   const [current, setCurrent] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [videoReady, setVideoReady] = useState(false);
 
   useEffect(() => {
     const prev = document.body.style.overflow;
@@ -101,13 +102,21 @@ export function VideoLightbox({ office, onClose }: Props) {
           <X size={22} weight="bold" />
         </button>
         <div className="vlb-frame">
+          {!videoReady && (
+            <div className="vlb-loader" role="status" aria-live="polite">
+              <span className="vlb-loader-spinner" aria-hidden="true" />
+              <span>Видео грузится</span>
+            </div>
+          )}
           <video
             ref={videoRef}
-            className="vlb-video"
-            poster={office.image}
+            className={`vlb-video${videoReady ? " is-ready" : ""}`}
             autoPlay
             playsInline
             onClick={togglePlay}
+            onLoadedData={() => setVideoReady(true)}
+            onCanPlay={() => setVideoReady(true)}
+            onWaiting={() => setVideoReady(false)}
             onPlay={() => setPlaying(true)}
             onPause={() => setPlaying(false)}
             onTimeUpdate={(event) => setCurrent(event.currentTarget.currentTime)}
