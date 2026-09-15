@@ -10,6 +10,7 @@ import { Footer } from "./components/layout/Footer";
 import { Header } from "./components/layout/Header";
 import { StickyCta } from "./components/layout/StickyCta";
 import { LeadModal } from "./components/lead/LeadModal";
+import { NotFound } from "./components/pages/NotFound";
 import { Categories } from "./components/sections/Categories";
 import { Cases } from "./components/sections/Cases";
 import { ProductInquiry } from "./components/sections/ProductInquiry";
@@ -43,6 +44,14 @@ export function App() {
   }, []);
 
   const value = useMemo(() => ({ openLead }), [openLead]);
+
+  const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+  const currentPath = window.location.pathname.replace(/\/$/, "");
+  const isNotFound = currentPath !== basePath;
+
+  if (isNotFound) {
+    return <NotFound />;
+  }
 
   return (
     <LeadModalContext.Provider value={value}>
