@@ -13,8 +13,8 @@
 - фото, маскот, видео складов и иконки категорий из `assets`
 - иконки MAX и WeChat: `assets/social` → `public/social`
 - маскот: `assets/mascote` → `public/mascote`
-- кадры проверок груза для кейсов: `assets/check` → `public/images/check`
-- фото мобильного hero: `assets/images/HERO.webp` → `public/images/hero/HERO.webp`
+- кадры проверок груза для кейсов: `assets/check` → `public/images/check` (копируются при `npm run dev` / `build`; серия `16-01`… — один кейс)
+- фото мобильного hero: `assets/images/HERO.webp` → `public/images/hero/HERO.webp`; на телефоне кнопка на фото открывает видео офиса в Гуанчжоу
 - фото офисов в Китае: `assets/images/china` → `public/images/china` (карусель в блоке «Компания»)
 - аватар специалиста: `assets/images/ava.jpg` → `public/images/ava.jpg` (финальный блок и подвал)
 
@@ -23,11 +23,11 @@
 - `src/components/layout` — шапка (капсула; на мобильном — телефон и бургер), подвал, sticky CTA, кнопка «наверх»
 - `src/components/sections` — блоки лендинга по ТЗ; сравнение карго и белой схемы — таблица-развилка в `Compare.tsx`
 - `src/components/lead` — формы расчёта; блок «Ссылка или фото» с загрузкой до 5 фото; успех — оверлей с галочкой по центру экрана
-- `src/config` — контент и контакты
+- `src/config` — контент и контакты; кейсы — `src/config/cases.ts`
 - `src/hooks` / `helpers` / `services` — логика заявки, маска телефона `+7 (9XX) XXX XX-XX`, скролл-анимации маршрута и автопроигрывание видео складов
 - `src/components/ui/RoutePinScene.tsx` — пин-сцена с грузовиком в блоке «что входит в стоимость»
 - `src/components/ui/VideoLightbox.tsx` — плеер склада: модалка, полный экран на телефоне, свайп вниз для закрытия
-- `src/components/ui/PhotoLightbox.tsx` — полноэкранная галерея фото из карусели Китая (листание, свайп)
+- `src/components/ui/PhotoLightbox.tsx` — полноэкранная галерея (офис в Китае и фотоотчёты кейсов)
 - `public` — логотип, шрифты, изображения, видео
 
 ## Запуск

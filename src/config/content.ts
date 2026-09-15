@@ -6,9 +6,12 @@
 ////////////////////////////////////////////////////////
 
 import { assetUrl } from "../helpers/assetUrl";
+import type { HeroChipIconId } from "../types/hero";
 import type { LeadPriority } from "../types/lead";
 import type { ChinaOffice } from "../types/office";
 import type { SafetyIconId } from "../types/safety";
+
+export { cases } from "./cases";
 
 export const navItems = [
   { href: "#uslugi", label: "Услуги" },
@@ -19,18 +22,18 @@ export const navItems = [
 ] as const;
 
 export const heroFacts = [
-  "Работаем по договору с юр. лицами",
-  "Фиксируем стоимость доставки",
-  "Страхуем груз",
-  "20 лет работаем с Китаем",
+  { text: "Работаем по договору с юр. лицами", short: "Работаем по договору" },
+  { text: "Фиксируем стоимость доставки", short: "Фиксируем стоимость доставки" },
+  { text: "Страхуем груз", short: "Страхуем груз" },
+  { text: "20 лет работаем с Китаем", short: "20 лет работаем с Китаем" },
 ] as const;
 
 /** Компактные ориентиры для мобильного hero */
-export const heroChips = [
-  { value: "от 1$", label: "за кг" },
-  { value: "от 3 дней", label: "в пути" },
-  { value: "от 2 кг", label: "минимум" },
-] as const;
+export const heroChips: { value: string; label: string; icon: HeroChipIconId }[] = [
+  { value: "от 1$", label: "за кг", icon: "weight" },
+  { value: "от 3 дней", label: "в пути", icon: "truck" },
+  { value: "от 2 кг", label: "минимум", icon: "box" },
+];
 
 export const priorities: { id: LeadPriority; label: string; hint: string }[] = [
   { id: "cheaper", label: "Дешевле", hint: "Минимальная ставка, длиннее срок" },
@@ -128,61 +131,6 @@ export const categories = [
 
 /** Список категорий в форме совпадает с карточками на лендинге */
 export const cargoCategories = categories.map((item) => item.name);
-
-export const cases = [
-  {
-    n: "01",
-    category: "Одежда",
-    route: "Иу → Москва",
-    weight: "126 кг",
-    volume: "1,1 м³",
-    days: "18 дней",
-    mode: "Авто",
-    rate: "Ориентир: ставка за кг — по запросу",
-    note: "Консолидация от двух фабрик, проверка перед отправкой.",
-    image: assetUrl("/images/check/01.jpg"),
-    alt: "Оранжевые кипы груза в фургоне перед выездом",
-  },
-  {
-    n: "02",
-    category: "Оборудование",
-    route: "Гуанчжоу → Красноярск",
-    weight: "480 кг",
-    volume: "3,4 м³",
-    days: "16 дней",
-    mode: "Авто",
-    rate: "Ориентир: ставка за кг — по запросу",
-    note: "Дополнительная обрешётка на складе в Китае.",
-    image: assetUrl("/images/check/02.jpg"),
-    alt: "Промышленное оборудование на площадке перед отправкой",
-  },
-  {
-    n: "03",
-    category: "Маркетплейсы",
-    route: "Пекин → Новосибирск",
-    weight: "62 кг",
-    volume: "0,7 м³",
-    days: "18 дней",
-    mode: "Авто",
-    rate: "Ориентир: ставка за кг — по запросу",
-    note: "Партия под поставку на склад МП.",
-    image: assetUrl("/images/check/03.jpg"),
-    alt: "Промаркированные места на паллете перед погрузкой",
-  },
-  {
-    n: "04",
-    category: "Автозапчасти",
-    route: "Шэньчжэнь → Екатеринбург",
-    weight: "210 кг",
-    volume: "1,6 м³",
-    days: "15 дней",
-    mode: "Авто",
-    rate: "Ориентир: ставка за кг — по запросу",
-    note: "Маркировка мест и фотоотчёт до выпуска со склада.",
-    image: assetUrl("/images/check/04.jpg"),
-    alt: "Двигатель в деревянной обрешётке с сопроводительными документами",
-  },
-] as const;
 
 export const safetyItems: readonly {
   icon: SafetyIconId;
@@ -283,6 +231,9 @@ export const chinaOffices: ChinaOffice[] = [
     image: assetUrl("/images/uslugi/03.jpg"),
   },
 ];
+
+/** Ролик склада в Гуанчжоу для кнопки в hero */
+export const guangzhouOffice = chinaOffices.find((office) => office.city === "Гуанчжоу");
 
 export const russiaOffices = [
   "Красноярск",

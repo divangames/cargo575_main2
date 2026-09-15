@@ -4,17 +4,23 @@
 //
 ////////////////////////////////////////////////////////
 
-import { HeroRoute } from "./HeroRoute";
-import { heroChips, heroFacts } from "../../config/content";
+import { Play } from "@phosphor-icons/react";
+import { useState } from "react";
+import { guangzhouOffice, heroChips, heroFacts } from "../../config/content";
 import { assetUrl } from "../../helpers/assetUrl";
 import { useLeadModal } from "../../hooks/useLeadModal";
 import { Button } from "../ui/Button";
+import { VideoLightbox } from "../ui/VideoLightbox";
 import { Wave } from "../ui/Wave";
+import { HeroChipIcon } from "./HeroChipIcon";
+import { HeroRoute } from "./HeroRoute";
+import { HeroRouteMark } from "./HeroRouteMark";
 import "./Hero.css";
 
-/** Главный оффер: на мобильном — фото, плашки и маршрут, на десктопе — сцена с фурой */
+/** Главный оффер: на мобильном — фото, видео офиса и сцена с фурой */
 export function Hero() {
   const { openLead } = useLeadModal();
+  const [officeOpen, setOfficeOpen] = useState(false);
 
   return (
     <section className="hero" id="top">
@@ -24,9 +30,26 @@ export function Hero() {
           <div className="hero-copy">
             <p className="eyebrow">CARGO 575 · Китай → Россия</p>
             <h1>
-              <span className="hero-title-brand">КАРГО</span>
-              <span className="hero-title-route">доставка из Китая в Россию</span>
+              <span className="hero-title-desktop">
+                <span className="hero-title-brand">КАРГО</span>
+                <span className="hero-title-route">доставка из Китая в Россию</span>
+              </span>
+              <span className="hero-title-mobile">
+                <span>Карго-доставка</span>
+                <span>из Китая</span>
+                <span className="hero-title-mobile-last">
+                  в Россию
+                  <HeroRouteMark />
+                </span>
+              </span>
             </h1>
+            <p className="hero-sub hero-sub-desktop">
+              Доставляем коммерческие грузы из Китая в любой город РФ от 2 кг
+            </p>
+            <p className="hero-sub hero-sub-mobile">
+              Заберём товар у поставщика, проверим, застрахуем и доставим в ваш город.
+              Стоимость фиксируем до отправки.
+            </p>
             <figure className="hero-shot">
               <img
                 src={assetUrl("/images/hero/HERO.webp?v=2")}
@@ -36,27 +59,52 @@ export function Hero() {
                 decoding="async"
                 fetchPriority="high"
               />
+              {guangzhouOffice ? (
+                <button
+                  type="button"
+                  className="hero-play"
+                  onClick={() => setOfficeOpen(true)}
+                  aria-label="Смотреть видео из офиса в Гуанчжоу"
+                >
+                  <span className="hero-play-icon" aria-hidden="true">
+                    <Play size={16} weight="fill" />
+                  </span>
+                  <span className="hero-play-label">
+                    <span>Видео из офиса</span>
+                    <span>в Китае</span>
+                  </span>
+                </button>
+              ) : null}
             </figure>
             <ul className="hero-chips" aria-label="Ориентиры по доставке">
               {heroChips.map((item) => (
                 <li key={item.label}>
-                  <strong>{item.value}</strong>
-                  <span>{item.label}</span>
+                  <span className="hero-chip-icon">
+                    <HeroChipIcon name={item.icon} />
+                  </span>
+                  <span className="hero-chip-copy">
+                    <strong>{item.value}</strong>
+                    <span>{item.label}</span>
+                  </span>
                 </li>
               ))}
             </ul>
-            <p className="hero-sub">Доставляем коммерческие грузы из Китая в любой город РФ от 2 кг</p>
             <div className="hero-cta">
               <Button type="button" onClick={() => openLead("hero")}>
-                Рассчитать стоимость доставки
+                <span className="hero-cta-desk">Рассчитать стоимость доставки</span>
+                <span className="hero-cta-mob">Рассчитать доставку</span>
               </Button>
               <button type="button" className="hero-ghost" onClick={() => openLead("hero")}>
                 Получить консультацию логиста
               </button>
             </div>
+            <p className="hero-cta-note">Расчёт бесплатно · ответим удобным способом</p>
             <ul className="hero-facts">
               {heroFacts.map((item) => (
-                <li key={item}>{item}</li>
+                <li key={item.text}>
+                  <span className="hero-fact-full">{item.text}</span>
+                  <span className="hero-fact-short">{item.short}</span>
+                </li>
               ))}
             </ul>
           </div>
@@ -78,7 +126,9 @@ export function Hero() {
         </div>
         <Wave from="#0088d8" to="#f5faff" />
       </div>
+      {officeOpen && guangzhouOffice ? (
+        <VideoLightbox office={guangzhouOffice} onClose={() => setOfficeOpen(false)} />
+      ) : null}
     </section>
   );
 }
-

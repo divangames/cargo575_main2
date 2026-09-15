@@ -42,7 +42,7 @@
   position: absolute;
   top: 0.35rem;
   right: 0.35rem;
-  z-index: 2;
+  z-index: 4;
   box-sizing: border-box;
   display: grid;
   place-items: center;
@@ -67,8 +67,9 @@
 
 .photo-lb-nav {
   position: absolute;
-  top: 50%;
-  z-index: 2;
+  top: auto;
+  bottom: 4.25rem;
+  z-index: 3;
   display: grid;
   place-items: center;
   width: 44px;
@@ -80,7 +81,7 @@
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.94);
   color: var(--ink);
-  transform: translateY(-50%);
+  transform: none;
   box-shadow: 0 8px 24px rgba(0, 36, 62, 0.18);
 }
 
