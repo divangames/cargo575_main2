@@ -1,3 +1,8 @@
+.has-not-found {
+  padding-bottom: 0;
+  background: var(--blue-700);
+}
+
 .not-found {
   position: relative;
   min-height: 100svh;

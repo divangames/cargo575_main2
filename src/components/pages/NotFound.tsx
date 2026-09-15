@@ -15,8 +15,10 @@ export function NotFound() {
   useEffect(() => {
     const previousTitle = document.title;
     document.title = `Страница не найдена — ${site.name}`;
+    document.body.classList.add("has-not-found");
     return () => {
       document.title = previousTitle;
+      document.body.classList.remove("has-not-found");
     };
   }, []);
 
