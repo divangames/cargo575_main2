@@ -18,11 +18,44 @@ import { HeroRoute } from "./HeroRoute";
 import { HeroRouteMark } from "./HeroRouteMark";
 import "./Hero.css";
 
+/** Фото офиса с кнопкой видео: мобильная и десктопная позиции */
+function HeroShot({ className, onOpen }: { className: string; onOpen: () => void }) {
+  return (
+    <figure className={className}>
+      <img
+        src={assetUrl("/images/hero/HERO.webp?v=2")}
+        alt="Встреча клиента и представителя CARGO 575 у офиса 575 Карго Синь Да"
+        width={1080}
+        height={1080}
+        decoding="async"
+        fetchPriority="high"
+      />
+      {guangzhouOffice ? (
+        <button
+          type="button"
+          className="hero-play"
+          onClick={onOpen}
+          aria-label="Смотреть видео из офиса в Гуанчжоу"
+        >
+          <span className="hero-play-icon" aria-hidden="true">
+            <Play size={16} weight="fill" />
+          </span>
+          <span className="hero-play-label">
+            <span>Видео из офиса</span>
+            <span>в Китае</span>
+          </span>
+        </button>
+      ) : null}
+    </figure>
+  );
+}
+
 /** Главный оффер: на мобильном — фото, видео офиса и сцена с фурой */
 export function Hero() {
   const { openLead } = useLeadModal();
   const [officeOpen, setOfficeOpen] = useState(false);
   const { ref, active } = useViewportActive<HTMLElement>(0.08);
+  const openOffice = () => setOfficeOpen(true);
 
   return (
     <section ref={ref} className={`hero${active ? " is-in-view" : ""}`} id="top">
@@ -52,32 +85,7 @@ export function Hero() {
               Принимаем товар на складе, консолидируем, проверяем, страхуем и доставляем в ваш
               город. Стоимость фиксируем до отправки.
             </p>
-            <figure className="hero-shot">
-              <img
-                src={assetUrl("/images/hero/HERO.webp?v=2")}
-                alt="Встреча клиента и представителя CARGO 575 у офиса 575 Карго Синь Да"
-                width={1080}
-                height={1080}
-                decoding="async"
-                fetchPriority="high"
-              />
-              {guangzhouOffice ? (
-                <button
-                  type="button"
-                  className="hero-play"
-                  onClick={() => setOfficeOpen(true)}
-                  aria-label="Смотреть видео из офиса в Гуанчжоу"
-                >
-                  <span className="hero-play-icon" aria-hidden="true">
-                    <Play size={16} weight="fill" />
-                  </span>
-                  <span className="hero-play-label">
-                    <span>Видео из офиса</span>
-                    <span>в Китае</span>
-                  </span>
-                </button>
-              ) : null}
-            </figure>
+            <HeroShot className="hero-shot hero-shot-inline" onOpen={openOffice} />
             <ul className="hero-chips" aria-label="Ориентиры по доставке">
               {heroChips.map((item) => (
                 <li key={item.label}>
@@ -110,6 +118,7 @@ export function Hero() {
               ))}
             </ul>
           </div>
+          <HeroShot className="hero-shot hero-shot-stage" onOpen={openOffice} />
           <HeroRoute />
         </div>
         <div className="hero-metrics wrap-wide">

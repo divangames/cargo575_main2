@@ -34,11 +34,9 @@ export function Why() {
           <div className="section-head">
             <p className="eyebrow">Компания</p>
             <h2 className="section-title why-title">
-              Почему бизнес
-              <br className="why-title-br" aria-hidden="true" />
-              доверяет доставку
-              <br className="why-title-br" aria-hidden="true" />
-              CARGO 575
+              <span className="why-title-line">Почему бизнес</span>
+              <span className="why-title-line">доверяет доставку</span>
+              <span className="why-title-line">CARGO 575</span>
             </h2>
             <p className="section-lead">
               Большая компания с людьми и инфраструктурой по обе стороны границы. Не посредник из

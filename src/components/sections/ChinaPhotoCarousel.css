@@ -56,9 +56,21 @@
   }
 }
 
+@media (min-width: 960px) {
+  .china-viewport {
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+
+  .china-card {
+    flex-basis: clamp(11.5rem, 14vw, 15.5rem);
+    border-radius: 20px;
+  }
+}
+
 @media (min-width: 1100px) {
   .china-card {
-    flex-basis: 250px;
+    flex-basis: clamp(12rem, 13.5vw, 16rem);
   }
 }
 

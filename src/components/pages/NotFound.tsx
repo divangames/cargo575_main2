@@ -60,6 +60,15 @@ export function NotFound() {
           </div>
           <div className="not-found__orbit not-found__orbit--one" />
           <div className="not-found__orbit not-found__orbit--two" />
+          {/* Десктоп: грузовик с первого экрана; мобильный — маскот-кот */}
+          <img
+            className="not-found__truck"
+            src={assetUrl("/assets/car.svg?v=2")}
+            alt=""
+            width="228"
+            height="94"
+            decoding="async"
+          />
           <img className="not-found__mascot" src={assetUrl("/mascote/hero.webp")} alt="" />
           <div className="not-found__label not-found__label--china">
             <MapPin size={16} weight="fill" /> Китай

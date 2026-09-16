@@ -35,5 +35,9 @@ export function YourFbReviews() {
     };
   }, []);
 
-  return <div id="yourfb-reviews" ref={hostRef} className="yourfb-reviews" />;
+  return (
+    <div className="yourfb-reviews-wrap">
+      <div id="yourfb-reviews" ref={hostRef} className="yourfb-reviews" />
+    </div>
+  );
 }

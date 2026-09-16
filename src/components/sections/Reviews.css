@@ -1,13 +1,5 @@
-/* Отзывы: виджет и лента площадок */
-
 .reviews.block {
   padding-bottom: 0;
-}
-
-@media (max-width: 1079px) {
-  .reviews.block {
-    padding-bottom: clamp(2rem, 6vw, 2.75rem);
-  }
 }
 
 .reviews .wrap {
@@ -15,6 +7,10 @@
 }
 
 @media (max-width: 1079px) {
+  .reviews.block {
+    padding-bottom: clamp(2rem, 6vw, 2.75rem);
+  }
+
   .reviews .section-head {
     color: var(--white);
   }

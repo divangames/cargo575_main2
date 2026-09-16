@@ -39,12 +39,12 @@
 .footer-inner {
   position: relative;
   z-index: 1;
-  padding-block: clamp(2rem, 4.2vw, 3.1rem) 1.35rem;
+  padding-block: clamp(1.35rem, 3vw, 2.1rem) 1rem;
 }
 
 .footer-board {
   display: grid;
-  gap: 1.75rem;
+  gap: 1.25rem;
 }
 
 .footer-brand {
@@ -226,8 +226,9 @@
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 16 / 9;
-  margin-top: 1.35rem;
+  aspect-ratio: 21 / 9;
+  max-height: 11rem;
+  margin-top: 1rem;
   object-fit: cover;
   object-position: center 45%;
   border-radius: var(--radius);
@@ -236,9 +237,9 @@
 
 .footer-bottom {
   display: grid;
-  gap: 0.45rem;
-  margin-top: 1.25rem;
-  padding-top: 1.1rem;
+  gap: 0.35rem;
+  margin-top: 0.9rem;
+  padding-top: 0.85rem;
   border-top: 1px solid rgba(255, 255, 255, 0.16);
   color: rgba(255, 255, 255, 0.64);
   font-size: 0.78rem;
@@ -271,13 +272,14 @@
 @media (min-width: 900px) {
   .footer-board {
     grid-template-columns: minmax(17.5rem, 0.9fr) minmax(0, 1.4fr);
-    gap: 1.4rem 1.6rem;
+    gap: 1rem 1.4rem;
     align-items: stretch;
   }
 
   .footer-aside {
-    padding-left: 1.4rem;
+    padding-left: 1.25rem;
     border-left: 1px solid rgba(255, 255, 255, 0.14);
+    gap: 0.85rem;
   }
 
   .footer-chips.is-dense {
@@ -286,21 +288,40 @@
   }
 
   .footer-mascot {
-    width: clamp(8.2rem, 14vw, 12.5rem);
+    width: clamp(6.5rem, 11vw, 9.5rem);
     right: -0.2rem;
-    bottom: -0.7rem;
+    bottom: -0.5rem;
   }
 
   .footer-socials {
-    padding-right: clamp(6.5rem, 12vw, 9rem);
+    padding-right: clamp(5.5rem, 10vw, 7.5rem);
+  }
+
+  .footer-brand {
+    padding: 1rem 1rem 1.05rem;
+    gap: 0.65rem;
   }
 
   .footer-office {
-    width: min(100%, 32rem);
-    aspect-ratio: 16 / 9;
-    margin: 1.6rem 0 0 auto;
+    width: min(100%, 22rem);
+    max-height: 8.5rem;
+    aspect-ratio: 21 / 9;
+    margin: 0.85rem 0 0 auto;
     object-position: center 42%;
-    border-radius: 20px;
+    border-radius: 18px;
+  }
+
+  .footer-bottom {
+    margin-top: 0.75rem;
+    padding-top: 0.7rem;
+  }
+
+  .footer-col h2 {
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-chip {
+    min-height: 36px;
   }
 }
 
