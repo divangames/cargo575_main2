@@ -125,3 +125,11 @@
     transform: translateY(-8px);
   }
 }
+
+@media (max-width: 1079px) {
+  .tariffs .section-head,
+  .tariffs .section-head .section-lead,
+  .tariff-foot {
+    color: var(--white);
+  }
+}

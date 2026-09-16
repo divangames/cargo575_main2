@@ -13,3 +13,9 @@
 .reviews .wrap {
   min-width: 0;
 }
+
+@media (max-width: 1079px) {
+  .reviews .section-head {
+    color: var(--white);
+  }
+}

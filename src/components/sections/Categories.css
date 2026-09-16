@@ -91,6 +91,12 @@
   }
 }
 
+@media (max-width: 1079px) {
+  #uslugi .section-head {
+    color: var(--white);
+  }
+}
+
 @media (min-width: 1080px) {
   .cat-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));

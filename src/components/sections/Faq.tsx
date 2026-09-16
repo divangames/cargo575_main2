@@ -7,6 +7,7 @@
 import { faq } from "../../config/content";
 import { Accordion } from "../ui/Accordion";
 import { Reveal } from "../ui/Reveal";
+import "./Faq.css";
 
 /** Частые вопросы о карго */
 export function Faq() {

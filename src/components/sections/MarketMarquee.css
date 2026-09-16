@@ -87,6 +87,10 @@
     margin-top: clamp(2rem, 6vw, 2.75rem);
   }
 
+  .rev-markets-title {
+    color: var(--white);
+  }
+
   .rev-market-chips {
     display: flex;
     flex-wrap: wrap;

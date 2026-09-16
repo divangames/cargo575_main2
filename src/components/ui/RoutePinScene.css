@@ -307,7 +307,7 @@
 
   .proc-list li {
     display: grid;
-    grid-template-columns: 2.25rem minmax(0, 0.95fr) minmax(0, 1.2fr);
+    grid-template-columns: 2.35rem minmax(0, 1fr);
     align-items: center;
     column-gap: 0.45rem;
     min-height: 2.6rem;
@@ -331,26 +331,55 @@
   .proc-list h3 {
     grid-column: 2;
     grid-row: 1;
-    font-size: 0.78rem;
+    font-size: 0.8rem;
     line-height: 1.1;
   }
 
   .proc-list p {
-    grid-column: 3;
-    grid-row: 1;
-    -webkit-line-clamp: 1;
-    line-clamp: 1;
-    font-size: 0.72rem;
-    line-height: 1.25;
+    display: none;
   }
 
   .proc-list li.is-current {
+    align-items: start;
+    row-gap: 0.22rem;
+    padding-block: 0.48rem;
     transform: translate3d(0, -1px, 0) scale(1.01);
   }
 
   .proc-list li.is-current b {
+    grid-row: 1 / span 2;
+    align-self: start;
     min-height: 1.3rem;
     padding: 0 0.38rem;
+  }
+
+  .proc-list li.is-current p {
+    display: block;
+    grid-column: 2;
+    grid-row: 2;
+    overflow: visible;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    font-size: 0.72rem;
+    line-height: 1.3;
+  }
+
+  .process.is-static .proc-list li {
+    align-items: start;
+    row-gap: 0.22rem;
+  }
+
+  .process.is-static .proc-list b {
+    grid-row: 1 / span 2;
+  }
+
+  .process.is-static .proc-list p {
+    display: block;
+    grid-column: 2;
+    grid-row: 2;
+    overflow: visible;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
   }
 }
 

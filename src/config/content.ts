@@ -36,7 +36,7 @@ export const heroFacts = [
 export const heroChips: { value: string; label: string; icon: HeroChipIconId }[] = [
   { value: "от 1$", label: "за кг", icon: "weight" },
   { value: "от 3 дней", label: "в пути", icon: "truck" },
-  { value: "от 20 кг", label: "минимум", icon: "box" },
+  { value: "от 20 кг", label: "авто · авиа от 2 кг", icon: "box" },
 ];
 
 export const priorities: { id: LeadPriority; label: string; hint: string }[] = [
@@ -345,7 +345,7 @@ export const faq = [
   },
   {
     q: "Какой минимальный вес груза?",
-    a: "Авто принимаем от 20 кг, авиа — от 2 кг. Меньший вес обсуждается индивидуально — например, для образцов.",
+    a: "Коммерческие партии для автодоставки принимаем от 20 кг. Партии меньшего веса можем рассмотреть для авиа: минимальный вес — от 2 кг, например образцы.",
   },
   {
     q: "Сколько занимает доставка?",
