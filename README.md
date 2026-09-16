@@ -50,6 +50,19 @@
 Репозиторий: https://github.com/divangames/cargo575_main2  
 Сборка для Pages идёт workflow «GitHub Pages» при push в `main`.
 
+Локальный помощник: `site-actions.bat`  
+- `site-actions.bat pages` — только redeploy Pages  
+- `site-actions.bat push` — сборка, безопасный commit и push  
+- `site-actions.bat all` — push и ожидание Pages  
+
+Сообщение коммита пишется в UTF-8 через `tools/write-commit-msg.ps1`.  
+Для русского текста из PowerShell:
+
+```powershell
+$env:CARGO575_COMMIT_MSG = "Обновить сайт"
+.\site-actions.bat push
+```
+
 Заявки с форм уходят в Telegram через PHP-прокси на chinatoway.ru: `stanki-lead.php` (текст) и `product-lead.php` (текст + фото). Скрипты в папке `api/`. На GitHub Pages PHP не выполняется, поэтому используется уже работающий хост. Токен бота хранится только в `api/config.php` на сервере (в репозиторий не коммитится; образец — `api/config.example.php`).
 
 ## Коммерческие ориентиры

@@ -1,7 +1,11 @@
 node_modules
 dist
 .DS_Store
+Thumbs.db
+desktop.ini
 *.local
+*.bak
+*~
 .vite
 .env
 .env.*
@@ -9,3 +13,8 @@ api/config.php
 *.log
 # Исходники видео дублируют public/video и близки к лимиту GitHub 100 МБ
 assets/video
+# Случайные UUID-экспорты изображений (не для репозитория)
+assets/images/*-*-*-*-*.png
+assets/images/*-*-*-*-*.jpg
+assets/images/*-*-*-*-*.jpeg
+assets/images/*-*-*-*-*.webp
