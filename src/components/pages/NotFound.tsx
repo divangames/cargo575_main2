@@ -8,6 +8,7 @@ import { ArrowLeft, MapPin, Phone } from "@phosphor-icons/react";
 import { useEffect } from "react";
 import { site } from "../../config/site";
 import { assetUrl } from "../../helpers/assetUrl";
+import { VectorTruckArt } from "../sections/VectorTruck";
 import "./NotFound.css";
 
 /** Фирменная страница для неизвестных адресов */
@@ -60,15 +61,8 @@ export function NotFound() {
           </div>
           <div className="not-found__orbit not-found__orbit--one" />
           <div className="not-found__orbit not-found__orbit--two" />
-          {/* Десктоп: грузовик с первого экрана; мобильный — маскот-кот */}
-          <img
-            className="not-found__truck"
-            src={assetUrl("/assets/car.svg?v=2")}
-            alt=""
-            width="228"
-            height="94"
-            decoding="async"
-          />
+          {/* Десктоп: та же векторная фура, что в hero; мобильный — маскот-кот */}
+          <VectorTruckArt className="not-found__truck" />
           <img className="not-found__mascot" src={assetUrl("/mascote/hero.webp")} alt="" />
           <div className="not-found__label not-found__label--china">
             <MapPin size={16} weight="fill" /> Китай

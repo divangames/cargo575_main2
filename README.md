@@ -12,7 +12,7 @@
 - шрифт Montserrat из `assets/fonts`
 - фото, маскот, видео складов и иконки категорий из `assets`
 - иконки MAX и WeChat: `assets/social` → `public/social`
-- маскот: `assets/mascote` → `public/mascote`; на десктопной 404 вместо кота — грузовик `public/assets/car.svg`
+- маскот: `assets/mascote` → `public/mascote`; на десктопной 404 вместо кота — та же векторная фура, что в hero (`VectorTruck`)
 - кадры проверок груза для кейсов: `assets/check` → `public/images/check` (копируются при `npm run dev` / `build`; серия `16-01`… — один кейс)
 - фото мобильного hero: `assets/images/HERO.webp` → `public/images/hero/HERO.webp`; на телефоне кнопка на фото открывает видео офиса в Гуанчжоу
 - на десктопе в hero справа — то же фото; анимированная фура остаётся на мобильном и на странице 404

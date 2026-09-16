@@ -184,15 +184,28 @@
 }
 
 .not-found__truck {
+  --motion-state: running;
   position: absolute;
   z-index: 3;
-  bottom: 18%;
+  bottom: 12%;
   left: 50%;
-  width: min(78%, 28rem);
+  width: min(92%, 36rem);
   height: auto;
   translate: -50% 0;
+  overflow: visible;
   filter: drop-shadow(0 22px 24px rgba(0, 21, 42, 0.32));
   animation: not-found-drive 5.2s ease-in-out infinite;
+}
+
+.not-found__truck .vector-wheel {
+  transform-origin: 0 0;
+  animation: vector-wheel-turn 3.02s linear infinite;
+  animation-play-state: var(--motion-state);
+}
+
+.not-found__truck .vector-truck-body {
+  animation: vector-suspension 1.7s ease-in-out infinite;
+  animation-play-state: var(--motion-state);
 }
 
 .not-found__mascot {
@@ -284,10 +297,29 @@
 @keyframes not-found-drive {
   0%,
   100% {
-    transform: translateX(-4%) translateY(0);
+    transform: translateX(-3%) translateY(0);
   }
   50% {
-    transform: translateX(4%) translateY(-6px);
+    transform: translateX(3%) translateY(-5px);
+  }
+}
+
+@keyframes vector-suspension {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  35% {
+    transform: translateY(-1.1px);
+  }
+  70% {
+    transform: translateY(0.5px);
+  }
+}
+
+@keyframes vector-wheel-turn {
+  to {
+    transform: rotate(360deg);
   }
 }
 
@@ -390,7 +422,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .not-found__mascot,
-  .not-found__truck {
+  .not-found__truck,
+  .not-found__truck .vector-wheel,
+  .not-found__truck .vector-truck-body {
     animation: none;
   }
 }
