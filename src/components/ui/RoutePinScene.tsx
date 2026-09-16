@@ -29,9 +29,9 @@ interface RouteStyle extends CSSProperties {
 }
 
 const FIRST_STEP = 0.04;
-const LAST_STEP = 0.97;
+const LAST_STEP = 0.92;
 
-/** Позиция этапа на маршруте; последняя карточка открывается почти у отпуска экрана. */
+/** Позиция этапа на маршруте; последняя карточка — до плавного схлопывания трека. */
 function stepPoint(index: number, total: number) {
   if (total <= 1) return 0;
   return FIRST_STEP + (index / (total - 1)) * (LAST_STEP - FIRST_STEP);
@@ -55,17 +55,27 @@ function currentStepIndex(progress: number, total: number, reduced: boolean) {
 
 /** Общий блок: экран стоит, грузовик едет Китай → Россия, затем страница едет дальше */
 export function RoutePinScene({ id, eyebrow, title, items, surface = "paper" }: Props) {
-  const { ref, progress, phase, reduced } = useScrollProgress();
+  const { ref, progress, phase, done, releasing, reduced } = useScrollProgress();
   const currentStep = currentStepIndex(progress, items.length, reduced);
+  // Во время подтягивания низа сцена fixed; после финиша — обычный поток
+  const scenePhase = done || reduced ? "before" : phase;
 
   return (
-    <section className={`process${reduced ? " is-static" : ""}${surface === "white" ? " is-white" : ""}`} id={id}>
+    <section
+      className={`process${reduced ? " is-static" : ""}${done ? " is-done" : ""}${releasing ? " is-releasing" : ""}${surface === "white" ? " is-white" : ""}`}
+      id={id}
+    >
       <div
         className="process-pin"
         ref={ref}
-        style={{ "--proc-progress": progress, "--pin-steps": items.length } as RouteStyle}
+        style={
+          {
+            "--proc-progress": progress,
+            "--pin-steps": done || reduced ? 0 : items.length,
+          } as RouteStyle
+        }
       >
-        <div className={`process-scene is-${phase}`}>
+        <div className={`process-scene is-${scenePhase}`}>
           <div className="wrap">
             <div className="section-head">
               <p className="eyebrow">{eyebrow}</p>

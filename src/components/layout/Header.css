@@ -295,6 +295,32 @@
   }
 }
 
+@media (min-width: 1080px) and (max-width: 1360px) {
+  .header-bar {
+    gap: 0.55rem;
+    padding-left: 0.7rem;
+  }
+
+  .header-nav {
+    gap: 0;
+  }
+
+  .header-nav a {
+    padding: 0 0.55rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.03em;
+  }
+
+  .header-actions {
+    gap: 0.45rem;
+  }
+
+  .header-cta {
+    padding: 0 0.9rem;
+    font-size: 0.66rem;
+  }
+}
+
 @media (min-width: 1240px) {
   .header-actions .header-phone {
     display: inline-flex;
