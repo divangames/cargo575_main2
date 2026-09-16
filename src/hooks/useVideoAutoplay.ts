@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Options {
   frozen: boolean;
@@ -16,6 +16,7 @@ export function useVideoAutoplay({ frozen, reduced }: Options) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const inViewRef = useRef(false);
+  const [inView, setInView] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -33,6 +34,7 @@ export function useVideoAutoplay({ frozen, reduced }: Options) {
     const observer = new IntersectionObserver(
       ([entry]) => {
         inViewRef.current = entry.isIntersecting;
+        setInView(entry.isIntersecting);
         apply();
       },
       { threshold: 0.35 },
@@ -44,5 +46,5 @@ export function useVideoAutoplay({ frozen, reduced }: Options) {
     return () => observer.disconnect();
   }, [frozen, reduced]);
 
-  return { videoRef, wrapRef };
+  return { videoRef, wrapRef, inView };
 }

@@ -20,10 +20,10 @@ interface Props {
 export function OfficeVideoCard({ office, frozen, onOpen }: Props) {
   const reduced = useReducedMotion();
   const [videoReady, setVideoReady] = useState(false);
-  const { videoRef, wrapRef } = useVideoAutoplay({ frozen, reduced });
+  const { videoRef, wrapRef, inView } = useVideoAutoplay({ frozen, reduced });
 
   return (
-    <div className="off-card" ref={wrapRef}>
+    <div className={`off-card${inView ? " is-in-view" : ""}`} ref={wrapRef}>
       <video
         ref={videoRef}
         className={videoReady ? "is-ready" : undefined}

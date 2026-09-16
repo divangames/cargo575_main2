@@ -5,6 +5,7 @@
 ////////////////////////////////////////////////////////
 
 import { marketChips, markets } from "../../config/content";
+import { useViewportActive } from "../../hooks/useViewportActive";
 import "./MarketMarquee.css";
 
 const repeats = 4;
@@ -32,9 +33,10 @@ function MarqueeSet({ items, clone }: { items: typeof topSet; clone?: boolean })
 /** Две полноширинные ленты: верх медленнее, низ быстрее */
 export function MarketMarquee() {
   const names = markets.map((item) => item.name).join(", ");
+  const { ref, active } = useViewportActive<HTMLDivElement>(0.08);
 
   return (
-    <div className="rev-markets-block">
+    <div ref={ref} className={`rev-markets-block${active ? " is-in-view" : ""}`}>
       <div className="wrap">
         <p className="rev-markets-title">Работаем с популярными площадками Китая</p>
       </div>

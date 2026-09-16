@@ -99,6 +99,11 @@
   border-top-color: var(--white);
   border-radius: 50%;
   animation: off-video-spin 0.8s linear infinite;
+  animation-play-state: paused;
+}
+
+.off-card.is-in-view .off-video-spinner {
+  animation-play-state: running;
 }
 
 @keyframes off-video-spin {

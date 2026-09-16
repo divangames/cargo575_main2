@@ -8,6 +8,7 @@ import { useCallback, useState } from "react";
 import { chinaOffices, russiaOffices, stats } from "../../config/content";
 import { assetUrl } from "../../helpers/assetUrl";
 import { useInView } from "../../hooks/useInView";
+import { useViewportActive } from "../../hooks/useViewportActive";
 import type { ChinaOffice } from "../../types/office";
 import { Reveal } from "../ui/Reveal";
 import { VideoLightbox } from "../ui/VideoLightbox";
@@ -22,6 +23,7 @@ const chinaVideos = chinaOffices.filter((item) => item.video);
 /** Масштаб компании, фото присутствия и офисы */
 export function Why() {
   const { ref, visible } = useInView<HTMLUListElement>();
+  const { ref: mapRef, active: mapActive } = useViewportActive<HTMLDivElement>(0.08);
   const [active, setActive] = useState<ChinaOffice | null>(null);
   const closePlayer = useCallback(() => setActive(null), []);
 
@@ -44,16 +46,18 @@ export function Why() {
             </p>
           </div>
         </Reveal>
-        <div className="why-map-wrap">
-          <img
-            className="why-map"
-            src={assetUrl("/images/map.gif")}
-            alt="Карта офисов CARGO 575 в Китае и России"
-            width="1000"
-            height="810"
-            loading="lazy"
-            decoding="async"
-          />
+        <div className="why-map-wrap" ref={mapRef}>
+          {mapActive ? (
+            <img
+              className="why-map"
+              src={assetUrl("/images/map.gif")}
+              alt="Карта офисов CARGO 575 в Китае и России"
+              width="1000"
+              height="810"
+              loading="lazy"
+              decoding="async"
+            />
+          ) : null}
         </div>
         <ul className="why-stats" ref={ref}>
           {stats.map((item, index) => (

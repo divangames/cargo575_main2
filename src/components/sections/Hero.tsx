@@ -9,6 +9,7 @@ import { useState } from "react";
 import { guangzhouOffice, heroChips, heroFacts } from "../../config/content";
 import { assetUrl } from "../../helpers/assetUrl";
 import { useLeadModal } from "../../hooks/useLeadModal";
+import { useViewportActive } from "../../hooks/useViewportActive";
 import { Button } from "../ui/Button";
 import { VideoLightbox } from "../ui/VideoLightbox";
 import { Wave } from "../ui/Wave";
@@ -21,9 +22,10 @@ import "./Hero.css";
 export function Hero() {
   const { openLead } = useLeadModal();
   const [officeOpen, setOfficeOpen] = useState(false);
+  const { ref, active } = useViewportActive<HTMLElement>(0.08);
 
   return (
-    <section className="hero" id="top">
+    <section ref={ref} className={`hero${active ? " is-in-view" : ""}`} id="top">
       <div className="hero-poster">
         <div className="hero-poster-fx" aria-hidden="true" />
         <div className="hero-main wrap-wide">

@@ -28,6 +28,11 @@
   width: max-content;
   will-change: transform;
   animation: rev-marquee-ltr 48s linear infinite;
+  animation-play-state: paused;
+}
+
+.rev-markets-block.is-in-view .rev-marquee-track {
+  animation-play-state: running;
 }
 
 .rev-marquee-row.is-fast .rev-marquee-track {

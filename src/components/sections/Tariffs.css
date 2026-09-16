@@ -39,8 +39,13 @@
   );
   transform: translateX(-80%) skewX(-18deg);
   animation: tariff-btn-shine 2.6s ease-in-out infinite;
+  animation-play-state: paused;
   pointer-events: none;
   z-index: 0;
+}
+
+.tariffs.is-in-view .tariff.is-feat .btn-primary::before {
+  animation-play-state: running;
 }
 
 .tariff.is-feat .btn-primary::after {

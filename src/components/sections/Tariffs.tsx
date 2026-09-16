@@ -6,6 +6,7 @@
 
 import { tariffs } from "../../config/content";
 import { useLeadModal } from "../../hooks/useLeadModal";
+import { useViewportActive } from "../../hooks/useViewportActive";
 import type { LeadPriority } from "../../types/lead";
 import { Button } from "../ui/Button";
 import { Reveal } from "../ui/Reveal";
@@ -30,9 +31,10 @@ function priorityFromTariff(id: (typeof tariffs)[number]["id"]): LeadPriority {
 /** Три маршрута: эконом, оптимальный, экспресс */
 export function Tariffs() {
   const { openLead } = useLeadModal();
+  const { ref, active } = useViewportActive<HTMLElement>(0.08);
 
   return (
-    <section className="block" id="tariffs">
+    <section ref={ref} className={`block tariffs${active ? " is-in-view" : ""}`} id="tariffs">
       <div className="wrap">
         <Reveal>
           <div className="section-head">
