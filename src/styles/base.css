@@ -139,6 +139,7 @@ p {
 
   body {
     padding-bottom: calc(72px + env(safe-area-inset-bottom));
+    background: var(--blue-500);
   }
 }
 
