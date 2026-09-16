@@ -14,12 +14,13 @@ import type { SafetyIconId } from "../types/safety";
 export { cases } from "./cases";
 
 export const navItems = [
-  { href: "#uslugi", label: "Услуги" },
   { href: "#tariffs", label: "Тарифы" },
-  { href: "#vykup", label: "Выкуп" },
+  { href: "#uslugi", label: "Услуги" },
+  { href: "#reviews", label: "Кейсы" },
   { href: "#packaging", label: "Упаковка" },
   { href: "#about", label: "О компании" },
-  { href: "#reviews", label: "Кейсы / Отзывы" },
+  { href: "#otzyvy", label: "Отзывы" },
+  { href: "#vykup", label: "Выкуп" },
   { href: "#faq", label: "FAQ" },
   { href: "#contacts", label: "Контакты" },
 ] as const;
@@ -35,7 +36,7 @@ export const heroFacts = [
 export const heroChips: { value: string; label: string; icon: HeroChipIconId }[] = [
   { value: "от 1$", label: "за кг", icon: "weight" },
   { value: "от 3 дней", label: "в пути", icon: "truck" },
-  { value: "от 2 кг", label: "минимум", icon: "box" },
+  { value: "от 20 кг", label: "минимум", icon: "box" },
 ];
 
 export const priorities: { id: LeadPriority; label: string; hint: string }[] = [
@@ -50,7 +51,7 @@ export const tariffs = [
     name: "Авто · эконом",
     days: "от 20 дней",
     price: "от 1 $/кг",
-    minWeight: "от 2 кг",
+    minWeight: "от 20 кг",
     text: "Для тяжёлых и несрочных партий. Самый доступный ориентир по ставке.",
     featured: false,
   },
@@ -59,7 +60,7 @@ export const tariffs = [
     name: "Авто · оптимальный",
     days: "от 12 дней",
     price: "от 2 $/кг",
-    minWeight: "от 2 кг",
+    minWeight: "от 20 кг",
     text: "Баланс стоимости и срока. Выбирают чаще всего для регулярных поставок.",
     featured: true,
   },
@@ -68,7 +69,7 @@ export const tariffs = [
     name: "Авиа · экспресс",
     days: "3–5 дней",
     price: "от 30 $/кг",
-    minWeight: "от 2 кг",
+    minWeight: "от 20 кг",
     text: "Для срочных поставок и образцов. Ставка выше, срок минимальный.",
     featured: false,
   },
@@ -266,7 +267,15 @@ export const markets = [
 ] as const;
 
 /** Подписи площадок под лентой иконок на телефоне */
-export const marketChips = ["1688", "Таобао", "ДЭВУ / Пойзон", "Алибаба", "Пиндуодуо", "Тимал"] as const;
+export const marketChips = [
+  "1688",
+  "Таобао",
+  "ДЭВУ / Пойзон",
+  "Алибаба",
+  "Пиндуодуо",
+  "Тимал",
+  "Напрямую с фабриками",
+] as const;
 
 export const compareLanes = {
   cargo: {
@@ -336,7 +345,7 @@ export const faq = [
   },
   {
     q: "Какой минимальный вес груза?",
-    a: "Принимаем коммерческие партии от 2 кг. Меньший вес обсуждается индивидуально — например, образцы авиа.",
+    a: "Принимаем коммерческие партии от 20 кг.",
   },
   {
     q: "Сколько занимает доставка?",
