@@ -298,6 +298,62 @@
   }
 }
 
+/* Узкие телефоны: этапы читаются как строки, а не как мелкая таблица. */
+@media (max-width: 599px) {
+  .proc-list {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+  }
+
+  .proc-list li {
+    display: grid;
+    grid-template-columns: 2.25rem minmax(0, 0.95fr) minmax(0, 1.2fr);
+    align-items: center;
+    column-gap: 0.45rem;
+    min-height: 2.6rem;
+    padding: 0.34rem 0.55rem;
+    border-radius: 16px;
+  }
+
+  .proc-list b,
+  .proc-list h3,
+  .proc-list p {
+    margin: 0;
+  }
+
+  .proc-list b {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    font-size: 0.68rem;
+  }
+
+  .proc-list h3 {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 0.78rem;
+    line-height: 1.1;
+  }
+
+  .proc-list p {
+    grid-column: 3;
+    grid-row: 1;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    font-size: 0.72rem;
+    line-height: 1.25;
+  }
+
+  .proc-list li.is-current {
+    transform: translate3d(0, -1px, 0) scale(1.01);
+  }
+
+  .proc-list li.is-current b {
+    min-height: 1.3rem;
+    padding: 0 0.38rem;
+  }
+}
+
 @media (min-width: 900px) and (min-height: 760px) {
   .proc-list {
     grid-template-columns: repeat(4, minmax(0, 1fr));

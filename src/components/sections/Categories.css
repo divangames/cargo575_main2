@@ -76,7 +76,13 @@
 }
 
 .cat-foot p {
-  color: var(--ink-soft);
+  padding: 0.8rem 1rem;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 10px 26px rgba(10, 61, 99, 0.1);
+  font-weight: 600;
 }
 
 @media (min-width: 720px) {
