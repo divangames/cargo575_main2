@@ -10,6 +10,7 @@ export const metrikaCounterId = 102098359;
 /** Цели конверсий и кликов по мессенджерам */
 export const metrikaGoals = {
   leadDelivery: "lid-cargo-delivery",
+  leadDeliveryCategoryInquiry: "lid-cargo-delivery-2",
   leadHelpCargoOrWhite: "lid-cargo-help-cargo-or-white",
   leadBusinessTour: "lid-cargo-business-tour",
   leadQuestions: "lid-cargo-questions",

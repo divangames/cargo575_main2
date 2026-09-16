@@ -13,6 +13,8 @@ export function getLeadFormTitle(source: LeadSource, mode: LeadFormMode): string
       return "Поможем выбрать способ доставки";
     case "quick":
       return "Узнайте стоимость доставки вашего груза";
+    case "categoryInquiry":
+      return "Уточнить возможность доставки";
     case "final":
       return mode === "question" ? "Остались вопросы?" : "Рассчитать стоимость доставки";
     case "hero":

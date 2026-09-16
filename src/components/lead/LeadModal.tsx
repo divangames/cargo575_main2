@@ -28,6 +28,7 @@ function leadModalMode(source: LeadSource): LeadFormMode {
     case "quick":
     case "case":
     case "category":
+    case "categoryInquiry":
     case "safety":
     case "compare":
     case "extra":
@@ -51,6 +52,7 @@ function leadModalCta(source: LeadSource): string {
     case "tariff":
     case "case":
     case "category":
+    case "categoryInquiry":
     case "safety":
     case "compare":
     case "extra":
@@ -74,6 +76,7 @@ function leadModalNote(source: LeadSource): string | undefined {
     case "tariff":
     case "case":
     case "category":
+    case "categoryInquiry":
     case "safety":
     case "compare":
     case "extra":

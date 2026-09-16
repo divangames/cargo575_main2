@@ -115,6 +115,8 @@
 }
 
 .proc-list li {
+  position: relative;
+  isolation: isolate;
   padding: clamp(0.7rem, 1.6vh, 1.1rem);
   background: transparent;
   border: 1px dashed rgba(12, 110, 177, 0.28);
@@ -133,6 +135,31 @@
   border-color: transparent;
   box-shadow: var(--shadow);
   transform: none;
+}
+
+.proc-list li.is-current {
+  background: linear-gradient(145deg, var(--blue-700), var(--blue-500));
+  border-color: rgba(255, 255, 255, 0.32);
+  box-shadow: 0 16px 36px rgba(0, 102, 162, 0.32);
+  transform: translate3d(0, -3px, 0) scale(1.02);
+}
+
+.proc-list li.is-current b {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.45rem;
+  padding: 0 0.5rem;
+  color: var(--white);
+  background: var(--red);
+  border-radius: 999px;
+}
+
+.proc-list li.is-current h3 {
+  color: var(--white);
+}
+
+.proc-list li.is-current p {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .proc-list b {

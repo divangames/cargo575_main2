@@ -80,6 +80,7 @@ export function LeadForm({
   });
   const phoneMeta = getContactChannel(values.contactChannel);
   const showCargoFields = mode === "simple" || mode === "tariff";
+  const isCategoryInquiry = source === "categoryInquiry";
 
   /** Сообщает модалке, что форму нужно спрятать под оверлеем */
   useEffect(() => {
@@ -117,7 +118,26 @@ export function LeadForm({
           onChange={(e) => setField("name", e.target.value)}
         />
       ) : null}
-      {showCargoFields ? (
+      {isCategoryInquiry ? (
+        <>
+          <Field
+            id={`${source}-cargo`}
+            label="Что хотели бы доставить?"
+            optional
+            value={values.cargo}
+            error={errors.cargo}
+            onChange={(e) => setField("cargo", e.target.value)}
+          />
+          <Field
+            id={`${source}-to`}
+            label="Город"
+            optional
+            value={values.toCity}
+            error={errors.toCity}
+            onChange={(e) => setField("toCity", e.target.value)}
+          />
+        </>
+      ) : showCargoFields ? (
         <>
           <SelectField
             id={`${source}-cargo`}

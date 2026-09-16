@@ -26,6 +26,8 @@ function sourceLabel(source: LeadSource): string {
       return "Кейс";
     case "category":
       return "Категория";
+    case "categoryInquiry":
+      return "Уточнение возможности доставки";
     case "safety":
       return "Контроль груза";
     case "compare":

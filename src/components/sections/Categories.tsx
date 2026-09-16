@@ -43,7 +43,7 @@ export function Categories() {
             Не нашли свой товар? Есть ограничения — уточните у логиста. Не пишем «доставляем
             абсолютно всё».
           </p>
-          <Button type="button" onClick={() => openLead("category")}>
+          <Button type="button" onClick={() => openLead("categoryInquiry")}>
             Уточнить возможность доставки
           </Button>
         </div>

@@ -28,18 +28,35 @@ interface RouteStyle extends CSSProperties {
   "--pin-steps": number;
 }
 
-/** Карточки равномерно открываются на пине; последняя — почти у отпуска экрана */
+const FIRST_STEP = 0.04;
+const LAST_STEP = 0.97;
+
+/** Позиция этапа на маршруте; последняя карточка открывается почти у отпуска экрана. */
+function stepPoint(index: number, total: number) {
+  if (total <= 1) return 0;
+  return FIRST_STEP + (index / (total - 1)) * (LAST_STEP - FIRST_STEP);
+}
+
 function isStepOpen(index: number, progress: number, total: number, reduced: boolean) {
-  if (reduced || total <= 1) return true;
-  const first = 0.04;
-  const last = 0.97;
-  const point = first + (index / (total - 1)) * (last - first);
-  return progress >= point;
+  return reduced || progress >= stepPoint(index, total);
+}
+
+/** Один текущий этап связывает положение машины с карточкой. */
+function currentStepIndex(progress: number, total: number, reduced: boolean) {
+  if (reduced || total === 0) return -1;
+
+  let current = 0;
+  for (let index = 1; index < total; index += 1) {
+    if (progress < stepPoint(index, total)) break;
+    current = index;
+  }
+  return current;
 }
 
 /** Общий блок: экран стоит, грузовик едет Китай → Россия, затем страница едет дальше */
 export function RoutePinScene({ id, eyebrow, title, items, surface = "paper" }: Props) {
   const { ref, progress, phase, reduced } = useScrollProgress();
+  const currentStep = currentStepIndex(progress, items.length, reduced);
 
   return (
     <section className={`process${reduced ? " is-static" : ""}${surface === "white" ? " is-white" : ""}`} id={id}>
@@ -76,16 +93,22 @@ export function RoutePinScene({ id, eyebrow, title, items, surface = "paper" }: 
             </div>
 
             <ol className="proc-list">
-              {items.map((item, index) => (
-                <li
-                  key={item.n}
-                  className={isStepOpen(index, progress, items.length, reduced) ? "is-on" : ""}
-                >
-                  <b>{item.n}</b>
-                  <h3>{item.title}</h3>
-                  <p>{item.text}</p>
-                </li>
-              ))}
+              {items.map((item, index) => {
+                const isCurrent = index === currentStep;
+                const isOpen = isStepOpen(index, progress, items.length, reduced);
+
+                return (
+                  <li
+                    key={item.n}
+                    className={`${isOpen ? "is-on" : ""}${isCurrent ? " is-current" : ""}`}
+                    aria-current={isCurrent ? "step" : undefined}
+                  >
+                    <b>{item.n}</b>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </li>
+                );
+              })}
             </ol>
           </div>
         </div>

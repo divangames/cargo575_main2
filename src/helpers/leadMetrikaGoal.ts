@@ -19,6 +19,8 @@ export function getLeadMetrikaGoal(source: LeadSource, mode: LeadFormMode): Metr
     case "extra":
     case "header":
       return metrikaGoals.leadDelivery;
+    case "categoryInquiry":
+      return metrikaGoals.leadDeliveryCategoryInquiry;
     case "final":
       return mode === "question" ? metrikaGoals.leadQuestions : metrikaGoals.leadDelivery;
     case "compare":

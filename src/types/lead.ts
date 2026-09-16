@@ -18,6 +18,7 @@ export type LeadSource =
   | "tariff"
   | "case"
   | "category"
+  | "categoryInquiry"
   | "safety"
   | "compare"
   | "extra"
