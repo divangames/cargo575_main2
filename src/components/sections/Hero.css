@@ -177,7 +177,7 @@
     display: block;
     position: absolute;
     z-index: 0;
-    top: 1rem;
+    top: 0.35rem;
     right: -0.35rem;
     width: min(51vw, 11.25rem);
     height: auto;

@@ -208,6 +208,69 @@
   }
 }
 
+/* Низкие телефоны: вся пин-сцена помещается над нижней CTA */
+@media (max-width: 899px) and (max-height: 740px) {
+  .process-scene {
+    padding-top: calc(var(--header) + 0.05rem);
+    padding-bottom: calc(4.55rem + env(safe-area-inset-bottom));
+  }
+
+  .process-scene .section-head {
+    gap: 0.18rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .process-scene .section-head .eyebrow {
+    margin-bottom: 0;
+    font-size: 0.62rem;
+  }
+
+  .process-scene .section-title {
+    font-size: clamp(1.12rem, 5.35vw, 1.35rem);
+    line-height: 0.94;
+  }
+
+  .proc-route {
+    margin-bottom: 0.35rem;
+  }
+
+  .proc-rail {
+    margin-top: calc(var(--truck-w) * 0.38);
+  }
+
+  .proc-ends {
+    margin-top: 0.35rem;
+    font-size: 0.65rem;
+  }
+
+  .proc-list {
+    gap: 0.28rem;
+  }
+
+  .proc-list li {
+    min-height: 0;
+    padding: 0.34rem 0.5rem 0.38rem;
+    border-radius: 18px;
+  }
+
+  .proc-list b {
+    font-size: 0.62rem;
+  }
+
+  .proc-list h3 {
+    margin: 0.04rem 0 0.08rem;
+    font-size: 0.68rem;
+    line-height: 1.15;
+  }
+
+  .proc-list p {
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    font-size: 0.62rem;
+    line-height: 1.2;
+  }
+}
+
 @media (min-width: 900px) and (min-height: 760px) {
   .proc-list {
     grid-template-columns: repeat(4, minmax(0, 1fr));
