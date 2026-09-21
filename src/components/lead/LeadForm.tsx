@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { cargoCategories, priorities } from "../../config/content";
 import { getContactChannel } from "../../config/contactChannels";
 import { getLeadFormTitle } from "../../helpers/leadFormTitle";
@@ -15,6 +15,7 @@ import { Field, SelectField } from "../ui/Field";
 import { PhoneField } from "../ui/PhoneField";
 import { ContactChannelPicker } from "./ContactChannelPicker";
 import { LeadSuccessOverlay } from "./LeadSuccessOverlay";
+import { SmartCaptchaField } from "./SmartCaptchaField";
 import "./LeadForm.css";
 
 interface Props {
@@ -72,12 +73,16 @@ export function LeadForm({
   onDismiss,
 }: Props) {
   const formTitle = formTitleProp ?? getLeadFormTitle(source, mode);
-  const { values, errors, status, submitError, setField, submit, reset } = useLeadForm({
+  const { values, errors, status, submitError, setField, validateFields, submit, reset } = useLeadForm({
     source,
     mode,
     formTitle,
     preset,
   });
+  const [smartToken, setSmartToken] = useState("");
+  const [captchaReset, setCaptchaReset] = useState(0);
+  const [captchaVisible, setCaptchaVisible] = useState(false);
+  const [captchaError, setCaptchaError] = useState("");
   const phoneMeta = getContactChannel(values.contactChannel);
   const showCargoFields = mode === "simple" || mode === "tariff";
   const isCategoryInquiry = source === "categoryInquiry";
@@ -87,10 +92,32 @@ export function LeadForm({
     onSuccessChange?.(status === "success");
   }, [onSuccessChange, status]);
 
+  /** Сбрасывает невидимую капчу */
+  function resetCaptcha() {
+    setSmartToken("");
+    setCaptchaVisible(false);
+    setCaptchaError("");
+    setCaptchaReset((prev) => prev + 1);
+  }
+
   /** Закрывает оверлей и возвращает форму к полям */
   function closeSuccess() {
+    resetCaptcha();
     reset();
     onDismiss?.();
+  }
+
+  /** Отправка после получения токена (тихо или после задания) */
+  function sendWithToken(token: string) {
+    setSmartToken(token);
+    setCaptchaVisible(false);
+    setCaptchaError("");
+    void submit(token).then((ok) => {
+      resetCaptcha();
+      if (!ok) {
+        /* ошибка уже в submitError */
+      }
+    });
   }
 
   return (
@@ -102,7 +129,14 @@ export function LeadForm({
       className={`lead-form lead-${mode}`}
       onSubmit={(e) => {
         e.preventDefault();
-        void submit();
+        if (!validateFields()) return;
+        if (smartToken.trim()) {
+          sendWithToken(smartToken);
+          return;
+        }
+        // Запускаем невидимую капчу; токен придёт в onToken
+        setCaptchaError("");
+        setCaptchaVisible(true);
       }}
       noValidate
     >
@@ -205,8 +239,21 @@ export function LeadForm({
         error={errors.contact}
         onChange={(value) => setField("contact", value)}
       />
-      <Button type="submit" disabled={status === "loading" || status === "success"}>
-        {status === "loading" ? loadingCopy(mode) : cta}
+      <SmartCaptchaField
+        resetKey={captchaReset}
+        visible={captchaVisible}
+        error={captchaError}
+        onToken={sendWithToken}
+        onExpired={() => {
+          setSmartToken("");
+          setCaptchaVisible(false);
+        }}
+        onHidden={() => {
+          setCaptchaVisible(false);
+        }}
+      />
+      <Button type="submit" disabled={status === "loading" || status === "success" || captchaVisible}>
+        {status === "loading" || captchaVisible ? loadingCopy(mode) : cta}
       </Button>
       {submitError ? <p className="lead-submit-error">{submitError}</p> : null}
       {note ? <p className="lead-note">{note}</p> : null}

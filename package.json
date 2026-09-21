@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",
+    "@yandex/smart-captcha": "^2.9.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },

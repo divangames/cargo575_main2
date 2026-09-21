@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////
 
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { cargoCategories } from "../../config/content";
 import { getContactChannel } from "../../config/contactChannels";
 import { metrikaGoals } from "../../config/metrika";
@@ -25,6 +25,7 @@ import { ContactChannelPicker } from "./ContactChannelPicker";
 import { LeadSuccessOverlay } from "./LeadSuccessOverlay";
 import { ProductInputPicker } from "./ProductInputPicker";
 import { ProductPhotoUpload } from "./ProductPhotoUpload";
+import { SmartCaptchaField } from "./SmartCaptchaField";
 import "./ProductLeadForm.css";
 
 const emptyValues: ProductLeadValues = {
@@ -39,10 +40,15 @@ const emptyValues: ProductLeadValues = {
 
 /** Открытая форма расчёта по ссылке, фото или параметрам груза */
 export function ProductLeadForm() {
+  const requestId = useRef(crypto.randomUUID());
   const [values, setValues] = useState<ProductLeadValues>(emptyValues);
   const [errors, setErrors] = useState<ProductLeadErrors>({});
   const [status, setStatus] = useState<ProductLeadStatus>("idle");
   const [submitError, setSubmitError] = useState("");
+  const [smartToken, setSmartToken] = useState("");
+  const [captchaReset, setCaptchaReset] = useState(0);
+  const [captchaVisible, setCaptchaVisible] = useState(false);
+  const [captchaError, setCaptchaError] = useState("");
   const phoneMeta = getContactChannel(values.contactChannel);
 
   const setField = useCallback(<K extends keyof ProductLeadValues>(key: K, value: ProductLeadValues[K]) => {
@@ -57,31 +63,61 @@ export function ProductLeadForm() {
     setErrors({});
   }
 
-  /** Отправляет заявку в Telegram */
-  async function submit() {
+  /** Сбрасывает невидимую капчу */
+  function resetCaptcha() {
+    setSmartToken("");
+    setCaptchaVisible(false);
+    setCaptchaError("");
+    setCaptchaReset((prev) => prev + 1);
+  }
+
+  /** Отправка после токена капчи */
+  async function sendWithToken(token: string) {
+    setSmartToken(token);
+    setCaptchaVisible(false);
+    setCaptchaError("");
+    setStatus("loading");
+    try {
+      await submitProductLead(values, token, requestId.current);
+      reachMetrikaGoal(metrikaGoals.leadLinkOrPhoto);
+      setStatus("success");
+      resetCaptcha();
+    } catch (error) {
+      setStatus("error");
+      resetCaptcha();
+      const captchaFailed = error instanceof Error && error.message === "CAPTCHA_FAILED";
+      setSubmitError(
+        captchaFailed
+          ? "Защита от спама не пропустила заявку. Попробуйте отправить ещё раз."
+          : "Не удалось отправить заявку. Попробуйте ещё раз или позвоните 8 (800) 300-57-58.",
+      );
+    }
+  }
+
+  /** Валидация и запуск невидимой капчи / отправка */
+  function submit() {
     const nextErrors = validateProductLead(values);
     setErrors(nextErrors);
     setSubmitError("");
+    setCaptchaError("");
     if (Object.keys(nextErrors).length > 0) {
       setStatus("error");
       return;
     }
-    setStatus("loading");
-    try {
-      await submitProductLead(values);
-      reachMetrikaGoal(metrikaGoals.leadLinkOrPhoto);
-      setStatus("success");
-    } catch {
-      setStatus("error");
-      setSubmitError("Не удалось отправить заявку. Попробуйте ещё раз или позвоните 8 (800) 300-57-58.");
+    if (smartToken.trim()) {
+      void sendWithToken(smartToken);
+      return;
     }
+    setCaptchaVisible(true);
   }
 
   /** Возвращает форму к начальному состоянию */
   function reset() {
+    requestId.current = crypto.randomUUID();
     setValues(emptyValues);
     setErrors({});
     setSubmitError("");
+    resetCaptcha();
     setStatus("idle");
   }
 
@@ -166,8 +202,23 @@ export function ProductLeadForm() {
         error={errors.contact}
         onChange={(contact) => setField("contact", contact)}
       />
-      <Button type="submit" disabled={status === "loading" || status === "success"}>
-        {status === "loading" ? "Отправляем…" : "Получить расчёт"}
+      <SmartCaptchaField
+        resetKey={captchaReset}
+        visible={captchaVisible}
+        error={captchaError}
+        onToken={(token) => {
+          void sendWithToken(token);
+        }}
+        onExpired={() => {
+          setSmartToken("");
+          setCaptchaVisible(false);
+        }}
+        onHidden={() => {
+          setCaptchaVisible(false);
+        }}
+      />
+      <Button type="submit" disabled={status === "loading" || status === "success" || captchaVisible}>
+        {status === "loading" || captchaVisible ? "Отправляем…" : "Получить расчёт"}
       </Button>
       {submitError ? <p className="lead-submit-error">{submitError}</p> : null}
     </form>

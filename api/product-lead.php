@@ -36,10 +36,21 @@ if ($token === '' || $chatId === '') {
     exit;
 }
 
+require_once __DIR__ . '/smartcaptcha.php';
+requireSmartCaptcha($config);
+
 $text = trim($_POST['text'] ?? '');
 if ($text === '') {
     http_response_code(400);
     echo json_encode(['ok' => false, 'error' => 'Empty message']);
+    exit;
+}
+
+$lead = json_decode($_POST['lead'] ?? '', true);
+require_once __DIR__ . '/google-sheets.php';
+if (!appendLeadToSheet($config, $lead)) {
+    http_response_code(502);
+    echo json_encode(['ok' => false, 'error' => 'Google Sheets error']);
     exit;
 }
 

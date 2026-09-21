@@ -37,6 +37,8 @@ if ($token === '' || $chatId === '') {
     exit;
 }
 
+require_once __DIR__ . '/smartcaptcha.php';
+
 $raw  = file_get_contents('php://input');
 $data = json_decode($raw, true);
 if (!is_array($data)) {
@@ -45,10 +47,19 @@ if (!is_array($data)) {
     exit;
 }
 
+requireSmartCaptcha($config, $data);
+
 $text = trim($data['text'] ?? '');
 if ($text === '') {
     http_response_code(400);
     echo json_encode(['ok' => false, 'error' => 'Empty message']);
+    exit;
+}
+
+require_once __DIR__ . '/google-sheets.php';
+if (!appendLeadToSheet($config, $data['lead'] ?? null)) {
+    http_response_code(502);
+    echo json_encode(['ok' => false, 'error' => 'Google Sheets error']);
     exit;
 }
 

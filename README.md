@@ -64,7 +64,19 @@ $env:CARGO575_COMMIT_MSG = "Обновить сайт"
 .\site-actions.bat push
 ```
 
-Заявки с форм уходят в Telegram через PHP-прокси на chinatoway.ru: `stanki-lead.php` (текст) и `product-lead.php` (текст + фото). Скрипты в папке `api/`. На GitHub Pages PHP не выполняется, поэтому используется уже работающий хост. Токен бота хранится только в `api/config.php` на сервере (в репозиторий не коммитится; образец — `api/config.example.php`).
+Заявки с форм уходят в Telegram через PHP-прокси на chinatoway.ru: `stanki-lead.php` (текст) и `product-lead.php` (текст + фото). Скрипты в папке `api/`. На GitHub Pages PHP не выполняется, поэтому используется уже работающий хост. Токен бота и **ключ сервера SmartCaptcha** хранятся только в `api/config.php` на сервере (в репозиторий не коммитится; образец — `api/config.example.php`). На формах — невидимая Яндекс SmartCaptcha (`InvisibleSmartCaptcha`, ключ клиента в `src/config/smartCaptcha.ts`).
+
+### Запись заявок в Google Sheets
+
+Обе формы также записывают строку в существующий лист `gid=0` таблицы [CRM Карго 575](https://docs.google.com/spreadsheets/d/1MPH7bXoWtsMDLYh3V_-SfaFvdsH9yDnSwnXC4hMH54k/edit?gid=0). PHP отправляет данные в уже существующий Apps Script с полями `secret`, `time`, `name`, `phone`, `email`, `extra`, `ymClientId`, `formName`, `pageUrl` и UTM. Скрипт сохраняет их в колонки A–N. Детали заявки и ID идут в колонку E; имена загруженных файлов записываются туда же, сами фото по-прежнему отправляются в Telegram.
+
+Для подключения:
+
+1. Убедитесь, что существующий Apps Script развёрнут как веб-приложение и у вас есть URL `.../exec`.
+2. На PHP-хосте в `api/config.php` укажите `sheets_webhook` (URL) и `sheets_secret` (значение `SHEETS_SECRET` из скрипта). Загрузите обновлённые `stanki-lead.php`, `product-lead.php` и новый `google-sheets.php` рядом с действующим `smartcaptcha.php`.
+3. Загрузите новую сборку сайта. Перед отправкой посетителю показывается успех только после подтверждения записи в таблицу и отправки в Telegram. Если запись в таблицу не настроена или не удалась, API вернёт ошибку.
+
+Существующий Apps Script не проверяет ID заявки на повторы: при повторной отправке после ошибки Telegram возможны одинаковые строки. Поле `ymClientId` пока передаётся пустым.
 
 ## Коммерческие ориентиры
 

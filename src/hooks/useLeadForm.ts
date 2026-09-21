@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////
 
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { formatRuMobileMask, RU_PHONE_PREFIX } from "../helpers/ruPhoneMask";
 import { validateLead } from "../helpers/validateLead";
 import { getLeadMetrikaGoal } from "../helpers/leadMetrikaGoal";
@@ -33,6 +33,7 @@ interface Options {
 
 /** Управляет полями, ошибками и отправкой заявки */
 export function useLeadForm({ source, mode, formTitle, preset }: Options) {
+  const requestId = useRef(crypto.randomUUID());
   const [values, setValues] = useState<LeadPayload>({
     ...empty,
     ...preset,
@@ -50,26 +51,49 @@ export function useLeadForm({ source, mode, formTitle, preset }: Options) {
     setSubmitError("");
   }, []);
 
-  const submit = useCallback(async () => {
+  /** Проверяет поля без отправки; true — можно запускать капчу/submit */
+  const validateFields = useCallback(() => {
     const nextErrors = validateLead(values, mode);
     setErrors(nextErrors);
     setSubmitError("");
     if (Object.keys(nextErrors).length > 0) {
       setStatus("error");
-      return;
+      return false;
     }
-    setStatus("loading");
-    try {
-      await submitLead({ ...values, source, formTitle });
-      reachMetrikaGoal(getLeadMetrikaGoal(source, mode));
-      setStatus("success");
-    } catch {
-      setStatus("error");
-      setSubmitError("Не удалось отправить заявку. Попробуйте ещё раз или позвоните 8 (800) 300-57-58.");
-    }
-  }, [formTitle, mode, source, values]);
+    return true;
+  }, [mode, values]);
+
+  /** Отправляет заявку; smartToken — одноразовый ответ SmartCaptcha */
+  const submit = useCallback(
+    async (smartToken: string) => {
+      if (!validateFields()) return false;
+      if (!smartToken.trim()) {
+        setStatus("error");
+        setSubmitError("Не удалось пройти защиту от спама. Попробуйте ещё раз.");
+        return false;
+      }
+      setStatus("loading");
+      try {
+        await submitLead({ ...values, source, formTitle }, smartToken, requestId.current);
+        reachMetrikaGoal(getLeadMetrikaGoal(source, mode));
+        setStatus("success");
+        return true;
+      } catch (error) {
+        setStatus("error");
+        const captchaFailed = error instanceof Error && error.message === "CAPTCHA_FAILED";
+        setSubmitError(
+          captchaFailed
+            ? "Защита от спама не пропустила заявку. Попробуйте отправить ещё раз."
+            : "Не удалось отправить заявку. Попробуйте ещё раз или позвоните 8 (800) 300-57-58.",
+        );
+        return false;
+      }
+    },
+    [formTitle, mode, source, validateFields, values],
+  );
 
   const reset = useCallback(() => {
+    requestId.current = crypto.randomUUID();
     setValues({
       ...empty,
       ...preset,
@@ -82,5 +106,5 @@ export function useLeadForm({ source, mode, formTitle, preset }: Options) {
     setStatus("idle");
   }, [formTitle, preset, source]);
 
-  return { values, errors, status, submitError, setField, submit, reset };
+  return { values, errors, status, submitError, setField, validateFields, submit, reset };
 }

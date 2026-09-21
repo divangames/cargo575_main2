@@ -1,0 +1,25 @@
+/* Невидимая SmartCaptcha — места почти не занимает */
+
+.smart-captcha-field {
+  display: grid;
+  gap: 0.35rem;
+  justify-items: start;
+}
+
+.smart-captcha-field.is-invisible {
+  min-height: 0;
+}
+
+.smart-captcha-field.has-error {
+  outline: 1px solid var(--red);
+  outline-offset: 4px;
+  border-radius: 8px;
+  padding: 0.35rem 0.5rem;
+}
+
+.smart-captcha-error {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--red);
+}
